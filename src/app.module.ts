@@ -19,6 +19,7 @@ import { StoreService } from './services/store/store.service';
 import { ApiStoreController } from './controllers/api.store.controller';
 import { AuthController } from './controllers/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
+import { PhotoService } from './services/photo/photo.service';
 
 @Module({
   imports: [
@@ -61,7 +62,8 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
     AdministratorService,
     CategoryService,
     FurnitureService,
-    StoreService
+    StoreService,
+    PhotoService
   ],
   exports: [
     AdministratorService
