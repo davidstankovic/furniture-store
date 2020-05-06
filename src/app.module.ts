@@ -15,6 +15,8 @@ import { FurnitureService } from './services/furniture/furniture.service';
 import { ApiFurnitureController } from './controllers/api.furniture.controller';
 import { Store } from 'entities/store.entity';
 import { Availability } from 'entities/availability.entity';
+import { StoreService } from './services/store/store.service';
+import { ApiStoreController } from './controllers/api.store.controller';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { Availability } from 'entities/availability.entity';
       Furniture,
       Category,
       Photo,
+      Store,
+      Availability
     ])
   ],
   controllers: [
@@ -48,11 +52,13 @@ import { Availability } from 'entities/availability.entity';
     ApiAdministratorController,
     ApiCategoryController,
     ApiFurnitureController,
+    ApiStoreController
   ],
   providers: [
     AdministratorService,
     CategoryService,
     FurnitureService,
+    StoreService
   ],
 })
 export class AppModule {}

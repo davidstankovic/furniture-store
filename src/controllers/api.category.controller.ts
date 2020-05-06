@@ -13,7 +13,7 @@ import { Category } from "entities/category.entity";
         join: {
             categories: { eager: true },
             parentCategory: { eager: true },
-            furnitures: { eager: true },
+            furnitures: { eager: true }
         },
     },
 })

@@ -20,7 +20,7 @@ export class FurniturePrice {
   furnitureId: number;
 
   @Column({ type: "decimal", unsigned: true, precision: 10, scale: 2 })
-  price: string;
+  price: number;
 
   @Column({ type: "timestamp", name: "created_at", default: () => "CURRENT_TIMESTAMP" })
   createdAt: Date;

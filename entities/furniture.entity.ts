@@ -13,6 +13,7 @@ import { FurniturePrice } from "./furniture-price.entity";
 import { Availability } from "./availability.entity";
 import { Photo } from "./photo.entity";
 import { from } from "rxjs";
+import { Store } from "./store.entity";
 
 @Entity()
 export class Furniture {
@@ -45,7 +46,7 @@ export class Furniture {
     precision: 10,
     scale: 2
   })
-  height: string;
+  height: number;
 
   @Column({
     type: "decimal", 
@@ -54,7 +55,7 @@ export class Furniture {
     precision: 10,
     scale: 2
   })
-  width: string;
+  width: number;
 
   @Column({
     type: "decimal",
@@ -63,7 +64,7 @@ export class Furniture {
     precision: 10,
     scale: 2
   })
-  deep: string;
+  deep: number;
 
   @Column({ type: "varchar", name: "material", length: 32})
   material: string;
@@ -78,6 +79,14 @@ export class Furniture {
 
   @OneToMany(() => Availability, (availability) => availability.furniture)
   availabilities: Availability[];
+
+  @ManyToMany(type => Store, store => store.furnitures)
+  @JoinTable({
+    name: "availability",
+    joinColumn: {name: "furniture_id", referencedColumnName:"furnitureId"},
+    inverseJoinColumn: {name: "store_id", referencedColumnName:"storeId"}
+  })
+  stores: Store[];
 
   @ManyToOne(() => Category, (category) => category.furnitures, {
     onDelete: "RESTRICT",

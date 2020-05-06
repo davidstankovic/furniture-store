@@ -4,8 +4,11 @@ import {
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Availability } from "./availability.entity";
+import { Furniture } from "./furniture.entity";
 
 @Index("uq_store_address", ["address"], { unique: true })
 @Index("uq_store_image_path", ["imagePath"], { unique: true })
@@ -39,7 +42,7 @@ export class Store {
     precision: 11,
     scale: 8
   })
-  geoLng: string;
+  geoLng: number;
 
   @Column({
     type: "decimal", 
@@ -47,8 +50,16 @@ export class Store {
     precision: 10,
     scale: 8
   })
-  geoLat: string;
+  geoLat: number;
 
   @OneToMany(() => Availability, (availability) => availability.store)
   availabilities: Availability[];
+
+  @ManyToMany(type => Furniture, furniture => furniture.stores)
+  @JoinTable({
+    name: "availability",
+    joinColumn: {name: "store_id", referencedColumnName:"storeId"},
+    inverseJoinColumn: {name: "furniture_id", referencedColumnName:"furnitureId"}
+  })
+  furnitures: Furniture[];
 }
