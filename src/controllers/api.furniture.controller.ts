@@ -1,5 +1,5 @@
 import { FurnitureService } from "src/services/furniture/furniture.service";
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Furniture } from "entities/furniture.entity";
 import { AddFurnitureDto } from "dtos/furniture/add.furniture.dto";
@@ -64,12 +64,14 @@ export class ApiFurnitureController {
                
                 //1. check extension: JPG, PNG
                 if(!file.originalname.toLowerCase().match(/\.(jpg|png)$/)){
-                    callback(new Error('Bad file extension!'), false);
+                    req.fileFilterError = 'Bad file extension!';
+                    callback(null, false);
                     return;
                 } 
                 //2. Check content type: jpeg, png (mimetype)
                 if(!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))){
-                    callback(new Error('Bad file content!'), false);
+                    req.fileFilterError = 'Bad file content!!';
+                    callback(null, false);
                     return;
                 }
 
@@ -77,11 +79,20 @@ export class ApiFurnitureController {
             },
             limits: {
                 files: 1, // Koliko slika mozemo postaviti
-                fieldSize: StorageConfig.photoMaxFileSize
+                fileSize: StorageConfig.photoMaxFileSize
             }
         })
     )
-    async uploadPhoto(@Param('id') furnitureId: number, @UploadedFile() photo): Promise<ApiResponse | Photo>{
+    async uploadPhoto(@Param('id') furnitureId: number, @UploadedFile() photo, @Req() req): Promise<ApiResponse | Photo>{
+
+        if(req.fileFilterError){
+            return new ApiResponse('error', -4002, req.fileFilterError);
+        }
+
+        if(!photo){
+            return new ApiResponse('error', -4002, 'File not uploaded!');
+        }
+
         const newPhoto: Photo = new Photo();
         newPhoto.furnitureId = furnitureId;
         newPhoto.imagePath = photo.filename;
