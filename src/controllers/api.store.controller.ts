@@ -1,7 +1,7 @@
 import { StoreService } from "src/services/store/store.service";
 import { Controller } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Store } from "entities/store.entity";
+import { Store } from "src/entities/store.entity";
 
 @Controller('api/store')
 @Crud({

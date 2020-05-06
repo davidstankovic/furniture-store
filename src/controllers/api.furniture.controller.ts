@@ -1,13 +1,13 @@
 import { FurnitureService } from "src/services/furniture/furniture.service";
 import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Furniture } from "entities/furniture.entity";
+import { Furniture } from "src/entities/furniture.entity";
 import { AddFurnitureDto } from "dtos/furniture/add.furniture.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { StorageConfig } from "config/storage.config";
 import { diskStorage } from "multer";
 import { PhotoService } from "src/services/photo/photo.service";
-import { Photo } from "entities/photo.entity";
+import { Photo } from "src/entities/photo.entity";
 import { ApiResponse } from "src/misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
@@ -22,7 +22,7 @@ import * as sharp from 'sharp';
             category: { eager: true },
             furniturePrices: { eager: false },
             photos: { eager: true },
-            availabilities: {eager: true},
+            availabilities: {eager: false},
             stores: {eager: true}
         }
     }
@@ -40,7 +40,7 @@ export class ApiFurnitureController {
     @UseInterceptors(
         FileInterceptor('photo', {
             storage: diskStorage({
-                destination: StorageConfig.photoDestination,
+                destination: StorageConfig.photo.destination,
                 filename: (req, file, callback) => {
                     let original: string = file.originalname;
 
@@ -82,7 +82,7 @@ export class ApiFurnitureController {
             },
             limits: {
                 files: 1, // Koliko slika mozemo postaviti
-                fileSize: StorageConfig.photoMaxFileSize
+                fileSize: StorageConfig.photo.maxSize
             }
         })
     )
@@ -110,8 +110,8 @@ export class ApiFurnitureController {
 
         }
 
-        await this.createThumb(photo);
-        await this.createSmallImage(photo);
+        await this.createResizedImage(photo, StorageConfig.photo.resize.thumb)
+        await this.createResizedImage(photo, StorageConfig.photo.resize.small)
 
 
         const newPhoto: Photo = new Photo();
@@ -126,30 +126,17 @@ export class ApiFurnitureController {
         return savedPhoto;
     }
 
-    async createThumb(photo){
-        const destinationFilePath = StorageConfig.photoDestination + '/thumb/' + photo.filename;
+    async createResizedImage(photo, resizeSettings){
+        const destinationFilePath = StorageConfig.photo.destination + resizeSettings.directory + photo.filename;
 
         await sharp(photo.path)
             .resize({
                 fit: 'cover', // pogledaj doc ako treba
-                width: StorageConfig.photoThumbSize.width,
-                height: StorageConfig.photoThumbSize.height,
-                background: {
-                    r: 255, g:255, b:255, alpha: 0.0
-                }
-            }).toFile(destinationFilePath);
-    }
-    async createSmallImage(photo){
-        const destinationFilePath = StorageConfig.photoDestination + '/small/' + photo.filename;
-
-        await sharp(photo.path)
-            .resize({
-                fit: 'cover', // pogledaj doc ako treba
-                width: StorageConfig.photoSmallSize.width,
-                height: StorageConfig.photoSmallSize.height,
-                background: {
-                    r: 255, g:255, b:255, alpha: 0.0
-                }
+                width: resizeSettings.width,
+                height: resizeSettings.height,
+                // background: {
+                //     r: 255, g:255, b:255, alpha: 0.0
+                // }
             }).toFile(destinationFilePath);
     }
 }

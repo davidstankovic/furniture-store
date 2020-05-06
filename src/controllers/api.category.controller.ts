@@ -1,7 +1,7 @@
 import { Controller } from "@nestjs/common";
 import { CategoryService } from "src/services/category/category.service";
 import { Crud } from "@nestjsx/crud";
-import { Category } from "entities/category.entity";
+import { Category } from "src/entities/category.entity";
 
 @Controller('api/category')
 @Crud({
