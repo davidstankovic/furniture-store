@@ -2,7 +2,7 @@ import { FurnitureService } from "src/services/furniture/furniture.service";
 import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Furniture } from "src/entities/furniture.entity";
-import { AddFurnitureDto } from "dtos/furniture/add.furniture.dto";
+import { AddFurnitureDto } from "src/dtos/furniture/add.furniture.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { StorageConfig } from "config/storage.config";
 import { diskStorage } from "multer";

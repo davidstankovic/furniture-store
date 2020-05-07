@@ -16,6 +16,9 @@ import { Store } from "src/entities/store.entity";
             // stores: {eager: true}
             furnitures: {
                 eager: true
+            },
+            availabilities: {
+                eager: false
             }
         }
     }

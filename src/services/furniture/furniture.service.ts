@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { Furniture } from "src/entities/furniture.entity";
-import { AddFurnitureDto } from "dtos/furniture/add.furniture.dto";
+import { AddFurnitureDto } from "src/dtos/furniture/add.furniture.dto";
 import { ApiResponse } from "src/misc/api.response.class";
 import { FurniturePrice } from "src/entities/furniture-price.entity";
 import { Availability } from "src/entities/availability.entity";

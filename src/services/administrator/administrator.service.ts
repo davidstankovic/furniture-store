@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Administrator } from 'src/entities/administrator.entity';
 import { Repository } from 'typeorm';
-import { AddAdministratorDto } from 'dtos/administrator/add.administrator.dto';
+import { AddAdministratorDto } from 'src/dtos/administrator/add.administrator.dto';
 import * as crypto from 'crypto';
-import { EditAdministratorDto } from 'dtos/administrator/edit.administrator.dto';
+import { EditAdministratorDto } from 'src/dtos/administrator/edit.administrator.dto';
 import { ApiResponse } from 'src/misc/api.response.class';
 
 @Injectable()

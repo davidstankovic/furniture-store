@@ -1,12 +1,12 @@
 import { Controller, Post, Body, Req } from "@nestjs/common";
 import { AdministratorService } from "src/services/administrator/administrator.service";
-import { LoginAdministratorDto } from "dtos/administrator/login.administrator.dto";
+import { LoginAdministratorDto } from "src/dtos/administrator/login.administrator.dto";
 import { ApiResponse } from "src/misc/api.response.class";
 import * as crypto from 'crypto';
 import * as jwt from 'jsonwebtoken';
 import { Request } from "express";
-import { LoginInfoAdministratorDto } from "dtos/login.info.administrator.dto";
-import { JwtDataAdministratorDto } from "dtos/administrator/jwt.data.administrator.dto";
+import { LoginInfoAdministratorDto } from "src/dtos/login.info.administrator.dto";
+import { JwtDataAdministratorDto } from "src/dtos/administrator/jwt.data.administrator.dto";
 import { jwtSecret } from "config/jwt.secret";
 
 @Controller('auth/')
