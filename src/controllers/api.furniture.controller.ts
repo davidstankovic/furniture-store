@@ -1,5 +1,5 @@
 import { FurnitureService } from "src/services/furniture/furniture.service";
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Furniture } from "src/entities/furniture.entity";
 import { AddFurnitureDto } from "src/dtos/furniture/add.furniture.dto";
@@ -127,9 +127,11 @@ export class ApiFurnitureController {
     }
 
     async createResizedImage(photo, resizeSettings){
-        const destinationFilePath = StorageConfig.photo.destination + resizeSettings.directory + photo.filename;
+        const originalFilePath = photo.path;
+        const fileName = photo.filename;
+        const destinationFilePath = StorageConfig.photo.destination + resizeSettings.directory + fileName;
 
-        await sharp(photo.path)
+        await sharp(originalFilePath)
             .resize({
                 fit: 'cover', // pogledaj doc ako treba
                 width: resizeSettings.width,
@@ -138,5 +140,30 @@ export class ApiFurnitureController {
                 //     r: 255, g:255, b:255, alpha: 0.0
                 // }
             }).toFile(destinationFilePath);
+    } 
+
+    @Delete(':furnitureId/deletePhoto/:photoId/')
+    public async deletePhoto(@Param('furnitureId') furnitureId: number, @Param('photoId') photoId: number){
+        const photo = await this.photoService.findOne({
+            furnitureId: furnitureId,
+            photoId: photoId
+        });
+
+        if(!photo){
+            return new ApiResponse('error', -4004, 'Photo not found!');
+        }
+
+        try {
+        fs.unlinkSync(StorageConfig.photo.destination + photo.imagePath);
+        fs.unlinkSync(StorageConfig.photo.destination + StorageConfig.photo.resize.thumb.directory + photo.imagePath);
+        fs.unlinkSync(StorageConfig.photo.destination + StorageConfig.photo.resize.small.directory + photo.imagePath);
+        } catch(e){}
+        const deleteResult = await this.photoService.deleteById(photo.photoId);
+
+        if(deleteResult.affected === 0){
+            return new ApiResponse('error', -4004, 'Photo not found!');
+        }
+
+        return new ApiResponse('ok', 0, 'One photo deleted!');
     }
 }
