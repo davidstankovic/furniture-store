@@ -1,5 +1,5 @@
 import { FurnitureService } from "src/services/furniture/furniture.service";
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Furniture } from "src/entities/furniture.entity";
 import { AddFurnitureDto } from "src/dtos/furniture/add.furniture.dto";
@@ -12,6 +12,7 @@ import { ApiResponse } from "src/misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
+import { EditFurnitureDto } from "src/dtos/furniture/edit.furniture.dto";
 
 @Controller('api/furniture')
 @Crud({
@@ -25,6 +26,9 @@ import * as sharp from 'sharp';
             availabilities: {eager: false},
             stores: {eager: true}
         }
+    },
+    routes: {
+        exclude: [ 'updateOneBase', 'replaceOneBase', 'deleteOneBase']
     }
 })
 export class ApiFurnitureController {
@@ -34,6 +38,11 @@ export class ApiFurnitureController {
     @Post('createFull') //POST
     createFullFurniture(@Body() data: AddFurnitureDto){
         return this.service.createFullFurniture(data);
+    }
+
+    @Patch(':id')
+    editFullFurniture(@Param('id') id: number, @Body() data: EditFurnitureDto){
+        return this.service.editFullFurniture(id, data);
     }
 
     @Post(':id/uploadPhoto/') // POST http://localhost:3000/api/furniture/:id/uploadPhoto/
