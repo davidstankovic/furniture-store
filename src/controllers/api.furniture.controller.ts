@@ -1,5 +1,5 @@
 import { FurnitureService } from "src/services/furniture/furniture.service";
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Furniture } from "src/entities/furniture.entity";
 import { AddFurnitureDto } from "src/dtos/furniture/add.furniture.dto";
@@ -13,6 +13,8 @@ import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
 import { EditFurnitureDto } from "src/dtos/furniture/edit.furniture.dto";
+import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
+import { RoleCheckerGuard } from "src/misc/role.checker.guard";
 
 @Controller('api/furniture')
 @Crud({
@@ -35,17 +37,25 @@ export class ApiFurnitureController {
     constructor(public service: FurnitureService,
                 public photoService: PhotoService) { }
 
+    
     @Post('createFull') //POST
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     createFullFurniture(@Body() data: AddFurnitureDto){
         return this.service.createFullFurniture(data);
     }
 
+    
     @Patch(':id')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     editFullFurniture(@Param('id') id: number, @Body() data: EditFurnitureDto){
         return this.service.editFullFurniture(id, data);
     }
 
     @Post(':id/uploadPhoto/') // POST http://localhost:3000/api/furniture/:id/uploadPhoto/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     @UseInterceptors(
         FileInterceptor('photo', {
             storage: diskStorage({
@@ -152,6 +162,8 @@ export class ApiFurnitureController {
     } 
 
     @Delete(':furnitureId/deletePhoto/:photoId/')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     public async deletePhoto(@Param('furnitureId') furnitureId: number, @Param('photoId') photoId: number){
         const photo = await this.photoService.findOne({
             furnitureId: furnitureId,
