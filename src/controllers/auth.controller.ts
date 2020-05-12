@@ -5,16 +5,16 @@ import { ApiResponse } from "src/misc/api.response.class";
 import * as crypto from 'crypto';
 import * as jwt from 'jsonwebtoken';
 import { Request } from "express";
-import { LoginInfoAdministratorDto } from "src/dtos/login.info.administrator.dto";
-import { JwtDataAdministratorDto } from "src/dtos/administrator/jwt.data.administrator.dto";
+import { LoginInfoDto } from "src/dtos/auth/login.info.dto";
+import { JwtDataDto } from "src/dtos/auth/jwt.data.dto";
 import { jwtSecret } from "config/jwt.secret";
 
 @Controller('auth/')
 export class AuthController {
     constructor(public administratorService: AdministratorService){}
 
-    @Post('login')
-    async doLogin(@Body() data: LoginAdministratorDto, @Req() req: Request): Promise<LoginInfoAdministratorDto | ApiResponse>{
+    @Post('administrator/login')
+    async doAdministratorLogin(@Body() data: LoginAdministratorDto, @Req() req: Request): Promise<LoginInfoDto | ApiResponse>{
         const administrator = await this.administratorService.getByUsername(data.username);
 
         if(!administrator){
@@ -36,9 +36,10 @@ export class AuthController {
 
         // TOKEN = JSON { adminId, username, exp, ip, ua }
 
-        const jwtData = new JwtDataAdministratorDto();
-        jwtData.administratorId = administrator.administratorId;
-        jwtData.username = administrator.username;
+        const jwtData = new JwtDataDto();
+        jwtData.role = "administrator";
+        jwtData.id = administrator.administratorId;
+        jwtData.identity = administrator.username;
         let now = new Date();
         now.setDate(now.getDate() + 14);
         const expiryTimestamp = now.getTime() / 1000;
@@ -49,7 +50,7 @@ export class AuthController {
         // token(JWT)
         let token: string = jwt.sign(jwtData.toPlainObject(),jwtSecret); //generisanje tokena!
 
-        const responseObject = new LoginInfoAdministratorDto(
+        const responseObject = new LoginInfoDto(
             administrator.administratorId,
             administrator.username,
             token
