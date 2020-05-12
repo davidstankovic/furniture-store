@@ -30,7 +30,21 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
         }
     },
     routes: {
-        exclude: [ 'updateOneBase', 'replaceOneBase', 'deleteOneBase']
+        only: [
+            'getOneBase', 'getManyBase'
+        ],
+        getOneBase: {
+            decorators: [
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator')
+            ]
+        },
+        getManyBase: {
+            decorators: [
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator')
+            ]
+        }
     }
 })
 export class ApiFurnitureController {
@@ -38,7 +52,7 @@ export class ApiFurnitureController {
                 public photoService: PhotoService) { }
 
     
-    @Post('createFull') //POST
+    @Post() //POST
     @UseGuards(RoleCheckerGuard)
     @AllowToRoles('administrator')
     createFullFurniture(@Body() data: AddFurnitureDto){

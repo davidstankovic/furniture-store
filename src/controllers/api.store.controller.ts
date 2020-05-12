@@ -1,7 +1,9 @@
 import { StoreService } from "src/services/store/store.service";
-import { Controller } from "@nestjs/common";
+import { Controller, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Store } from "src/entities/store.entity";
+import { RoleCheckerGuard } from "src/misc/role.checker.guard";
+import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 
 @Controller('api/store')
 @Crud({
@@ -21,6 +23,45 @@ import { Store } from "src/entities/store.entity";
                 eager: false
             }
         }
+    },
+    routes: {
+        only: [
+            "createOneBase",
+            "createManyBase",
+            "updateOneBase",
+            "getManyBase",
+            "getOneBase",
+        ],
+        createOneBase: {
+            decorators: [
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator'),
+            ]
+        },
+        createManyBase: {
+            decorators: [
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator'),
+            ]
+        },
+        updateOneBase: {
+            decorators: [
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator'),
+            ]
+        },
+        getManyBase: {
+            decorators: [
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator'),
+            ]
+        },
+        getOneBase: {
+            decorators: [
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator'),
+            ]
+        },
     }
 })
 export class ApiStoreController {
