@@ -1,0 +1,1840 @@
+{
+	"info": {
+		"_postman_id": "9f6baf04-fc58-4ccb-bdf4-a2a8f7f197a9",
+		"name": "NestJS Furniture Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "Get all Administrators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all Administrators",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "195"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c3-0y3UFCzmJIZ1vyTxyU0MBxjCzDI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 May 2020 10:34:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"davidstankovic\",\n        \"passwordHash\": \"5c56e016f1e7123974e53c9d2a249ca5\"\n    },\n    {\n        \"administratorId\": 2,\n        \"username\": \"milantex\",\n        \"passwordHash\": \"650c3fa56c2689d97ce439dd4b1900fe\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get a single Administrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a single Administrator",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "99"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"63-0eZHQXDiswKK09Gz53bu5kqicUU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 May 2020 10:37:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"davidstankovic\",\n    \"passwordHash\": \"5c56e016f1e7123974e53c9d2a249ca5\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Add a new Administrator",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add a new Administrator - success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"vladislavmiskovic\",\n\t\"password\": \"SecretSecretPassword!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "198"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c6-NqEzYlzPs4pF0M0NivpGZ9YJA5s\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 May 2020 10:41:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"vladislavmiskovic\",\n    \"passwordHash\": \"B64EFFA78FAE4B19AD358F80DCC841101DAB90BD957FC2567AD91337AFBA5425868A4B599C55CD54E9A12BD616925AA1CFF3C8DA4E8674F0957114CEEC0CB25D\",\n    \"administratorId\": 4\n}"
+						},
+						{
+							"name": "Add a new Administrator - username already taken",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"zorannenadic\",\n\t\"password\": \"NajtanijaSifra!!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-t4k/9UI9MQaVcBQ68YkMUdFYBok\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 May 2020 11:24:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1001,\n    \"message\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit an existing Administrator",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"NekaNovaLozinkaZaOvogAdministratora1233\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit an existing Administrator",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"NekaNovaLozinkaZaOvogAdministratora1233\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "186"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ba-5Kzii8omAG9ReY9DxieKFNonKSs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 May 2020 12:52:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"mtair\",\n    \"passwordHash\": \"10CD7E114039E4E6D9D38E66DC21CB9C980FCA1F9448705A068F4CFE22B172E2B7779AFBB5A581DB1B577FE575A399276741C2F8A21FEE1E5B2ED42351F5DA30\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit a non-existing Administrator",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"NoviPassword!!!2\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/670",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"670"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit a non-existing Administrator",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"NoviPassword!!!2\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/670",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"670"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-TohoSz0THfgyH4V7rCdfcfXcq54\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 May 2020 11:34:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1002,\n    \"message\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a non-existing Administrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/569",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"569"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a non-existing Administrator",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/569",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"569"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-TohoSz0THfgyH4V7rCdfcfXcq54\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 May 2020 11:37:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1002,\n    \"message\": null\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5c8462ae-248d-473c-b591-3248b0d751da",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e424bc8-ea0e-4fb1-91dd-4bcde175b75b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Furniture",
+			"item": [
+				{
+					"name": "createFull Furniture",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Posle iispravke\",\n    \"categoryId\": 1,\n    \"description\": \"Savrseno radi\",\n    \"color\": \"Kaki\",\n    \"construction\": \"Platinum\",\n    \"material\": \"Sljiva\",\n    \"height\": 45,\n    \"width\": 45,\n    \"deep\": 47,\n    \"price\": 423.99,\n    \"stores\": [\n    \t{\n    \t\t\"storeId\": 1,\n        \t\"isAvailable\": 1\n    \t},\n    \t{\n    \t\t\"storeId\": 2,\n        \t\"isAvailable\": 1\n    \t}\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/furniture/createFull/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"furniture",
+								"createFull",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "createFull Furniture - success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Lovac\",\n    \"categoryId\": 1,\n    \"description\": \"Savrsen stvarno\",\n    \"color\": \"Blue\",\n    \"construction\": \"Srebrna konstrukcija\",\n    \"material\": \"Orah\",\n    \"height\": 35,\n    \"width\": 35,\n    \"deep\": 37,\n    \"price\": 123.99,\n    \"stores\": [\n    \t{\n    \t\t\"storeId\": 1,\n        \t\"isAvailable\": 1\n    \t},\n    \t{\n    \t\t\"storeId\": 2,\n        \t\"isAvailable\": 1\n    \t}\n    ]\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/furniture/createFull/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"furniture",
+										"createFull",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "919"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"397-sRZYBQqCgCMRK8PRi0qXKVvqwuA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 May 2020 13:35:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"furnitureId\": 6,\n    \"name\": \"Lovac\",\n    \"categoryId\": 1,\n    \"description\": \"Savrsen stvarno\",\n    \"construction\": \"Srebrna konstrukcija\",\n    \"color\": \"Blue\",\n    \"height\": \"35.00\",\n    \"width\": \"35.00\",\n    \"deep\": \"37.00\",\n    \"material\": \"Orah\",\n    \"status\": \"available\",\n    \"category\": {\n        \"categoryId\": 1,\n        \"name\": \"Dnevna soba\",\n        \"imagePath\": \"assets/img/dnevnasoba.jpg\",\n        \"parentCategoryId\": null\n    },\n    \"availabilities\": [\n        {\n            \"availabilityId\": 9,\n            \"isAvailable\": 1,\n            \"storeId\": 1,\n            \"furnitureId\": 6\n        },\n        {\n            \"availabilityId\": 10,\n            \"isAvailable\": 1,\n            \"storeId\": 2,\n            \"furnitureId\": 6\n        }\n    ],\n    \"stores\": [\n        {\n            \"storeId\": 1,\n            \"imagePath\": \"assets/img/radnja1.jpg\",\n            \"name\": \"Velika prodavnica\",\n            \"address\": \"Velika Prodavnica 15\",\n            \"geoLng\": \"44.00000000\",\n            \"geoLat\": \"250.00000000\"\n        },\n        {\n            \"storeId\": 2,\n            \"imagePath\": \"assets/img/radnja2.jpg\",\n            \"name\": \"Mala prodavnica\",\n            \"address\": \"Mala Prodavnica 22\",\n            \"geoLng\": \"70.00000000\",\n            \"geoLat\": \"91.00000000\"\n        }\n    ],\n    \"furniturePrices\": [\n        {\n            \"furniturePriceId\": 5,\n            \"furnitureId\": 6,\n            \"price\": \"123.99\",\n            \"createdAt\": \"2020-05-06T12:35:58.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Upload furniture photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/DS/Desktop/keramicka-endokruna.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/furniture/2/uploadPhoto/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"furniture",
+								"2",
+								"uploadPhoto",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Upload furniture photo - Bad file extension",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/DS/Desktop/Exercise Files/002 PDF-Guide-Node-Andrew-Mead-v3.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/furniture/2/uploadPhoto/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"furniture",
+										"2",
+										"uploadPhoto",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-/1BctOZfI9HUiikyGHz7sO4T6hY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 May 2020 19:15:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -4002,\n    \"message\": \"Bad file extension!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a single Furniture",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/furniture/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"furniture",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a single Furniture - success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/furniture/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"furniture",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "864"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"360-7AljwcOLo71FhmaL2Fo9Kc3ZNvA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 May 2020 18:01:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"furnitureId\": 2,\n    \"name\": \"David\",\n    \"categoryId\": 2,\n    \"description\": \"AAAAAAAAAAAAA\",\n    \"construction\": \"kvadrat\",\n    \"color\": \"siva\",\n    \"height\": \"33.00\",\n    \"width\": \"33.00\",\n    \"deep\": \"33.00\",\n    \"material\": \"0\",\n    \"status\": \"available\",\n    \"category\": {\n        \"categoryId\": 2,\n        \"name\": \"Trpezarija\",\n        \"imagePath\": \"assets/img/trpezarija.jpg\",\n        \"parentCategoryId\": null\n    },\n    \"photos\": [\n        {\n            \"photoId\": 3,\n            \"furnitureId\": 2,\n            \"imagePath\": \"202056-5112322003-me.png\"\n        }\n    ],\n    \"availabilities\": [\n        {\n            \"availabilityId\": 2,\n            \"isAvailable\": 1,\n            \"storeId\": 1,\n            \"furnitureId\": 2\n        },\n        {\n            \"availabilityId\": 4,\n            \"isAvailable\": 1,\n            \"storeId\": 2,\n            \"furnitureId\": 2\n        }\n    ],\n    \"stores\": [\n        {\n            \"storeId\": 1,\n            \"imagePath\": \"assets/img/radnja1.jpg\",\n            \"name\": \"Velika prodavnica\",\n            \"address\": \"Velika Prodavnica 15\",\n            \"geoLng\": \"44.00000000\",\n            \"geoLat\": \"250.00000000\"\n        },\n        {\n            \"storeId\": 2,\n            \"imagePath\": \"assets/img/radnja2.jpg\",\n            \"name\": \"Mala prodavnica\",\n            \"address\": \"Mala Prodavnica 22\",\n            \"geoLng\": \"70.00000000\",\n            \"geoLat\": \"91.00000000\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a single photo of a Furniture",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/furniture/2/deletePhoto/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"furniture",
+								"2",
+								"deletePhoto",
+								"15"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete a single photo of a Furniture - success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/furniture/2/deletePhoto/15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"furniture",
+										"2",
+										"deletePhoto",
+										"15"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-EPvOlDLL44snnM4WQSDM7EsUZSQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 12:38:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"statusCode\": 0,\n    \"message\": \"One photo deleted!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit a single article without editing stores",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Izmenjeno ime\",\n    \"categoryId\": 1,\n    \"description\": \" IzmenjenIzmenjenIzmenjenIzmenjen\",\n    \"construction\": \"Izmenjenja \",\n    \"color\": \"ssss\",\n    \"height\": \"12.00\",\n    \"width\": \"12.00\",\n    \"deep\": \"12.00\",\n    \"material\": \"Peach\",\n    \"status\": \"hidden\",\n    \"price\": 69.69,\n    \"stores\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/furniture/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"furniture",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit a single article without editing stores - success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Izmenjeno ime\",\n    \"categoryId\": 1,\n    \"description\": \" IzmenjenIzmenjenIzmenjenIzmenjen\",\n    \"construction\": \"Izmenjenja \",\n    \"color\": \"ssss\",\n    \"height\": \"12.00\",\n    \"width\": \"12.00\",\n    \"deep\": \"12.00\",\n    \"material\": \"Peach\",\n    \"status\": \"hidden\",\n    \"price\": 69.69,\n    \"stores\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/furniture/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"furniture",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1027"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"403-i2PxygH6NY2On0hjtfhmRxAVNXw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 14:43:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"furnitureId\": 2,\n    \"name\": \"Izmenjeno ime\",\n    \"categoryId\": 1,\n    \"description\": \" IzmenjenIzmenjenIzmenjenIzmenjen\",\n    \"construction\": \"Izmenjenja \",\n    \"color\": \"ssss\",\n    \"height\": \"12.00\",\n    \"width\": \"12.00\",\n    \"deep\": \"12.00\",\n    \"material\": \"Peach\",\n    \"status\": \"hidden\",\n    \"category\": {\n        \"categoryId\": 1,\n        \"name\": \"Dnevna soba\",\n        \"imagePath\": \"assets/img/dnevnasoba.jpg\",\n        \"parentCategoryId\": null\n    },\n    \"availabilities\": [\n        {\n            \"availabilityId\": 2,\n            \"isAvailable\": 1,\n            \"storeId\": 1,\n            \"furnitureId\": 2\n        },\n        {\n            \"availabilityId\": 4,\n            \"isAvailable\": 1,\n            \"storeId\": 2,\n            \"furnitureId\": 2\n        }\n    ],\n    \"stores\": [\n        {\n            \"storeId\": 1,\n            \"imagePath\": \"assets/img/radnja1.jpg\",\n            \"name\": \"Velika prodavnica\",\n            \"address\": \"Velika Prodavnica 15\",\n            \"geoLng\": \"44.00000000\",\n            \"geoLat\": \"250.00000000\"\n        },\n        {\n            \"storeId\": 2,\n            \"imagePath\": \"assets/img/radnja2.jpg\",\n            \"name\": \"Mala prodavnica\",\n            \"address\": \"Mala Prodavnica 22\",\n            \"geoLng\": \"70.00000000\",\n            \"geoLat\": \"91.00000000\"\n        }\n    ],\n    \"furniturePrices\": [\n        {\n            \"furniturePriceId\": 10,\n            \"furnitureId\": 2,\n            \"price\": \"0.00\",\n            \"createdAt\": \"2020-05-07T13:43:31.000Z\"\n        },\n        {\n            \"furniturePriceId\": 11,\n            \"furnitureId\": 2,\n            \"price\": \"69.69\",\n            \"createdAt\": \"2020-05-07T13:43:51.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit a single article with editing stores",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Izmenjeno ime\",\n    \"categoryId\": 1,\n    \"description\": \" IzmenjenIzmenjenIzmenjenIzmenjen\",\n    \"construction\": \"Izmenjenja \",\n    \"color\": \"ssss\",\n    \"height\": \"12.00\",\n    \"width\": \"12.00\",\n    \"deep\": \"12.00\",\n    \"material\": \"Peach\",\n    \"status\": \"hidden\",\n    \"price\": 69.69,\n    \"stores\": [\n    \t{\n    \t\t\"storeId\": 1,\n    \t\t\"isAvailable\": 0\n    \t}, {\n    \t\t\"storeId\": 2,\n    \t\t\"isAvailable\": 0\n    \t}]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/furniture/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"furniture",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit a single article with editing stores - success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Izmenjeno ime\",\n    \"categoryId\": 1,\n    \"description\": \" IzmenjenIzmenjenIzmenjenIzmenjen\",\n    \"construction\": \"Izmenjenja \",\n    \"color\": \"ssss\",\n    \"height\": \"12.00\",\n    \"width\": \"12.00\",\n    \"deep\": \"12.00\",\n    \"material\": \"Peach\",\n    \"status\": \"hidden\",\n    \"price\": 69.69,\n    \"stores\": [\n    \t{\n    \t\t\"storeId\": 1,\n    \t\t\"isAvailable\": 0\n    \t}, {\n    \t\t\"storeId\": 2,\n    \t\t\"isAvailable\": 0\n    \t}]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/furniture/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"furniture",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1029"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"405-3xFPNyBAg3gOn9gYlKw07Q/RrRw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 14:48:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"furnitureId\": 2,\n    \"name\": \"Izmenjeno ime\",\n    \"categoryId\": 1,\n    \"description\": \" IzmenjenIzmenjenIzmenjenIzmenjen\",\n    \"construction\": \"Izmenjenja \",\n    \"color\": \"ssss\",\n    \"height\": \"12.00\",\n    \"width\": \"12.00\",\n    \"deep\": \"12.00\",\n    \"material\": \"Peach\",\n    \"status\": \"hidden\",\n    \"category\": {\n        \"categoryId\": 1,\n        \"name\": \"Dnevna soba\",\n        \"imagePath\": \"assets/img/dnevnasoba.jpg\",\n        \"parentCategoryId\": null\n    },\n    \"availabilities\": [\n        {\n            \"availabilityId\": 13,\n            \"isAvailable\": 0,\n            \"storeId\": 1,\n            \"furnitureId\": 2\n        },\n        {\n            \"availabilityId\": 14,\n            \"isAvailable\": 0,\n            \"storeId\": 2,\n            \"furnitureId\": 2\n        }\n    ],\n    \"stores\": [\n        {\n            \"storeId\": 1,\n            \"imagePath\": \"assets/img/radnja1.jpg\",\n            \"name\": \"Velika prodavnica\",\n            \"address\": \"Velika Prodavnica 15\",\n            \"geoLng\": \"44.00000000\",\n            \"geoLat\": \"250.00000000\"\n        },\n        {\n            \"storeId\": 2,\n            \"imagePath\": \"assets/img/radnja2.jpg\",\n            \"name\": \"Mala prodavnica\",\n            \"address\": \"Mala Prodavnica 22\",\n            \"geoLng\": \"70.00000000\",\n            \"geoLat\": \"91.00000000\"\n        }\n    ],\n    \"furniturePrices\": [\n        {\n            \"furniturePriceId\": 10,\n            \"furnitureId\": 2,\n            \"price\": \"0.00\",\n            \"createdAt\": \"2020-05-07T13:43:31.000Z\"\n        },\n        {\n            \"furniturePriceId\": 11,\n            \"furnitureId\": 2,\n            \"price\": \"69.69\",\n            \"createdAt\": \"2020-05-07T13:43:51.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e28d5f7d-afe9-4a51-a230-e73ac5e0a6e8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e77317c-125f-45b7-9901-471208ec339d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "POST auth/administrator/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/administrator/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"administrator",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login - when the administrator exists and the password is correct.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"120-FykcnW/LpSMFOKSzXQKFJMW1NCM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 May 2020 15:47:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 7,\n    \"username\": \"admin\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjcsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1ODk5ODk2MjAuMDcsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI0LjEiLCJpYXQiOjE1ODg3ODAwMjB9.l32n4lprWBAvvRCJbkamsd5jDnBpKVCyLqhcAbGFOyU\"\n}"
+						},
+						{
+							"name": "Login - when the password is incorrect.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin1\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-yGnd1fUn+KRemOJUJKfIJoExxS4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 May 2020 15:50:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3002,\n    \"message\": null\n}"
+						},
+						{
+							"name": "Login - when the administrator doesn't exist.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"admin1\",\n\t\"password\": \"admin\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-jVzHjGg0W81AgoBNOOnaoLkouLY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 May 2020 15:50:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3001,\n    \"message\": null\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3140ffd5-14c6-4fdd-8aa7-70dd8f53f015",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9479ff5d-ac7c-4e64-baba-c97021678e23",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Get all stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/store",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"store"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all stores - success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/store",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"store"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2678"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a76-x4dMeUjSlkuBjlgJ/KwbpwVcWKw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 11:06:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"storeId\": 1,\n        \"imagePath\": \"assets/img/radnja1.jpg\",\n        \"name\": \"Velika prodavnica\",\n        \"address\": \"Velika Prodavnica 15\",\n        \"geoLng\": \"44.00000000\",\n        \"geoLat\": \"250.00000000\",\n        \"furnitures\": [\n            {\n                \"furnitureId\": 1,\n                \"name\": \"V22\",\n                \"categoryId\": 3,\n                \"description\": \"Kratak opis...\",\n                \"construction\": \"kocka\",\n                \"color\": \"bela\",\n                \"height\": \"22.00\",\n                \"width\": \"22.00\",\n                \"deep\": \"22.00\",\n                \"material\": \"0\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 2,\n                \"name\": \"David\",\n                \"categoryId\": 2,\n                \"description\": \"AAAAAAAAAAAAA\",\n                \"construction\": \"kvadrat\",\n                \"color\": \"siva\",\n                \"height\": \"33.00\",\n                \"width\": \"33.00\",\n                \"deep\": \"33.00\",\n                \"material\": \"0\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 3,\n                \"name\": \"Verona\",\n                \"categoryId\": 11,\n                \"description\": \"Kliže jako lepo\",\n                \"construction\": \"kupa\",\n                \"color\": \"crna\",\n                \"height\": \"44.00\",\n                \"width\": \"44.00\",\n                \"deep\": \"44.00\",\n                \"material\": \"0\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 4,\n                \"name\": \"Vitorog\",\n                \"categoryId\": 3,\n                \"description\": \"Desscriptione\",\n                \"construction\": \"Celicna konstrukcija\",\n                \"color\": \"Hwite\",\n                \"height\": \"31.00\",\n                \"width\": \"11.00\",\n                \"deep\": \"58.00\",\n                \"material\": \"Bademmmm\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 5,\n                \"name\": \"Zmaj\",\n                \"categoryId\": 5,\n                \"description\": \"OHOHOO\",\n                \"construction\": \"Zlatna konstrukcija\",\n                \"color\": \"Brown\",\n                \"height\": \"22.00\",\n                \"width\": \"22.00\",\n                \"deep\": \"22.00\",\n                \"material\": \"Bademmmm\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 6,\n                \"name\": \"Lovac\",\n                \"categoryId\": 1,\n                \"description\": \"Savrsen stvarno\",\n                \"construction\": \"Srebrna konstrukcija\",\n                \"color\": \"Blue\",\n                \"height\": \"35.00\",\n                \"width\": \"35.00\",\n                \"deep\": \"37.00\",\n                \"material\": \"Orah\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 7,\n                \"name\": \"Posle iispravke\",\n                \"categoryId\": 1,\n                \"description\": \"Savrseno radi\",\n                \"construction\": \"Platinum\",\n                \"color\": \"Kaki\",\n                \"height\": \"45.00\",\n                \"width\": \"45.00\",\n                \"deep\": \"47.00\",\n                \"material\": \"Sljiva\",\n                \"status\": \"available\"\n            }\n        ]\n    },\n    {\n        \"storeId\": 2,\n        \"imagePath\": \"assets/img/radnja2.jpg\",\n        \"name\": \"Mala prodavnica\",\n        \"address\": \"Mala Prodavnica 22\",\n        \"geoLng\": \"70.00000000\",\n        \"geoLat\": \"91.00000000\",\n        \"furnitures\": [\n            {\n                \"furnitureId\": 2,\n                \"name\": \"David\",\n                \"categoryId\": 2,\n                \"description\": \"AAAAAAAAAAAAA\",\n                \"construction\": \"kvadrat\",\n                \"color\": \"siva\",\n                \"height\": \"33.00\",\n                \"width\": \"33.00\",\n                \"deep\": \"33.00\",\n                \"material\": \"0\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 5,\n                \"name\": \"Zmaj\",\n                \"categoryId\": 5,\n                \"description\": \"OHOHOO\",\n                \"construction\": \"Zlatna konstrukcija\",\n                \"color\": \"Brown\",\n                \"height\": \"22.00\",\n                \"width\": \"22.00\",\n                \"deep\": \"22.00\",\n                \"material\": \"Bademmmm\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 6,\n                \"name\": \"Lovac\",\n                \"categoryId\": 1,\n                \"description\": \"Savrsen stvarno\",\n                \"construction\": \"Srebrna konstrukcija\",\n                \"color\": \"Blue\",\n                \"height\": \"35.00\",\n                \"width\": \"35.00\",\n                \"deep\": \"37.00\",\n                \"material\": \"Orah\",\n                \"status\": \"available\"\n            },\n            {\n                \"furnitureId\": 7,\n                \"name\": \"Posle iispravke\",\n                \"categoryId\": 1,\n                \"description\": \"Savrseno radi\",\n                \"construction\": \"Platinum\",\n                \"color\": \"Kaki\",\n                \"height\": \"45.00\",\n                \"width\": \"45.00\",\n                \"deep\": \"47.00\",\n                \"material\": \"Sljiva\",\n                \"status\": \"available\"\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get a single store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/store/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"store",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a single store - success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/store/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"store",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1021"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3fd-PFAQ3QpwKkAl/fhgyRYC1xF1Rwg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 11:07:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"storeId\": 2,\n    \"imagePath\": \"assets/img/radnja2.jpg\",\n    \"name\": \"Mala prodavnica\",\n    \"address\": \"Mala Prodavnica 22\",\n    \"geoLng\": \"70.00000000\",\n    \"geoLat\": \"91.00000000\",\n    \"furnitures\": [\n        {\n            \"furnitureId\": 2,\n            \"name\": \"David\",\n            \"categoryId\": 2,\n            \"description\": \"AAAAAAAAAAAAA\",\n            \"construction\": \"kvadrat\",\n            \"color\": \"siva\",\n            \"height\": \"33.00\",\n            \"width\": \"33.00\",\n            \"deep\": \"33.00\",\n            \"material\": \"0\",\n            \"status\": \"available\"\n        },\n        {\n            \"furnitureId\": 5,\n            \"name\": \"Zmaj\",\n            \"categoryId\": 5,\n            \"description\": \"OHOHOO\",\n            \"construction\": \"Zlatna konstrukcija\",\n            \"color\": \"Brown\",\n            \"height\": \"22.00\",\n            \"width\": \"22.00\",\n            \"deep\": \"22.00\",\n            \"material\": \"Bademmmm\",\n            \"status\": \"available\"\n        },\n        {\n            \"furnitureId\": 6,\n            \"name\": \"Lovac\",\n            \"categoryId\": 1,\n            \"description\": \"Savrsen stvarno\",\n            \"construction\": \"Srebrna konstrukcija\",\n            \"color\": \"Blue\",\n            \"height\": \"35.00\",\n            \"width\": \"35.00\",\n            \"deep\": \"37.00\",\n            \"material\": \"Orah\",\n            \"status\": \"available\"\n        },\n        {\n            \"furnitureId\": 7,\n            \"name\": \"Posle iispravke\",\n            \"categoryId\": 1,\n            \"description\": \"Savrseno radi\",\n            \"construction\": \"Platinum\",\n            \"color\": \"Kaki\",\n            \"height\": \"45.00\",\n            \"width\": \"45.00\",\n            \"deep\": \"47.00\",\n            \"material\": \"Sljiva\",\n            \"status\": \"available\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add a new store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Stores\",\n\t\"imagePath\": \"img/img2.png\",\n\t\"address\": \"Beograd 112321\",\n\t\"geoLng\": 123,\n\t\"geoLat\": 39\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/store/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"store",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add a new store - success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Stores\",\n\t\"imagePath\": \"img/img2.png\",\n\t\"address\": \"Beograd 112321\",\n\t\"geoLng\": 123,\n\t\"geoLat\": 39\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/store/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"store",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "146"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"92-UyTb0XF8SQHB5OKMDle/lE7uCO0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 11:13:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"storeId\": 6,\n    \"imagePath\": \"img/img2.png\",\n    \"name\": \"Stores\",\n    \"address\": \"Beograd 112321\",\n    \"geoLng\": \"123.00000000\",\n    \"geoLat\": \"39.00000000\",\n    \"furnitures\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit a single store",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Prodavnica\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/store/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"store",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit a single store - success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Prodavnica\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/store/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"store",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "150"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"96-vpGRKZeYjC+yIQzTgZcSadbgJWQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 11:17:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"storeId\": 3,\n    \"imagePath\": \"img/img2.png\",\n    \"name\": \"Prodavnica\",\n    \"address\": \"Beograd 112321\",\n    \"geoLng\": \"123.00000000\",\n    \"geoLat\": \"39.00000000\",\n    \"furnitures\": []\n}"
+						},
+						{
+							"name": "Add a new store - success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Stores\",\n\t\"imagePath\": \"img/img2.png\",\n\t\"address\": \"Beograd 112321\",\n\t\"geoLng\": 123,\n\t\"geoLat\": 39\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/store/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"store",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "146"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"92-UyTb0XF8SQHB5OKMDle/lE7uCO0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 May 2020 11:13:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"storeId\": 6,\n    \"imagePath\": \"img/img2.png\",\n    \"name\": \"Stores\",\n    \"address\": \"Beograd 112321\",\n    \"geoLng\": \"123.00000000\",\n    \"geoLat\": \"39.00000000\",\n    \"furnitures\": []\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c7ec3225-1da0-4f30-ba54-a372b7604043",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "edca33c0-f35d-44b6-ace4-620faa2622c8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo3LCJpZGVudGl0eSI6ImFkbWluIiwiZXhwIjoxNTkwNDk0MTExLjY5NywiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjQuMSIsImlhdCI6MTU4OTI4NDUxMX0.O_1vD5_6w8ZXQknTQwKuywYNAkeIxqAkvgsAJQ1-P2M",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8aa064be-f846-4533-995d-78ba889c5c11",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f8c71059-82d3-4691-b8f2-01f2e5f3d44e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
