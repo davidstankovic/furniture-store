@@ -15,6 +15,7 @@ import * as sharp from 'sharp';
 import { EditFurnitureDto } from "src/dtos/furniture/edit.furniture.dto";
 import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 import { RoleCheckerGuard } from "src/misc/role.checker.guard";
+import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
 
 @Controller('api/furniture')
 @Crud({
@@ -23,7 +24,7 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
     query: {
         join: {
             category: { eager: true },
-            furniturePrices: { eager: false },
+            furniturePrices: { eager: true },
             photos: { eager: true },
             availabilities: {eager: false},
             stores: {eager: true}
@@ -38,7 +39,7 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
                 UseGuards(RoleCheckerGuard),
                 AllowToRoles('administrator')
             ]
-        },
+        }, 
         getManyBase: {
             decorators: [
                 UseGuards(RoleCheckerGuard),
@@ -200,5 +201,12 @@ export class ApiFurnitureController {
         }
 
         return new ApiResponse('ok', 0, 'One photo deleted!');
+    }
+
+    @Post('search')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
+    async search(@Body() data: FurnitureSearchDto): Promise<Furniture[]> {
+        return await this.service.search(data)
     }
 }

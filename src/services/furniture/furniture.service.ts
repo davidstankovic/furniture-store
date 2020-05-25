@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Repository } from "typeorm";
+import { Repository, QueryBuilder } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { Furniture } from "src/entities/furniture.entity";
@@ -8,6 +8,7 @@ import { EditFurnitureDto } from "src/dtos/furniture/edit.furniture.dto";
 import { ApiResponse } from "src/misc/api.response.class";
 import { FurniturePrice } from "src/entities/furniture-price.entity";
 import { Availability } from "src/entities/availability.entity";
+import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
 
 @Injectable()
 export class FurnitureService extends TypeOrmCrudService<Furniture> {
@@ -123,5 +124,85 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
                 "furniturePrices"
             ]
         })
+    }
+
+    async search(data: FurnitureSearchDto): Promise<Furniture[]> {
+        const builder = await this.furniture.createQueryBuilder("furniture");
+
+        builder.innerJoin("furniture.furniturePrices", "fp");
+        builder.leftJoin("furniture.availabilities", "fa");
+
+        builder.where('furniture.categoryId = :categoryId', { categoryId: data.categoryId });
+
+        if(data.keywords && data.keywords.length> 0){
+            builder.andWhere(`furniture.name LIKE :kw OR
+                              furniture.description LIKE :kw OR
+                              furniture.color LIKE :kw OR
+                              furniture.material LIKE :kw OR`, { kw: '%' + data.keywords + '%'})
+        }
+        if(data.priceMin && typeof data.priceMin === 'number'){
+            builder.andWhere('fp.price >= :min', { min: data.priceMin })
+        }
+        if(data.priceMax && typeof data.priceMax === 'number'){
+            builder.andWhere('fp.price >= :max', { max: data.priceMax })
+        }
+        if(data.color && typeof data.color === 'string'){
+            builder.andWhere('furniture.color LIKE :color', { color: data.color })
+        }
+        if(data.material && typeof data.material === 'string'){
+            builder.andWhere('furniture.material LIKE :material', { material: data.material })
+        }
+        // DIMENZIJE
+        if(data.height && typeof data.height === 'number'){
+            builder.andWhere('furniture.height LIKE :height', { height: data.height })
+        }
+        if(data.width && typeof data.width === 'number'){
+            builder.andWhere('furniture.width LIKE :width', { width: data.width })
+        }
+        if(data.deep && typeof data.deep === 'number'){
+            builder.andWhere('furniture.deep LIKE :deep', { deep: data.deep })
+        }
+
+        if(data.stores && data.stores.length > 0) {
+            for(const store of data.stores) {
+                builder.andWhere('fa.storeId = :sId AND fa.isAvailable IN (:sAvail)',
+                {
+                    sId: store.storeId,
+                    sAvail: store.isAvailable,
+                })
+            }
+        }
+
+        let orderBy = 'furniture.name'
+        let orderDirection: 'ASC' | 'DESC' = 'ASC'
+
+        if(data.orderBy){
+            orderBy = data.orderBy
+
+            if(orderBy === 'price'){
+                orderBy = 'fa.price'
+            }
+        }
+        if(data.orderDirection){
+            orderDirection = data.orderDirection
+        }
+
+        builder.orderBy(orderBy, orderDirection)
+
+        let page = 0;
+        let perPage: 5 | 10 | 25 | 50 = 10;
+        if(data.page && typeof data.page === 'number'){
+            page = data.page
+        }
+        if(data.itemsPerPage && typeof data.itemsPerPage === 'number') {
+            perPage = data.itemsPerPage
+        }
+
+        builder.skip(page * perPage)
+        builder.take(perPage)
+
+        let items = await builder.getMany();
+
+        return items;
     }
 }
