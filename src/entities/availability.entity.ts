@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { Furniture } from "./furniture.entity";
 import { Store } from "./store.entity";
+import * as Validator from 'class-validator';
 
 @Index("fk_availability_furniture_id", ["furnitureId"], {})
 @Index("fk_availability_store_id", ["storeId"], {})
@@ -25,6 +26,8 @@ export class Availability {
     name: "is_available",
     unsigned: true
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsIn([0,1])
   isAvailable: number;
 
   @Column({type: "int", name: "store_id", unsigned: true })

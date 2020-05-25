@@ -14,6 +14,8 @@ import { Availability } from "./availability.entity";
 import { Photo } from "./photo.entity";
 import { from } from "rxjs";
 import { Store } from "./store.entity";
+import * as Validator from 'class-validator'
+import { ArticleStatus } from "src/types/furniture.status.enum";
 
 @Entity()
 export class Furniture {
@@ -21,12 +23,18 @@ export class Furniture {
   furnitureId: number;
 
   @Column({ type: "varchar", length: 128 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3,128)
   name: string;
 
   @Column({ type: "int", name: "category_id", unsigned: true })
   categoryId: number;
 
   @Column({ type: "text" })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(64, 10000)
   description: string;
 
   @Column({
@@ -34,9 +42,15 @@ export class Furniture {
     name: "construction",
     length: 128
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(10,128)
   construction: string;
 
   @Column({ type: "varchar", name: "color", length: 32 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3,32)
   color: string;
 
   @Column({
@@ -45,6 +59,13 @@ export class Furniture {
     unsigned: true,
     precision: 10,
     scale: 2
+  })
+  @Validator.IsNotEmpty()
+  @Validator.IsPositive()
+  @Validator.IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 2,
   })
   height: number;
 
@@ -55,6 +76,13 @@ export class Furniture {
     precision: 10,
     scale: 2
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsPositive()
+  @Validator.IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 2,
+  })
   width: number;
 
   @Column({
@@ -64,17 +92,29 @@ export class Furniture {
     precision: 10,
     scale: 2
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsPositive()
+  @Validator.IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 2,
+  })
   deep: number;
 
   @Column({ type: "varchar", name: "material", length: 32})
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3,32)
   material: string;
-
-
+  
   @Column({
     type: "enum",
     enum: ["available", "visible", "hidden"],
     default: () => "'available'",
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.IsEnum(ArticleStatus)
   status: "available" | "visible" | "hidden";
 
   @OneToMany(() => Availability, (availability) => availability.furniture)

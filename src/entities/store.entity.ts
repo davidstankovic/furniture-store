@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { Availability } from "./availability.entity";
 import { Furniture } from "./furniture.entity";
+import * as Validator from 'class-validator';
 
 @Index("uq_store_address", ["address"], { unique: true })
 @Index("uq_store_image_path", ["imagePath"], { unique: true })
@@ -23,9 +24,15 @@ export class Store {
     unique: true,
     length: 128
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(1,128)
   imagePath: string;
 
   @Column({ type: "varchar", name: "name", length: 50 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(1, 50)
   name: string;
 
   @Column({
@@ -34,6 +41,9 @@ export class Store {
     unique: true,
     length: 128
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(1,128)
   address: string;
 
   @Column({
@@ -42,6 +52,13 @@ export class Store {
     precision: 11,
     scale: 8
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsPositive()
+  @Validator.IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 8,
+  })
   geoLng: number;
 
   @Column({
@@ -49,6 +66,13 @@ export class Store {
     name: "geo_lat",
     precision: 10,
     scale: 8
+  })
+  @Validator.IsNotEmpty()
+  @Validator.IsPositive()
+  @Validator.IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 8,
   })
   geoLat: number;
 

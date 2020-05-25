@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Furniture } from "./furniture.entity";
+import * as Validator from 'class-validator';
 
 @Entity("furniture_price")
 export class FurniturePrice {
@@ -20,6 +21,13 @@ export class FurniturePrice {
   furnitureId: number;
 
   @Column({ type: "decimal", unsigned: true, precision: 10, scale: 2 })
+  @Validator.IsNotEmpty()
+  @Validator.IsPositive()
+  @Validator.IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 2,
+  })
   price: number;
 
   @Column({ type: "timestamp", name: "created_at", default: () => "CURRENT_TIMESTAMP" })
