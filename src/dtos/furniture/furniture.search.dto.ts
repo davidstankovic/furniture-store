@@ -16,6 +16,7 @@ export class FurnitureSearchDto {
     @Validator.IsString()
     @Validator.Length(2, 128)
     keywords: string;
+
     @Validator.IsOptional()
     @Validator.IsNumber({
         allowInfinity: false,
@@ -71,8 +72,8 @@ export class FurnitureSearchDto {
     })
     deep: number;
 
-
     stores: FurnitureSearchStoreComponentDto[];
+    
     @Validator.IsOptional()
     @Validator.IsIn(['name', 'price'])
     orderBy: 'name' | 'price';

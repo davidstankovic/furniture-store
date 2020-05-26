@@ -118,7 +118,7 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         }
         return await this.furniture.findOne(furnitureId, {
             relations: [
-                "category",
+                "categories",
                 "availabilities",
                 "stores",
                 "furniturePrices"
@@ -138,7 +138,7 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
             builder.andWhere(`furniture.name LIKE :kw OR
                               furniture.description LIKE :kw OR
                               furniture.color LIKE :kw OR
-                              furniture.material LIKE :kw OR`, { kw: '%' + data.keywords + '%'})
+                              furniture.material LIKE :kw OR`, { kw: '%' + data.keywords.trim() + '%'})
         }
         if(data.priceMin && typeof data.priceMin === 'number'){
             builder.andWhere('fp.price >= :min', { min: data.priceMin })
@@ -147,20 +147,20 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
             builder.andWhere('fp.price >= :max', { max: data.priceMax })
         }
         if(data.color && typeof data.color === 'string'){
-            builder.andWhere('furniture.color LIKE :color', { color: data.color })
+            builder.andWhere('furniture.color = :color', { color: data.color })
         }
         if(data.material && typeof data.material === 'string'){
-            builder.andWhere('furniture.material LIKE :material', { material: data.material })
+            builder.andWhere('furniture.material = :material', { material: data.material })
         }
         // DIMENZIJE
         if(data.height && typeof data.height === 'number'){
-            builder.andWhere('furniture.height LIKE :height', { height: data.height })
+            builder.andWhere('furniture.height = :height', { height: data.height })
         }
         if(data.width && typeof data.width === 'number'){
-            builder.andWhere('furniture.width LIKE :width', { width: data.width })
+            builder.andWhere('furniture.width = :width', { width: data.width })
         }
         if(data.deep && typeof data.deep === 'number'){
-            builder.andWhere('furniture.deep LIKE :deep', { deep: data.deep })
+            builder.andWhere('furniture.deep = :deep', { deep: data.deep })
         }
 
         if(data.stores && data.stores.length > 0) {
