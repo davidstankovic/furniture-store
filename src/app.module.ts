@@ -20,6 +20,7 @@ import { ApiStoreController } from './controllers/api.store.controller';
 import { AuthController } from './controllers/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoService } from './services/photo/photo.service';
+import { AdministratorToken } from './entities/administrator-token.entity';
 
 @Module({
   imports: [
@@ -37,7 +38,8 @@ import { PhotoService } from './services/photo/photo.service';
         Category,
         Photo,
         Store,
-        Availability
+        Availability,
+        AdministratorToken
       ]
     }),
     TypeOrmModule.forFeature([
@@ -47,7 +49,8 @@ import { PhotoService } from './services/photo/photo.service';
       Category,
       Photo,
       Store,
-      Availability
+      Availability,
+      AdministratorToken
     ])
   ],
   controllers: [
