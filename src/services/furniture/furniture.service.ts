@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Repository, QueryBuilder } from "typeorm";
+import { Repository, QueryBuilder, In } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { Furniture } from "src/entities/furniture.entity";
@@ -118,10 +118,11 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         }
         return await this.furniture.findOne(furnitureId, {
             relations: [
-                "categories",
+                "category",
                 "availabilities",
                 "stores",
-                "furniturePrices"
+                "furniturePrices",
+                "photos"
             ]
         })
     }
@@ -129,38 +130,38 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
     async search(data: FurnitureSearchDto): Promise<Furniture[]> {
         const builder = await this.furniture.createQueryBuilder("furniture");
 
-        builder.innerJoin("furniture.furniturePrices", "fp");
+        builder.innerJoinAndSelect("furniture.furniturePrices", "fp", "fp.createdAt =  (SELECT MAX(fp.created_at) FROM furniture_price as fp WHERE fp.furniture_id = furniture.furniture_id)");
         builder.leftJoin("furniture.availabilities", "fa");
 
-        builder.where('furniture.categoryId = :categoryId', { categoryId: data.categoryId });
+        builder.where('furniture.categoryId = :catId', { catId: data.categoryId });
 
         if(data.keywords && data.keywords.length> 0){
-            builder.andWhere(`furniture.name LIKE :kw OR
+            builder.andWhere(`(furniture.name LIKE :kw OR
                               furniture.description LIKE :kw OR
                               furniture.color LIKE :kw OR
-                              furniture.material LIKE :kw OR`, { kw: '%' + data.keywords.trim() + '%'})
+                              furniture.material LIKE :kw)`, { kw: '%' + data.keywords.trim() + '%'})
         }
         if(data.priceMin && typeof data.priceMin === 'number'){
             builder.andWhere('fp.price >= :min', { min: data.priceMin })
         }
         if(data.priceMax && typeof data.priceMax === 'number'){
-            builder.andWhere('fp.price >= :max', { max: data.priceMax })
+            builder.andWhere('fp.price <= :max', { max: data.priceMax })
         }
         if(data.color && typeof data.color === 'string'){
-            builder.andWhere('furniture.color = :color', { color: data.color })
+            builder.andWhere('furniture.color = :clr', { clr: data.color })
         }
         if(data.material && typeof data.material === 'string'){
-            builder.andWhere('furniture.material = :material', { material: data.material })
+            builder.andWhere('furniture.material = :mrl', { mrl: data.material })
         }
         // DIMENZIJE
         if(data.height && typeof data.height === 'number'){
-            builder.andWhere('furniture.height = :height', { height: data.height })
+            builder.andWhere('furniture.height = :hei', { hei: data.height })
         }
         if(data.width && typeof data.width === 'number'){
-            builder.andWhere('furniture.width = :width', { width: data.width })
+            builder.andWhere('furniture.width = :wth', { wth: data.width })
         }
         if(data.deep && typeof data.deep === 'number'){
-            builder.andWhere('furniture.deep = :deep', { deep: data.deep })
+            builder.andWhere('furniture.deep = :dp', { dp: data.deep })
         }
 
         if(data.stores && data.stores.length > 0) {
@@ -180,7 +181,10 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
             orderBy = data.orderBy
 
             if(orderBy === 'price'){
-                orderBy = 'fa.price'
+                orderBy = 'fp.price'
+            }
+            if(orderBy === 'name'){
+                orderBy = 'furniture.name'
             }
         }
         if(data.orderDirection){
@@ -201,8 +205,17 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         builder.skip(page * perPage)
         builder.take(perPage)
 
-        let items = await builder.getMany();
+        let furnitureIds = await (await builder.getMany()).map(furniture => furniture.furnitureId);
 
-        return items;
+        return await this.furniture.find({
+            where: { furnitureId: In(furnitureIds)},
+            relations: [
+                "category",
+                "availabilities",
+                "stores",
+                "furniturePrices",
+                "photos"
+            ]
+        });
     }
 }

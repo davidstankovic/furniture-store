@@ -26,7 +26,7 @@ import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
             category: { eager: true },
             furniturePrices: { eager: true },
             photos: { eager: true },
-            availabilities: {eager: false},
+            availabilities: {eager: true},
             stores: {eager: true}
         }
     },
@@ -176,10 +176,10 @@ export class ApiFurnitureController {
             }).toFile(destinationFilePath);
     } 
 
-    @Delete(':furnitureId/deletePhoto/:photoId/')
+    @Delete(':id/deletePhoto/:photoId/')
     @UseGuards(RoleCheckerGuard)
     @AllowToRoles('administrator')
-    public async deletePhoto(@Param('furnitureId') furnitureId: number, @Param('photoId') photoId: number){
+    public async deletePhoto(@Param('id') furnitureId: number, @Param('photoId') photoId: number){
         const photo = await this.photoService.findOne({
             furnitureId: furnitureId,
             photoId: photoId

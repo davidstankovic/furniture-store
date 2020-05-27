@@ -2,7 +2,6 @@ import * as Validator from 'class-validator';
 import { FurnitureSearchStoreComponentDto } from './furniture.search.store.component.dto';
 export class FurnitureSearchDto {
 
-
     @Validator.IsNotEmpty()
     @Validator.IsPositive()
     @Validator.IsNumber({
@@ -33,14 +32,11 @@ export class FurnitureSearchDto {
     })
     priceMax: number;
 
-   
-
     @Validator.IsOptional()
     @Validator.IsNotEmpty()
     @Validator.IsString()
     @Validator.Length(3,32)
     color: string;
-
 
     @Validator.IsOptional()
     @Validator.IsNotEmpty()
@@ -71,6 +67,7 @@ export class FurnitureSearchDto {
         maxDecimalPlaces: 2
     })
     deep: number;
+
 
     stores: FurnitureSearchStoreComponentDto[];
     
