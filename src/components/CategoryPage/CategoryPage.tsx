@@ -26,7 +26,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
 
     render(){
         return (
-            <Container>
+        <Container>
             <Card>
                 <Card.Body>
                     <Card.Title>
@@ -37,7 +37,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                     </Card.Text>
                 </Card.Body>
             </Card>
-            
         </Container>
         );
     }

@@ -1,6 +1,5 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { ApiConfig } from '../config/api.confing'
-import e from 'express'
 export default function api(
     path: string,
     method: 'get' | 'post' | 'patch' | 'delete',
@@ -46,34 +45,25 @@ export default function api(
     })  
 }
 
-interface ApiResponse {
+export interface ApiResponse {
     status: 'ok' | 'error' | 'login'
     data: any;
 }
 
 async function responseHandler(res: AxiosResponse<any>, resolve: (value?: ApiResponse) => void){
     if(res.status < 200 || res.status >=300){
-
         const response: ApiResponse = {
             status: 'error',
             data: res.data
         }
         return resolve(response);
     }
-    let response: ApiResponse;
-    if(res.data.statusCode < 0){
-        response = {
-            status: 'login',
-            data: null
-        };
-    } else {
-        response = {
-            status: 'ok',
-            data: res.data
-        };
-    }
 
-    resolve(res.data);
+    const response: ApiResponse = {
+        status: 'ok',
+        data: res.data
+    }
+    return resolve(response)
 }
 
 function getToken(): string {
@@ -90,9 +80,9 @@ function getRefreshToken(): string {
     return token + '';
 }
 
-function saveRefreshToken(token: string){
-    localStorage.setItem('api_refresh_token', token)
-}
+// function saveRefreshToken(token: string){
+//     localStorage.setItem('api_refresh_token', token)
+// }
 
 async function refreshToken(): Promise<string | null> {
     const path = 'auth/user/refresh';
