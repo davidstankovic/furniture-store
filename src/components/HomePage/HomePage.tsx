@@ -38,7 +38,7 @@ class HomePage extends React.Component {
   }
 
   private getCategories() {
-    api('api/category', 'get', {})
+    api('api/category/?filter=parentCategoryId||$isnull', 'get', {})
       .then((res: ApiResponse) => {
         this.putCategoriesInState(res.data)
       })
