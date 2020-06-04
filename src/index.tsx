@@ -20,8 +20,6 @@ const menuItems = [
   new MainMenuItem("Contact", "/contact/"),
   new MainMenuItem("Customer service", "/service/"),
   new MainMenuItem("Custom furniture", "/custom/"),
-  new MainMenuItem("Category 1", "/category/1"),
-  new MainMenuItem("Category 3", "/category/3"),
 ];
 
 ReactDOM.render(

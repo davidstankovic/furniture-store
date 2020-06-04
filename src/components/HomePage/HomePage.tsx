@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container, Card } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
 import { faListAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CategoryType from '../../types/CategoryType';
-import CardDeck from 'react-bootstrap/CardDeck'
 import { Link } from 'react-router-dom';
 import api, { ApiResponse } from '../../api/api';
 
@@ -11,6 +10,11 @@ import api, { ApiResponse } from '../../api/api';
 interface HomePageState {
   // isUserLoggedIn: boolean;
   categories: CategoryType[];  
+}
+
+interface ApiCategoryDto {
+  categoryId: number;
+  name: string;
 }
 
 class HomePage extends React.Component {
@@ -36,9 +40,26 @@ class HomePage extends React.Component {
   private getCategories() {
     api('api/category', 'get', {})
       .then((res: ApiResponse) => {
-        console.log(res)
+        this.putCategoriesInState(res.data)
       })
   }
+
+  private putCategoriesInState(data: ApiCategoryDto[]){
+    const categories: CategoryType[] = data.map(category => {
+      return {
+        categoryId: category.categoryId,
+        name: category.name,
+        items: []
+      }
+    })
+
+    const newState = Object.assign(this.state, {
+      categories: categories
+    });
+
+    this.setState(newState)
+  }
+
   render() {
   return (
     <Container>
@@ -47,9 +68,9 @@ class HomePage extends React.Component {
                     <Card.Title>
                         <FontAwesomeIcon icon={ faListAlt } />  Top level categories
                     </Card.Title>
-                    <CardDeck>
+                    <Row>
                     { this.state.categories.map(this.singleCategory) }
-                    </CardDeck>
+                    </Row>
                 </Card.Body>
             </Card>
     </Container>
@@ -58,16 +79,18 @@ class HomePage extends React.Component {
 
   private singleCategory(category: CategoryType){
     return(
-      <Card>
+      <Col lg="3" md="4" sm="6" xs="12">
+      <Card className="mb-3">
         <Card.Body>
-        <Card.Title>
+        <Card.Title as="p">
           { category.name }
         </Card.Title>
-        <Link to={ `/category/${ category.categoryId }`} className="btn btn-primary">
+        <Link to={ `/category/${ category.categoryId }`} className="btn btn-primary btn-block btn-sm">
           Open Category
         </Link>
         </Card.Body>
       </Card>
+      </Col>
     )
   }
 }
