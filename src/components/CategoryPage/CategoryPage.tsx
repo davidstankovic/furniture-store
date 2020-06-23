@@ -7,6 +7,8 @@ import api, { ApiResponse } from '../../api/api';
 import { Link } from 'react-router-dom';
 import FurnitureType from "../../types/FurnitureType";
 import { ApiConfig } from "../../config/api.confing";
+import ApiCategoryDto from '../../dtos/ApiCategoryDto';
+import RoleMainMenu from "../RoleMainMenu/RoleMainMenu";
 
 interface CategoryPageProperties {
     match: {
@@ -26,24 +28,22 @@ interface CategoryPageState {
         priceMinimum: number;
         priceMaximum: number;
         order: "name asc" | "name desc" | "price asc" | "price desc";
-    }
-}
-
-interface CategoryDto {
-    categoryId: number;
-    name: string;
+        selectedFeatures: {
+            featureId: number;
+            value: string;
+        }[];
+    };
+    features: {
+        featureId: number;
+        name: string;
+        values: string[];
+    }[];
 }
 
 interface FurnitureDto {
     furnitureId: number;
     name: string;
     description?: string;
-    construction?: string;
-    color?: string;
-    height?: number;
-    width?: number;
-    deep?: number;
-    material?: string;
     furniturePrices?: {
         price: number;
         createdAt: string;
@@ -65,8 +65,18 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                 priceMinimum: 0.01,
                 priceMaximum: 1000000,
                 order: "price asc",
-            }
+                selectedFeatures: [],
+            },
+            features: [],
         };
+    }
+
+    private setFeatures(features: any) {
+        const newState = Object.assign(this.state, {
+            features: features,
+        });
+
+        this.setState(newState);
     }
 
     private setMessage(message: string) {
@@ -97,6 +107,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
     render() {
         return (
             <Container>
+                 <RoleMainMenu role="visitor"/>
                 <Card>
                     <Card.Body>
                         <Card.Title>
@@ -151,11 +162,54 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
         }));
     }
 
+    private featureFilterChanged(event: React.ChangeEvent<HTMLInputElement>) {
+        const featureId = Number(event.target.dataset.featureId);
+        const value = event.target.value;
+
+        if (event.target.checked) {
+            this.addFeatureFilterValue(featureId, value);
+        } else {
+            this.removeFeatureFilterValue(featureId, value);
+        }
+    }
+
+    private addFeatureFilterValue(featureId: number, value: string) {
+        const newSelectedFeatures = [...this.state.filters.selectedFeatures ];
+
+        newSelectedFeatures.push({
+            featureId: featureId,
+            value: value,
+        });
+
+        this.setSelectedFeatures(newSelectedFeatures);
+    }
+
+    private removeFeatureFilterValue(featureId: number, value: string) {
+        const newSelectedFeatures = this.state.filters.selectedFeatures.filter(record => {
+            return !(record.featureId === featureId && record.value === value);
+        });
+
+        this.setSelectedFeatures(newSelectedFeatures);
+    }
+
+    private setSelectedFeatures(newSelectedFeatures: any) {
+        this.setState(Object.assign(this.state, {
+            filters: Object.assign(this.state.filters, {
+                selectedFeatures: newSelectedFeatures,
+            })
+        }));
+
+        console.log(this.state);
+    }
+
     private applyFilters(){
-        this.getCategoryData();
+   // console.log('Trenutni filteri su: ', this.state)
+    this.getCategoryData();
     }
 
     private printFilters() {
+        if (this.state.subcategories?.length === 0) {
+       
         return (
             <>
                 <Form.Group>
@@ -187,9 +241,12 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                         <option value="name asc">Sort by name - ascending</option>
                         <option value="name desc">Sort by name - descending</option>
                         <option value="price asc">Sort by price - ascending</option>
-                        <option value="price desc">Sort by price - ascending</option>
+                        <option value="price desc">Sort by price - descending</option>
                     </Form.Control>
                 </Form.Group>
+               
+                { this.state.features.map(this.printFeatureFilterComponent, this) }
+
                 <Form.Group>
                     <Button variant="primary" block onClick={() => this.applyFilters() }>
                         <FontAwesomeIcon icon={ faSearch }/> Search
@@ -198,6 +255,24 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
             </>
         );
     }
+    return;
+    }
+
+    private printFeatureFilterComponent(feature: { featureId: number; name: string; values: string[]; }) {
+        return (
+            <Form.Group>
+                <Form.Label><strong>{ feature.name }</strong></Form.Label>
+                { feature.values.map(value => this.printFeatureFilterCheckbox(feature, value), this) }
+            </Form.Group>
+        );
+    }
+
+    private printFeatureFilterCheckbox(feature: any, value: string){
+      return( <Form.Check type="checkbox" label={ value } data-feature-id={ feature.featureId }
+            onChange={ (event: any) => this.featureFilterChanged(event as any) } value={value}/>)
+    }
+
+    
 
     private printOptionalMessage() {
         if (this.state.message === '') {
@@ -269,9 +344,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                             <strong> {furniture.name} </strong>
                         </Card.Title>
                         <Card.Text>
-                            {furniture.construction}
-                        </Card.Text>
-                        <Card.Text>
                             Price: {Number(furniture.price).toFixed(2)} RSD
             </Card.Text>
                         <Link to={`/furniture/${furniture.furnitureId}`} className="btn btn-primary btn-block btn-sm">
@@ -305,11 +377,13 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                 const categoryData: CategoryType = {
                     categoryId: res.data.categoryId,
                     name: res.data.name,
+                    imagePath: res.data.imagePath,
+                    parentCategoryId: res.data.parentCategoryId
                 };
 
                 this.setCategoryData(categoryData);
 
-                const subcategories: CategoryType[] = res.data.categories.map((category: CategoryDto) => {
+                const subcategories: CategoryType[] = res.data.categories.map((category: ApiCategoryDto) => {
                     return {
                         categoryId: category.categoryId,
                         name: category.name
@@ -323,12 +397,36 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
             const orderBy = orderParts[0];
             const orderDirection = orderParts[1].toUpperCase();
 
+            const featureFilters: any[] = [];
+
+            for (const item of this.state.filters.selectedFeatures) {
+                let found = false;
+                let foundRef = null;
+    
+                for (const featureFilter of featureFilters) {
+                    if (featureFilter.featureId === item.featureId) {
+                        found = true;
+                        foundRef = featureFilter;
+                        break;
+                    }
+                }
+    
+                if (!found) {
+                    featureFilters.push({
+                        featureId: item.featureId,
+                        values: [ item.value ],
+                    });
+                } else {
+                    foundRef.values.push(item.value);
+                }
+            }
+
         api('api/furniture/search', 'post', {
             categoryId: Number(this.props.match.params.cId),
             keywords: this.state.filters.keywords,
             priceMin: this.state.filters.priceMinimum,
             priceMax: this.state.filters.priceMaximum,
-            stores: [],
+            features: featureFilters,
             orderBy: orderBy,
             orderDirection: orderDirection
         }).then((res: ApiResponse) => {
@@ -348,12 +446,6 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                     furnitureId: furniture.furnitureId,
                     name: furniture.name,
                     description: furniture.description,
-                    construction: furniture.construction,
-                    color: furniture.color,
-                    height: furniture.height,
-                    width: furniture.width,
-                    deep: furniture.deep,
-                    material: furniture.material,
                     imageUrl: '',
                     price: 0,
                 }
@@ -370,6 +462,17 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
             })
 
             this.setFurnitures(furnitures);
-        })
+        });
+        this.getFeatures();
+    }
+    getFeatures() {
+        api('api/feature/values/' + this.props.match.params.cId, 'get', {})
+        .then((res: ApiResponse) => {
+            if (res.status === 'error') {
+                return this.setMessage('Request error. Please try to refresh the page.');
+            }
+
+            this.setFeatures(res.data.features);
+        });
     }
 }

@@ -5,16 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CategoryType from '../../types/CategoryType';
 import { Link } from 'react-router-dom';
 import api, { ApiResponse } from '../../api/api';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
+import ApiCategoryDto from '../../dtos/ApiCategoryDto';
 
 
 interface HomePageState {
   // isUserLoggedIn: boolean;
   categories: CategoryType[];  
-}
-
-interface ApiCategoryDto {
-  categoryId: number;
-  name: string;
 }
 
 class HomePage extends React.Component {
@@ -44,7 +41,7 @@ class HomePage extends React.Component {
       })
   }
 
-  private putCategoriesInState(data: ApiCategoryDto[]){
+  private putCategoriesInState(data?: ApiCategoryDto[]){
     const categories: CategoryType[] = data.map(category => {
       return {
         categoryId: category.categoryId,
@@ -63,6 +60,7 @@ class HomePage extends React.Component {
   render() {
   return (
     <Container>
+      <RoleMainMenu role="visitor"/>
             <Card>
                 <Card.Body>
                     <Card.Title>

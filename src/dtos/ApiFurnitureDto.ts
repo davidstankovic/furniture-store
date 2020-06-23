@@ -1,30 +1,28 @@
-export default class FurnitureType {
-    furnitureId?: number;
-    name?: string;
-    description?: string;
-    imageUrl?: string;
-    price?: number;
-
-    status?: "available" | "visible" | "hidden";
-    furniturePrices?: {
+export default interface ApiFurnitureDto{
+    furnitureId: number;
+    name: string;
+    categoryId: number;
+    description: string;
+    status: "available" | "visible" | "hidden";
+    furniturePrices: {
         furniturePriceId: number;
         price: number;
     }[];
-    photos?: {
+    photos: {
         photoId: number;
         imagePath: string;
     }[];
-    furnitureFeatures?: {
+    furnitureFeatures: {
         furnitureFeatureId: number;
         featureId: number;
         value: string;
     }[];
-    features?: {
+    features: {
         featureId: number;
         name: string;
     }[];
-    categoryId?: number;
     category?: {
         name: string;
     }
+
 }

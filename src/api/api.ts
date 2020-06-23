@@ -1,135 +1,200 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { ApiConfig } from '../config/api.confing'
 
-export class ApiResponse {
-    status: 'ok' | 'error' | 'login';
-    data: any;
-
-    constructor(status: 'ok' | 'error' | 'login', data: any) {
-        this.status = status;
-        this.data = data;
-    }
-}
 export default function api(
     path: string,
     method: 'get' | 'post' | 'patch' | 'delete',
-    body?: any,): Promise<ApiResponse>{
+    body: any | undefined,
+    role: 'visitor' | 'administrator' = 'visitor'){
     
     return new Promise<ApiResponse>((resolve) => {
-        const requestConfig: AxiosRequestConfig = {
+        const requestData: AxiosRequestConfig = {
             method: method,
             url: path,
             baseURL: ApiConfig.API_URL,
             data: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': getToken(),
+                'Authorization': getToken(role),
             }
        }
     
-        axios(requestConfig).then(res => responseHandler(res, resolve))
+        axios(requestData).then(res => responseHandler(res, resolve))
         .catch(async err =>{
 
             if(err.response.status === 401) {      
-                const newToken = await refreshToken();
+                const newToken = await refreshToken(role);
     
                 if(!newToken){
-                    return resolve(new ApiResponse("login", null));
+                    const response: ApiResponse = {
+                        status: 'login',
+                        data: null,
+                    }
+                    return resolve(response);
                 }
     
-                saveToken(newToken);
+                saveToken(role, newToken);
     
-                requestConfig.headers['Authorization'] = getToken();
+                requestData.headers['Authorization'] = getToken(role);
     
-                return await repeatRequest(requestConfig, resolve);
+                return await repeatRequest(requestData, resolve);
             }
-            return resolve(new ApiResponse("error", err));
+            const response: ApiResponse = {
+                status: 'error',
+                data: err
+            };
+            resolve(response)
         })
     })  
 }
 
-async function refreshToken(): Promise<string | null> {
-    return new Promise(async resolve => {
-        const body = {
-            token: getRefreshToken(),
-        };
+export function apiFile(
+    path: string,
+    name: string,
+    file: File,
+    role: 'administrator'): Promise<ApiResponse>{
+    
+    return new Promise<ApiResponse>((resolve) => {
+        const formData = new FormData();
+        formData.append(name, file); 
 
-        const rtrConfig: AxiosRequestConfig = {
+        const requestData: AxiosRequestConfig = {
             method: 'post',
-            url: 'auth/user/refresh/',
+            url: path,
             baseURL: ApiConfig.API_URL,
-            data: JSON.stringify(body),
+            data: formData,
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                'Authorization': getToken(role),
             }
-        };
+       }
+    
+        axios(requestData).then(res => responseHandler(res, resolve))
+        .catch(async err =>{
 
-        const response: any = await axios(rtrConfig);
-
-        if (response && response.token) {
-            return resolve(response.token);
-        }
-
-        return resolve(null);
-    });
+            if(err.response.status === 401) {      
+                const newToken = await refreshToken(role);
+    
+                if(!newToken){
+                    const response: ApiResponse = {
+                        status: 'login',
+                        data: null,
+                    }
+                    return resolve(response);
+                }
+    
+                saveToken(role, newToken);
+    
+                requestData.headers['Authorization'] = getToken(role);
+    
+                return await repeatRequest(requestData, resolve);
+            }
+            const response: ApiResponse = {
+                status: 'error',
+                data: err
+            };
+            resolve(response)
+        })
+    })  
 }
 
-function getToken(): string {
-    const token = localStorage.getItem('api_token');
-    return 'Bearer ' + token;
-}
-
-function saveToken(token: string){
-    localStorage.setItem('api_token', token)
-}
-
-function getRefreshToken() {
-    return localStorage.getItem('api_refresh_token');
-}
-
-
-function saveRefreshToken(token: string) {
-    localStorage.setItem('api_refresh_token', token);
+export interface ApiResponse {
+    status: 'ok' | 'error' | 'login';
+    data: any;
 }
 
 function responseHandler(
     res: AxiosResponse<any>,
-    resolve: (value: ApiResponse) => void
+    resolve: (value?: ApiResponse) => void,
 ) {
     if (res.status < 200 || res.status >= 300) {
-        return resolve(new ApiResponse("error", res.data));
+        const response: ApiResponse = {
+            status: 'error',
+            data: res.data,
+        };
+
+        return resolve(response);
     }
 
-    if (res.data.statusCode < 0) {
-        return resolve(new ApiResponse("error", res.data));
-    }
+    const response: ApiResponse = {
+        status: 'ok',
+        data: res.data,
+    };
 
-    return resolve(new ApiResponse("ok", res.data));
+    return resolve(response);
 }
 
-// function saveRefreshToken(token: string){
-//     localStorage.setItem('api_refresh_token', token)
-// }
+function getToken(role: 'visitor' | 'administrator'): string {
+    const token = localStorage.getItem('api_token' + role);
+    return 'Bearer ' + token;
+}
 
+export function saveToken(role: 'visitor' | 'administrator', token: string){
+    localStorage.setItem('api_token' + role, token)
+}
 
+function getRefreshToken(role: 'visitor' | 'administrator') {
+    const token = localStorage.getItem('api_refresh_token' + role);
+    return token + '';
+}
+
+export function saveRefreshToken(role: 'visitor' | 'administrator', token: string) {
+    localStorage.setItem('api_refresh_token' + role, token);
+}
+
+async function refreshToken(role: 'visitor' | 'administrator'): Promise<string | null> {
+    const path = 'auth/' + role + '/refresh';
+    const data = {
+        token: getRefreshToken(role),
+    }
+
+    const refreshTokenRequestData: AxiosRequestConfig = {
+        method: 'post',
+        url: path,
+        baseURL: ApiConfig.API_URL,
+        data: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    const rtr: { data: { token: string | undefined } } = await axios(refreshTokenRequestData);
+
+    if (!rtr.data.token) {
+        return null;
+    }
+
+    return rtr.data.token;
+}
 
 function repeatRequest(
-    config: AxiosRequestConfig,
-    resolve: (value: ApiResponse) => void
+    requestData: AxiosRequestConfig,
+    resolve: (value?: ApiResponse) => void
 ) {
-    axios(config)
+    axios(requestData)
     .then(res => {
-        if (res.data.statusCode < 0) {
-            return resolve(new ApiResponse("error", res.data));
+        let response: ApiResponse;
+
+        if (res.status === 401) {
+            response = {
+                status: 'login',
+                data: null,
+            };
+        } else {
+            response = {
+                status: 'ok',
+                data: res.data,
+            };
         }
 
-        return resolve(new ApiResponse("ok", res.data));
+        return resolve(response);
     })
     .catch(err => {
-        if (err.response.status === 401) {
-            return resolve(new ApiResponse("login", null));
-        }
+        const response: ApiResponse = {
+            status: 'error',
+            data: err,
+        };
 
-        return resolve(new ApiResponse("error", err));
+        return resolve(response);
     });
 }

@@ -2,11 +2,13 @@ import React from "react";
 import { Container, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCubes } from "@fortawesome/free-solid-svg-icons";
+import RoleMainMenu from "../RoleMainMenu/RoleMainMenu";
 
 export default class CustomFurniture extends React.Component {
     render(){
         return (
         <Container>
+             <RoleMainMenu role="visitor"/>
             <Card>
                 <Card.Body>
                     <Card.Title>

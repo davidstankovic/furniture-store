@@ -8,23 +8,21 @@ import 'jquery/dist/jquery.js';
 import 'popper.js/dist/popper.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
-import { MainMenu, MainMenuItem } from './components/MainMenu/MainMenu';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import ContactPage from './components/ContactPage/ContactPage';
 import CustomerService from './components/CustomerService/CustomerService';
 import CustomFurniture from './components/CustomFurniture/CustomFurniture';
 import CategoryPage from './components/CategoryPage/CategoryPage';
-
-const menuItems = [
-  new MainMenuItem("Home", "/"),
-  new MainMenuItem("Contact", "/contact/"),
-  new MainMenuItem("Customer service", "/service/"),
-  new MainMenuItem("Custom furniture", "/custom/"),
-];
+import AdministratorLoginPage from './components/AdministratorLoginPage/AdministratorLoginPage';
+import AdministratorDashboard from './components/AdministratorDashboard/AdministratorDashboard';
+import AdministratorCategory from './components/AdministratorCategory/AdministratorCategory';
+import AdministratorFeature from './components/AdministratorFeature/AdministratorFeature';
+import AdministratorFurniture from './components/AdministratorFurniture/AdministratorFurniture';
+import AdministratorPhoto from './components/AdministratorPhoto/AdministratorPhoto';
+import FurniturePage from './components/FurniturePage/FurniturePage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainMenu items= { menuItems }></MainMenu>
     <HashRouter>
       <Switch>
         <Route exact path="/" component={ HomePage }/>
@@ -32,6 +30,14 @@ ReactDOM.render(
         <Route path="/service" component={ CustomerService }/>
         <Route path="/custom" component={ CustomFurniture }/>
         <Route path="/category/:cId" component={ CategoryPage }/>
+        <Route path="/furniture/:fId" component={ FurniturePage }/>
+        <Route path="/administrator/login" component={ AdministratorLoginPage }/>
+        <Route exact path="/administrator/dashboard" component={ AdministratorDashboard }/>
+        <Route exact path="/administrator/dashboard/category" component={ AdministratorCategory }/>
+        <Route path="/administrator/dashboard/feature/:cId" component={ AdministratorFeature }/>
+        <Route path="/administrator/dashboard/furnitures/" component = { AdministratorFurniture }/>
+        <Route path="/administrator/dashboard/photo/:fId" component = { AdministratorPhoto }/>
+
       </Switch>
     </HashRouter>
   </React.StrictMode>,
