@@ -55,7 +55,7 @@ export class AuthController {
         jwtRefresh.role = jwtData.role;
         jwtRefresh.id = jwtData.id;
         jwtRefresh.identity = jwtData.identity;
-        jwtRefresh.exp = this.getDatePlus(60 * 60 * 24 * 31); //mesec dana
+        jwtRefresh.exp = this.getDatePlus(60 * 5); //5 min
         jwtRefresh.ip = jwtData.ip;
         jwtRefresh.ua = jwtData.ua;
 

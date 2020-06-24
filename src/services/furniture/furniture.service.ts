@@ -6,6 +6,7 @@ import { Furniture } from "src/entities/furniture.entity";
 import { AddFurnitureDto } from "src/dtos/furniture/add.furniture.dto";
 import { EditFurnitureDto } from "src/dtos/furniture/edit.furniture.dto";
 import { ApiResponse } from "src/misc/api.response.class";
+import { FurnitureFeature } from "src/entities/furniture-feature.entity";
 import { FurniturePrice } from "src/entities/furniture-price.entity";
 import { Availability } from "src/entities/availability.entity";
 import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
@@ -18,6 +19,9 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         @InjectRepository(FurniturePrice)
         private readonly furniturePrice: Repository<FurniturePrice>,
 
+        @InjectRepository(FurnitureFeature)
+        private readonly furnitureFeature: Repository<FurnitureFeature>,
+
         @InjectRepository(Availability)
         private readonly availability: Repository<Availability>
         ) {
@@ -29,12 +33,6 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         newFurniture.name = data.name;
         newFurniture.categoryId = data.categoryId;
         newFurniture.description = data.description;
-        newFurniture.construction = data.construction;
-        newFurniture.color = data.color;
-        newFurniture.height = data.height;
-        newFurniture.width = data.width;
-        newFurniture.deep = data.deep;
-        newFurniture.material = data.material;
 
         let savedFurniture = await this.furniture.save(newFurniture);
 
@@ -44,44 +42,50 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
 
         await this.furniturePrice.save(newFurniturePrice);
 
-        for (let store of data.stores){
-            let newAvailability: Availability = new Availability();
-            newAvailability.furnitureId = savedFurniture.furnitureId;
-            newAvailability.storeId = store.storeId;
-            newAvailability.isAvailable = store.isAvailable;
+        // for (let store of data.stores){
+        //     let newAvailability: Availability = new Availability();
+        //     newAvailability.furnitureId = savedFurniture.furnitureId;
+        //     newAvailability.storeId = store.storeId;
+        //     newAvailability.isAvailable = store.isAvailable;
 
-            await this.availability.save(newAvailability);
+        //     await this.availability.save(newAvailability);
+        // }
+
+        for (let feature of data.features) {
+            let newFurnitureFeature: FurnitureFeature = new FurnitureFeature();
+            newFurnitureFeature.furnitureId = savedFurniture.furnitureId;
+            newFurnitureFeature.featureId = feature.featureId;
+            newFurnitureFeature.value     = feature.value;
+
+            await this.furnitureFeature.save(newFurnitureFeature);
         }
 
         return await this.furniture.findOne(savedFurniture.furnitureId, {
             relations: [
                 "category",
-                "availabilities",
-                "stores",
-                "furniturePrices"
+                "furnitureFeatures",
+                "features",
+                // "availabilities",
+                // "stores",
+                "furniturePrices",
+                "photos"
             ]
         })
     }
 
     async editFullFurniture(furnitureId: number, data: EditFurnitureDto): Promise<Furniture | ApiResponse>{
         const existingFurniture: Furniture = await this.furniture.findOne(furnitureId, {
-            relations: ['furniturePrices', 'availabilities']
+            relations: ['furniturePrices', 'furnitureFeatures']
         });
 
         if(!existingFurniture){
-            return new ApiResponse('error', -5001, 'Article not found!');
+            return new ApiResponse('error', -5001, 'Furniture not found!');
         }
 
         existingFurniture.name = data.name;
         existingFurniture.categoryId = data.categoryId;
         existingFurniture.description = data.description;
         existingFurniture.status = data.status;
-        existingFurniture.construction = data.construction;
-        existingFurniture.color = data.color;
-        existingFurniture.height = data.height;
-        existingFurniture.width = data.width;
-        existingFurniture.deep = data.deep;
-        existingFurniture.material = data.material;
 
         const savedFurniture = await this.furniture.save(existingFurniture)
         if(!savedFurniture){
@@ -89,7 +93,6 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         }
 
         const newPriceString: string = Number(data.price).toFixed(2);
-
         const lastPrice = existingFurniture.furniturePrices[existingFurniture.furniturePrices.length - 1].price
         const lastPriceString: string = Number(lastPrice).toFixed(2);
 
@@ -105,41 +108,57 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
             }
         }
 
-        if(data.stores !== null){
-            await this.availability.remove(existingFurniture.availabilities)
-            for (let store of data.stores){
-                let newAvailability: Availability = new Availability();
-                newAvailability.furnitureId = furnitureId;
-                newAvailability.storeId = store.storeId;
-                newAvailability.isAvailable = store.isAvailable;
+        // if(data.stores !== null){
+        //     await this.availability.remove(existingFurniture.availabilities)
+        //     for (let store of data.stores){
+        //         let newAvailability: Availability = new Availability();
+        //         newAvailability.furnitureId = furnitureId;
+        //         newAvailability.storeId = store.storeId;
+        //         newAvailability.isAvailable = store.isAvailable;
     
-                await this.availability.save(newAvailability);
+        //         await this.availability.save(newAvailability);
+        //     }
+        // }
+
+        if (data.features !== null) {
+            await this.furnitureFeature.remove(existingFurniture.furnitureFeatures);
+
+            for (let feature of data.features) {
+                let newFurnitureFeature: FurnitureFeature = new FurnitureFeature();
+                newFurnitureFeature.furnitureId = furnitureId;
+                newFurnitureFeature.featureId = feature.featureId;
+                newFurnitureFeature.value     = feature.value;
+    
+                await this.furnitureFeature.save(newFurnitureFeature);
             }
         }
         return await this.furniture.findOne(furnitureId, {
             relations: [
                 "category",
-                "availabilities",
-                "stores",
-                "furniturePrices",
-                "photos"
+                // "availabilities",
+                "furnitureFeatures",
+                "features",
+                //"stores",
+                "furniturePrices"
             ]
         })
     }
 
-    async search(data: FurnitureSearchDto): Promise<Furniture[]> {
+    async search(data: FurnitureSearchDto): Promise<Furniture[] | ApiResponse> {
         const builder = await this.furniture.createQueryBuilder("furniture");
 
         builder.innerJoinAndSelect("furniture.furniturePrices", "fp", "fp.createdAt =  (SELECT MAX(fp.created_at) FROM furniture_price as fp WHERE fp.furniture_id = furniture.furniture_id)");
-        builder.leftJoin("furniture.availabilities", "fa");
+        // builder.leftJoinAndSelect("furniture.availabilities", "fa");
+        // builder.leftJoinAndSelect("furniture.stores", "stores");
+        builder.leftJoinAndSelect("furniture.photos", "photos");
+        builder.leftJoinAndSelect("furniture.furnitureFeatures", "ff");
+        builder.leftJoinAndSelect("furniture.features", "features")
 
         builder.where('furniture.categoryId = :catId', { catId: data.categoryId });
 
         if(data.keywords && data.keywords.length> 0){
             builder.andWhere(`(furniture.name LIKE :kw OR
-                              furniture.description LIKE :kw OR
-                              furniture.color LIKE :kw OR
-                              furniture.material LIKE :kw)`, { kw: '%' + data.keywords.trim() + '%'})
+                              furniture.description LIKE :kw)`, { kw: '%' + data.keywords.trim() + '%'});
         }
         if(data.priceMin && typeof data.priceMin === 'number'){
             builder.andWhere('fp.price >= :min', { min: data.priceMin })
@@ -147,32 +166,28 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         if(data.priceMax && typeof data.priceMax === 'number'){
             builder.andWhere('fp.price <= :max', { max: data.priceMax })
         }
-        if(data.color && typeof data.color === 'string'){
-            builder.andWhere('furniture.color = :clr', { clr: data.color })
-        }
-        if(data.material && typeof data.material === 'string'){
-            builder.andWhere('furniture.material = :mrl', { mrl: data.material })
-        }
-        // DIMENZIJE
-        if(data.height && typeof data.height === 'number'){
-            builder.andWhere('furniture.height = :hei', { hei: data.height })
-        }
-        if(data.width && typeof data.width === 'number'){
-            builder.andWhere('furniture.width = :wth', { wth: data.width })
-        }
-        if(data.deep && typeof data.deep === 'number'){
-            builder.andWhere('furniture.deep = :dp', { dp: data.deep })
-        }
 
-        if(data.stores && data.stores.length > 0) {
-            for(const store of data.stores) {
-                builder.andWhere('fa.storeId = :sId AND fa.isAvailable IN (:sAvail)',
-                {
-                    sId: store.storeId,
-                    sAvail: store.isAvailable,
-                })
+        if (data.features && data.features.length > 0) {
+            for (const feature of data.features) {
+                builder.andWhere(
+                    'ff.featureId = :fId AND ff.value IN (:fVals)',
+                    {
+                        fId: feature.featureId,
+                        fVals: feature.values,
+                    }
+                );
             }
         }
+
+        // if(data.stores && data.stores.length > 0) {
+        //     for(const store of data.stores) {
+        //         builder.andWhere('fa.storeId = :sId AND fa.isAvailable IN (:sAvail)',
+        //         {
+        //             sId: store.storeId,
+        //             sAvail: store.isAvailable,
+        //         })
+        //     }
+        // }
 
         let orderBy = 'furniture.name'
         let orderDirection: 'ASC' | 'DESC' = 'ASC'
@@ -205,17 +220,12 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         builder.skip(page * perPage)
         builder.take(perPage)
 
-        let furnitureIds = await (await builder.getMany()).map(furniture => furniture.furnitureId);
+        let furnitures = await builder.getMany();
 
-        return await this.furniture.find({
-            where: { furnitureId: In(furnitureIds)},
-            relations: [
-                "category",
-                "availabilities",
-                "stores",
-                "furniturePrices",
-                "photos"
-            ]
-        });
+        if(furnitures.length === 0){
+            return new ApiResponse("ok", 0, "There are no results found for this query.")
+        }
+
+        return furnitures;
     }
 }

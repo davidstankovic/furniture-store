@@ -34,8 +34,8 @@ export class FurniturePrice {
   createdAt: Date;
 
   @ManyToOne(() => Furniture, (furniture) => furniture.furniturePrices, {
-    onDelete: "RESTRICT",
-    onUpdate: "CASCADE",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "furniture_id", referencedColumnName: "furnitureId" }])
   furniture: Furniture;

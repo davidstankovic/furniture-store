@@ -38,14 +38,14 @@ export class Availability {
 
   @ManyToOne(() => Furniture, (furniture) => furniture.availabilities, {
     onDelete: "NO ACTION",
-    onUpdate: "CASCADE",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "furniture_id", referencedColumnName: "furnitureId" }])
   furniture: Furniture;
 
   @ManyToOne(() => Store, (store) => store.availabilities, {
     onDelete: "NO ACTION",
-    onUpdate: "CASCADE",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "store_id", referencedColumnName: "storeId" }])
   store: Store;

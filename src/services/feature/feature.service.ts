@@ -1,0 +1,46 @@
+import { Injectable } from "@nestjs/common";
+import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
+import { Feature } from "src/entities/feature.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import DistinctFeatureValuesDto from "src/dtos/feature/distinct.feature.values.dto";
+import { FurnitureFeature } from "src/entities/furniture-feature.entity";
+
+@Injectable()
+export class FeatureService extends TypeOrmCrudService<Feature> {
+    constructor(
+        @InjectRepository(Feature) private readonly feature: Repository<Feature>,
+        @InjectRepository(FurnitureFeature) private readonly furnitureFeature: Repository<FurnitureFeature>,) {
+        super(feature);
+    }
+
+    async getDistinctValuesByCategoryId(categoryId: number): Promise<DistinctFeatureValuesDto>{
+        const features = await this.feature.find({
+            categoryId: categoryId,
+        });
+
+        const result: DistinctFeatureValuesDto = {
+            features: []
+        };
+
+        if(!features || features.length === 0){
+            return result;
+        }
+
+        result.features = await Promise.all(features.map(async feature => {
+            const values: string[] =(
+                                         await this.furnitureFeature.createQueryBuilder("af")
+                                         .select("DISTINCT af.value", 'value')
+                                         .where('af.featureId = :featureId', { featureId: feature.featureId })
+                                         .orderBy('af.value', 'ASC')
+                                         .getRawMany()).map(item => item.value);
+            return {
+                featureId: feature.featureId,
+                name: feature.name,
+                values: values
+            }
+        }));
+
+        return result;
+    }
+}

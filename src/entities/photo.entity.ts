@@ -28,8 +28,8 @@ export class Photo {
   imagePath: string;
 
   @ManyToOne(() => Furniture, (furniture) => furniture.photos, {
-    onDelete: "RESTRICT",
-    onUpdate: "CASCADE",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "furniture_id", referencedColumnName: "furnitureId" }])
   furniture: Furniture;

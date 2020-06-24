@@ -26,8 +26,14 @@ import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
             category: { eager: true },
             furniturePrices: { eager: true },
             photos: { eager: true },
-            availabilities: {eager: true},
-            stores: {eager: true}
+            availabilities: {eager: false},
+            stores: {eager: false},
+            furnitureFeatures: {
+                eager: false
+            },
+            features: {
+                eager: false
+            }
         }
     },
     routes: {
@@ -36,14 +42,10 @@ import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
         ],
         getOneBase: {
             decorators: [
-                UseGuards(RoleCheckerGuard),
-                AllowToRoles('administrator')
             ]
         }, 
         getManyBase: {
             decorators: [
-                UseGuards(RoleCheckerGuard),
-                AllowToRoles('administrator')
             ]
         }
     }
@@ -54,8 +56,6 @@ export class ApiFurnitureController {
 
     
     @Post() //POST
-    @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('administrator')
     createFullFurniture(@Body() data: AddFurnitureDto){
         return this.service.createFullFurniture(data);
     }
@@ -69,8 +69,6 @@ export class ApiFurnitureController {
     }
 
     @Post(':id/uploadPhoto/') // POST http://localhost:3000/api/furniture/:id/uploadPhoto/
-    @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('administrator')
     @UseInterceptors(
         FileInterceptor('photo', {
             storage: diskStorage({
@@ -204,9 +202,7 @@ export class ApiFurnitureController {
     }
 
     @Post('search')
-    @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('administrator')
-    async search(@Body() data: FurnitureSearchDto): Promise<Furniture[]> {
+    async search(@Body() data: FurnitureSearchDto): Promise<Furniture[] | ApiResponse> {
         return await this.service.search(data)
     }
 }

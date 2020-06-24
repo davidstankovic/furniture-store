@@ -1,6 +1,7 @@
 import * as Validator from 'class-validator';
 import { FurnitureStoreComponentDto } from './furniture.store.component.dto';
-import { ArticleStatus } from 'src/types/furniture.status.enum';
+import { FurnitureStatus } from 'src/types/furniture.status.enum';
+import { FurnitureFeatureComponentDto } from "./furniture.feature.component.dto";
 export class EditFurnitureDto {
     @Validator.IsNotEmpty()
     @Validator.IsString()
@@ -16,51 +17,8 @@ export class EditFurnitureDto {
 
     @Validator.IsNotEmpty()
     @Validator.IsString()
-    @Validator.Length(10,128)
-    construction: string;
-
-    @Validator.IsNotEmpty()
-    @Validator.IsString()
-    @Validator.IsEnum(ArticleStatus)
+    @Validator.IsEnum(FurnitureStatus)
     status: 'available' | 'visible'| 'hidden';
-
-
-     @Validator.IsNotEmpty()
-    @Validator.IsString()
-    @Validator.Length(3,32)
-    color: string;
-
-    @Validator.IsNotEmpty()
-    @Validator.IsPositive()
-    @Validator.IsNumber({
-      allowInfinity: false,
-      allowNaN: false,
-      maxDecimalPlaces: 2,
-    })
-    height: number;
-
-    @Validator.IsNotEmpty()
-    @Validator.IsPositive()
-    @Validator.IsNumber({
-        allowInfinity: false,
-        allowNaN: false,
-        maxDecimalPlaces: 2,
-    })
-    width: number;
-
-    @Validator.IsNotEmpty()
-    @Validator.IsPositive()
-    @Validator.IsNumber({
-        allowInfinity: false,
-        allowNaN: false,
-        maxDecimalPlaces: 2,
-    })
-    deep: number;
-
-    @Validator.IsNotEmpty()
-    @Validator.IsString()
-    @Validator.Length(3,32)
-    material: string;
 
     @Validator.IsNotEmpty()
     @Validator.IsPositive()
@@ -78,4 +36,10 @@ export class EditFurnitureDto {
     })
     stores: FurnitureStoreComponentDto[] | null;
     
+    @Validator.IsOptional()
+    @Validator.IsArray()
+    @Validator.ValidateNested({
+        always: true,
+    })
+    features: FurnitureFeatureComponentDto[] | null;
 }

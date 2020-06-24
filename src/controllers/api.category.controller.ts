@@ -1,9 +1,10 @@
 import { Controller, UseGuards } from "@nestjs/common";
 import { CategoryService } from "src/services/category/category.service";
 import { Crud } from "@nestjsx/crud";
-import { Category } from "src/entities/category.entity";
-import { RoleCheckerGuard } from "src/misc/role.checker.guard";
 import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
+import { RoleCheckerGuard } from "src/misc/role.checker.guard";
+import { Category } from "src/entities/category.entity";
+
 
 @Controller('api/category')
 @Crud({
@@ -14,8 +15,11 @@ import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
     query: {
         join: {
             categories: { eager: true },
-            parentCategory: { eager: true },
-            furnitures: { eager: true }
+            parentCategory: { eager: false },
+            furnitures: { eager: false },
+            features: {
+                eager: true
+            }
         },
     },
     routes: {
@@ -26,38 +30,25 @@ import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
             "getManyBase",
             "getOneBase",
         ],
-        createOneBase: {
+        getOneBase: {
             decorators: [
-                UseGuards(RoleCheckerGuard),
-                AllowToRoles('administrator'),
-            ]
-        },
-        createManyBase: {
-            decorators: [
-                UseGuards(RoleCheckerGuard),
-                AllowToRoles('administrator'),
-            ]
-        },
-        updateOneBase: {
-            decorators: [
-                UseGuards(RoleCheckerGuard),
-                AllowToRoles('administrator'),
             ]
         },
         getManyBase: {
             decorators: [
-                UseGuards(RoleCheckerGuard),
-                AllowToRoles('administrator'),
             ]
         },
-        getOneBase: {
+        createOneBase: {
             decorators: [
-                UseGuards(RoleCheckerGuard),
-                AllowToRoles('administrator'),
+            ]
+        },
+        updateOneBase: {
+            decorators: [
             ]
         },
     }
 })
+
 export class ApiCategoryController {
     constructor(public service: CategoryService) { }
 }

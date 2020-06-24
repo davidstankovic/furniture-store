@@ -1,5 +1,6 @@
 import * as Validator from 'class-validator';
 import { FurnitureSearchStoreComponentDto } from './furniture.search.store.component.dto';
+import { FurnitureSearchFeatureComponentDto } from './furniture.search.feature.component.dto';
 export class FurnitureSearchDto {
 
     @Validator.IsNotEmpty()
@@ -13,10 +14,11 @@ export class FurnitureSearchDto {
 
     @Validator.IsOptional()
     @Validator.IsString()
-    @Validator.Length(2, 128)
+    @Validator.Length(0, 128)
     keywords: string;
 
     @Validator.IsOptional()
+    @Validator.IsPositive()
     @Validator.IsNumber({
         allowInfinity: false,
         allowNaN: false,
@@ -32,48 +34,16 @@ export class FurnitureSearchDto {
     })
     priceMax: number;
 
-    @Validator.IsOptional()
-    @Validator.IsNotEmpty()
-    @Validator.IsString()
-    @Validator.Length(3,32)
-    color: string;
-
-    @Validator.IsOptional()
-    @Validator.IsNotEmpty()
-    @Validator.IsString()
-    @Validator.Length(3,32)
-    material: string;
-
-    @Validator.IsOptional()
-    @Validator.IsNumber({
-        allowInfinity: false,
-        allowNaN: false,
-        maxDecimalPlaces: 2
-    })
-    width: number;
-    
-    @Validator.IsOptional()
-    @Validator.IsNumber({
-        allowInfinity: false,
-        allowNaN: false,
-        maxDecimalPlaces: 2
-    })
-    height: number;
-
-    @Validator.IsOptional()
-    @Validator.IsNumber({
-        allowInfinity: false,
-        allowNaN: false,
-        maxDecimalPlaces: 2
-    })
-    deep: number;
-
-
     stores: FurnitureSearchStoreComponentDto[];
+
+    features: FurnitureSearchFeatureComponentDto[];
     
     @Validator.IsOptional()
     @Validator.IsIn(['name', 'price'])
     orderBy: 'name' | 'price';
+
+    @Validator.IsOptional()
+    @Validator.IsIn(['ASC', 'DESC'])
     orderDirection: 'ASC' | 'DESC';
 
     @Validator.IsOptional()

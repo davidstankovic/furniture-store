@@ -12,10 +12,12 @@ import { Category } from "./category.entity";
 import { FurniturePrice } from "./furniture-price.entity";
 import { Availability } from "./availability.entity";
 import { Photo } from "./photo.entity";
+import { FurnitureFeature } from "./furniture-feature.entity";
+import { Feature } from "./feature.entity";
 import { from } from "rxjs";
 import { Store } from "./store.entity";
 import * as Validator from 'class-validator'
-import { ArticleStatus } from "src/types/furniture.status.enum";
+import { FurnitureStatus } from "src/types/furniture.status.enum";
 
 @Entity()
 export class Furniture {
@@ -36,76 +38,6 @@ export class Furniture {
   @Validator.IsString()
   @Validator.Length(64, 10000)
   description: string;
-
-  @Column({
-    type: "varchar", 
-    name: "construction",
-    length: 128
-  })
-  @Validator.IsNotEmpty()
-  @Validator.IsString()
-  @Validator.Length(10,128)
-  construction: string;
-
-  @Column({ type: "varchar", name: "color", length: 32 })
-  @Validator.IsNotEmpty()
-  @Validator.IsString()
-  @Validator.Length(3,32)
-  color: string;
-
-  @Column({
-    type: "decimal",
-    name: "height",
-    unsigned: true,
-    precision: 10,
-    scale: 2
-  })
-  @Validator.IsNotEmpty()
-  @Validator.IsPositive()
-  @Validator.IsNumber({
-    allowInfinity: false,
-    allowNaN: false,
-    maxDecimalPlaces: 2,
-  })
-  height: number;
-
-  @Column({
-    type: "decimal", 
-    name: "width",
-    unsigned: true,
-    precision: 10,
-    scale: 2
-  })
-  @Validator.IsNotEmpty()
-  @Validator.IsPositive()
-  @Validator.IsNumber({
-    allowInfinity: false,
-    allowNaN: false,
-    maxDecimalPlaces: 2,
-  })
-  width: number;
-
-  @Column({
-    type: "decimal",
-    name: "deep",
-    unsigned: true,
-    precision: 10,
-    scale: 2
-  })
-  @Validator.IsNotEmpty()
-  @Validator.IsPositive()
-  @Validator.IsNumber({
-    allowInfinity: false,
-    allowNaN: false,
-    maxDecimalPlaces: 2,
-  })
-  deep: number;
-
-  @Column({ type: "varchar", name: "material", length: 32})
-  @Validator.IsNotEmpty()
-  @Validator.IsString()
-  @Validator.Length(3,32)
-  material: string;
   
   @Column({
     type: "enum",
@@ -114,7 +46,7 @@ export class Furniture {
   })
   @Validator.IsNotEmpty()
   @Validator.IsString()
-  @Validator.IsEnum(ArticleStatus)
+  @Validator.IsEnum(FurnitureStatus)
   status: "available" | "visible" | "hidden";
 
   @OneToMany(() => Availability, (availability) => availability.furniture)
@@ -129,8 +61,8 @@ export class Furniture {
   stores: Store[];
 
   @ManyToOne(() => Category, (category) => category.furnitures, {
-    onDelete: "RESTRICT",
-    onUpdate: "CASCADE",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "category_id", referencedColumnName: "categoryId" }])
   category: Category;
@@ -140,4 +72,18 @@ export class Furniture {
 
   @OneToMany(() => Photo, (photo) => photo.furniture)
   photos: Photo[];
+
+  @OneToMany(
+    () => FurnitureFeature,
+    furnitureFeature => furnitureFeature.furniture
+  )
+  furnitureFeatures: FurnitureFeature[];
+
+  @ManyToMany(type => Feature, feature => feature.furnitures)
+  @JoinTable({
+    name: "furniture_feature",
+    joinColumn: { name: "furniture_id", referencedColumnName: "furnitureId" },
+    inverseJoinColumn: { name: "feature_id", referencedColumnName: "featureId" }
+  })
+  features: Feature[];
 }
