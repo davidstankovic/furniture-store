@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Card, Table, Button, Modal, Form, Alert } from 'react-bootstrap';
-import { faListAlt, faPlus, faEdit, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faListAlt, faPlus, faEdit, faSave, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import CategoryType from '../../types/CategoryType';
 import ApiCategoryDto from '../../dtos/ApiCategoryDto';
 import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
@@ -186,6 +186,9 @@ export default class AdministratorCategory extends React.Component {
                                         <td>{ category.name }</td>
                                         <td className="text-right">{ category.parentCategoryId }</td>
                                         <td className="text-center">
+                                            <Link className="btn btn-sm btn-info mr-2" to={ "/administrator/dashboard/feature/" + category.categoryId}>
+                                                <FontAwesomeIcon icon={ faListUl }/> Features
+                                            </Link>
                                         <Button variant="info" size="sm"
                                                 onClick={ () => this.showEditModal(category) }>
                                             <FontAwesomeIcon icon={ faEdit } /> Edit

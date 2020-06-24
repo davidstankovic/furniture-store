@@ -344,7 +344,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                             <strong> {furniture.name} </strong>
                         </Card.Title>
                         <Card.Text>
-                            Price: {Number(furniture.price).toFixed(2)} RSD
+                            Price: {Number(furniture.price).toFixed(2)} $
             </Card.Text>
                         <Link to={`/furniture/${furniture.furnitureId}`} className="btn btn-primary btn-block btn-sm">
                             Open Furniture page
