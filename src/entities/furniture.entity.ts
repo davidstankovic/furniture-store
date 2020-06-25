@@ -62,7 +62,7 @@ export class Furniture {
 
   @ManyToOne(() => Category, (category) => category.furnitures, {
     onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
+    onUpdate: "CASCADE",
   })
   @JoinColumn([{ name: "category_id", referencedColumnName: "categoryId" }])
   category: Category;

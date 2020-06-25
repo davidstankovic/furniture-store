@@ -101,7 +101,8 @@ export class AppModule implements NestModule {
                          {path: 'api/furniture/search', method: RequestMethod.POST} ,{path: 'api/furniture/search/(.*)', method: RequestMethod.POST},
                          {path: 'api/feature/', method: RequestMethod.GET} ,{path: 'api/furniture/(.*)', method: RequestMethod.GET},
                          {path: 'api/feature/', method: RequestMethod.POST} ,{path: 'api/furniture/(.*)', method: RequestMethod.POST},
-                         {path: 'api/feature/values', method: RequestMethod.GET} ,{path: 'api/feature/values/(.*)', method: RequestMethod.GET},)
+                         {path: 'api/feature/values', method: RequestMethod.GET} ,{path: 'api/feature/values/(.*)', method: RequestMethod.GET},
+                         {path: 'api/store/', method: RequestMethod.GET} ,{path: 'api/store/(.*)', method: RequestMethod.GET},)
       .forRoutes('api/*');
   }
 }

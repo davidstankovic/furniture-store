@@ -74,6 +74,7 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
     }
 
     async editFullFurniture(furnitureId: number, data: EditFurnitureDto): Promise<Furniture | ApiResponse>{
+        console.log(data) 
         const existingFurniture: Furniture = await this.furniture.findOne(furnitureId, {
             relations: ['furniturePrices', 'furnitureFeatures']
         });
@@ -86,6 +87,7 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         existingFurniture.categoryId = data.categoryId;
         existingFurniture.description = data.description;
         existingFurniture.status = data.status;
+        
 
         const savedFurniture = await this.furniture.save(existingFurniture)
         if(!savedFurniture){
