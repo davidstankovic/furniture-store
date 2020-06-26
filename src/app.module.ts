@@ -17,16 +17,16 @@ import { ApiCategoryController } from './controllers/api.category.controller';
 import { CategoryService } from './services/category/category.service';
 import { FurnitureService } from './services/furniture/furniture.service';
 import { ApiFurnitureController } from './controllers/api.furniture.controller';
-import { Store } from 'src/entities/store.entity';
-import { Availability } from 'src/entities/availability.entity';
-import { StoreService } from './services/store/store.service';
-import { ApiStoreController } from './controllers/api.store.controller';
+// import { Store } from 'src/entities/store.entity';
+// import { Availability } from 'src/entities/availability.entity';
+// import { StoreService } from './services/store/store.service';
+// import { ApiStoreController } from './controllers/api.store.controller';
 import { AuthController } from './controllers/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoService } from './services/photo/photo.service';
 import { AdministratorToken } from './entities/administrator-token.entity';
-import { ApiAvailabilityController } from './controllers/api.availability.controller';
-import { AvailabilityService } from './services/availability/availability.service';
+// import { ApiAvailabilityController } from './controllers/api.availability.controller';
+// import { AvailabilityService } from './services/availability/availability.service';
 
 @Module({
   imports: [
@@ -45,10 +45,9 @@ import { AvailabilityService } from './services/availability/availability.servic
         Furniture,
         Category,
         Photo,
-        Store,
-        Availability,
+        // Store,
+        // Availability,
         AdministratorToken,
-        Availability
       ]
     }),
     TypeOrmModule.forFeature([
@@ -59,10 +58,9 @@ import { AvailabilityService } from './services/availability/availability.servic
       Furniture,
       Category,
       Photo,
-      Store,
-      Availability,
+      // Store,
+      // Availability,
       AdministratorToken,
-      Availability
     ])
   ],
   controllers: [
@@ -71,18 +69,18 @@ import { AvailabilityService } from './services/availability/availability.servic
     ApiCategoryController,
     FeatureController,
     ApiFurnitureController,
-    ApiStoreController,
+    // ApiStoreController,
     AuthController,
-    ApiAvailabilityController
+    // ApiAvailabilityController
   ],
   providers: [
     AdministratorService,
     CategoryService,
     FurnitureService,
-    StoreService,
+   // StoreService,
     FeatureService,
     PhotoService,
-    AvailabilityService
+  //  AvailabilityService
   ],
   exports: [
     AdministratorService

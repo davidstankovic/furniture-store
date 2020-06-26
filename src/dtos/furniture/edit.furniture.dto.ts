@@ -1,5 +1,5 @@
 import * as Validator from 'class-validator';
-import { FurnitureStoreComponentDto } from './furniture.store.component.dto';
+// import { FurnitureStoreComponentDto } from './furniture.store.component.dto';
 import { FurnitureStatus } from 'src/types/furniture.status.enum';
 import { FurnitureFeatureComponentDto } from "./furniture.feature.component.dto";
 export class EditFurnitureDto {
@@ -20,6 +20,16 @@ export class EditFurnitureDto {
     @Validator.IsEnum(FurnitureStatus)
     status: 'available' | 'visible'| 'hidden';
 
+    
+    @Validator.IsNotEmpty()
+    @Validator.IsIn([0, 1])
+    availableOne: 0 | 1;
+
+    
+    @Validator.IsNotEmpty()
+    @Validator.IsIn([0, 1])
+    availableTwo: 0 | 1;
+
     @Validator.IsNotEmpty()
     @Validator.IsPositive()
     @Validator.IsNumber({
@@ -29,12 +39,12 @@ export class EditFurnitureDto {
     })
     price: number;
 
-    @Validator.IsOptional()
-    @Validator.IsArray()
-    @Validator.ValidateNested({
-        always: true,
-    })
-    stores: FurnitureStoreComponentDto[] | null;
+    // @Validator.IsOptional()
+    // @Validator.IsArray()
+    // @Validator.ValidateNested({
+    //     always: true,
+    // })
+    // stores: FurnitureStoreComponentDto[] | null;
     
     @Validator.IsOptional()
     @Validator.IsArray()

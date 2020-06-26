@@ -26,13 +26,11 @@ import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
             category: { eager: true },
             furniturePrices: { eager: true },
             photos: { eager: true },
-            availabilities: {eager: false},
-            stores: {eager: false},
             furnitureFeatures: {
-                eager: false
+                eager: true
             },
             features: {
-                eager: false
+                eager: true
             }
         }
     },

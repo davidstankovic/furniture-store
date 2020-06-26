@@ -1,5 +1,5 @@
 import * as Validator from 'class-validator';
-import { FurnitureStoreComponentDto } from './furniture.store.component.dto';
+// import { FurnitureStoreComponentDto } from './furniture.store.component.dto';
 import { FurnitureFeatureComponentDto } from './furniture.feature.component.dto';
 export class AddFurnitureDto {
     @Validator.IsNotEmpty()

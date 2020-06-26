@@ -13,12 +13,10 @@
 
 
 -- Dumping database structure for aplikacija
-DROP DATABASE IF EXISTS `aplikacija`;
 CREATE DATABASE IF NOT EXISTS `aplikacija` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `aplikacija`;
 
 -- Dumping structure for table aplikacija.administrator
-DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE IF NOT EXISTS `administrator` (
   `administrator_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -41,7 +39,6 @@ INSERT INTO `administrator` (`administrator_id`, `username`, `password_hash`) VA
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.administrator_token
-DROP TABLE IF EXISTS `administrator_token`;
 CREATE TABLE IF NOT EXISTS `administrator_token` (
   `administrator_token_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `administrator_id` int(10) unsigned NOT NULL,
@@ -52,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `administrator_token` (
   PRIMARY KEY (`administrator_token_id`),
   KEY `fk_administrator_token_administrator_id` (`administrator_id`),
   CONSTRAINT `fk_administrator_token_administrator_id` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.administrator_token: ~78 rows (approximately)
+-- Dumping data for table aplikacija.administrator_token: ~131 rows (approximately)
 DELETE FROM `administrator_token`;
 /*!40000 ALTER TABLE `administrator_token` DISABLE KEYS */;
 INSERT INTO `administrator_token` (`administrator_token_id`, `administrator_id`, `created_at`, `token`, `expires_at`, `is_valid`) VALUES
@@ -135,30 +132,54 @@ INSERT INTO `administrator_token` (`administrator_token_id`, `administrator_id`,
 	(75, 9, '2020-06-25 19:04:01', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMDg1NDEuMDcsImlwIjoiOjoxIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODMuMC40MTAzLjEwNiBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTA4MjQxfQ.NEpn3NFV9y5i87SpAMYg9EzmAbKOKNa6IJUOJnIHw74', '2020-06-25 18:09:01', 1),
 	(76, 9, '2020-06-25 19:16:50', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMDkzMTAuMjYxLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMDYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEwOTAxMH0.FCTE84-WHrUJB27BHhBJCCwElegBhh7DVc1br6ME4Rk', '2020-06-25 18:21:50', 1),
 	(77, 9, '2020-06-25 19:17:45', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMDkzNjUuNDM0LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMDYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEwOTA2NX0.C21TsZ41crR1HFNjEAWBnhA3i0TdrxQYIid1Kvdd-LE', '2020-06-25 18:22:45', 1),
-	(78, 9, '2020-06-25 19:20:01', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMDk1MDEuMDI0LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEwOTIwMX0.kOELBNcBBogSF4odg8LPErm0AABHpVaFPK9_ry_-Llw', '2020-06-25 18:25:01', 1);
+	(78, 9, '2020-06-25 19:20:01', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMDk1MDEuMDI0LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEwOTIwMX0.kOELBNcBBogSF4odg8LPErm0AABHpVaFPK9_ry_-Llw', '2020-06-25 18:25:01', 1),
+	(79, 9, '2020-06-25 20:46:56', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMTQ3MTYuODU3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzExNDQxNn0.Fyoakcqtl6kMTjV5M3dRiE9rYFKJRnidRB5WHCSHe9s', '2020-06-25 19:51:56', 1),
+	(80, 9, '2020-06-25 20:53:20', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMTUxMDAuNDE3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzExNDgwMH0.ZHHxeN2gq8GPw1NYNorJmIkaoIOR-XMtStPkiiUCyf8', '2020-06-25 19:58:20', 1),
+	(81, 9, '2020-06-25 20:56:31', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMTUyOTEuMjUxLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzExNDk5MX0.jfHTE4cu6Ue9rU2eHb4F9OoHglPdtZC6PUzDL_sV950', '2020-06-25 20:01:31', 1),
+	(82, 9, '2020-06-25 21:10:37', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMTYxMzcuNDI5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzExNTgzN30.xC-ZcpfxA71sdby7f2ZV3Whu5feWhWyyIeyOC10esMc', '2020-06-25 20:15:37', 1),
+	(83, 9, '2020-06-25 22:06:14', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMTk0NzQuNjExLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzExOTE3NH0.LyliaovQ7c0DGmAGERr_vLmcrMYQFkVEiS6zwFt6Cvo', '2020-06-25 21:11:14', 1),
+	(84, 9, '2020-06-25 22:11:28', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMTk3ODguMzQxLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzExOTQ4OH0.WCqNi-v7LWh85qW-oGrPrEtIlgpYdhma2La5Kyuym0Q', '2020-06-25 21:16:28', 1),
+	(85, 9, '2020-06-25 22:45:46', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjE4NDYuMzk2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTIxNTQ2fQ.u8Nd58TY72QH-hUfFbZMAIh7H3Tz_YWYfItcsuYpm0s', '2020-06-25 21:50:46', 1),
+	(86, 9, '2020-06-25 22:53:02', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjIyODIuNTU1LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyMTk4Mn0.KsBjyJ0144SOu5MXKV7yuEE6pthIN5TOtTWulk3ZdX8', '2020-06-25 21:58:02', 1),
+	(87, 9, '2020-06-25 23:01:48', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjI4MDguNTY4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyMjUwOH0.MMyopWgBVEq4xyxUajPDnv8yahNUWlicrJdpGX0HPfk', '2020-06-25 22:06:48', 1),
+	(88, 9, '2020-06-25 23:06:16', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjMwNzYuODk1LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTIyNzc2fQ.NExIVwaOz6EROEf0CLUHyBP1wC-7CAyCpFA-qwfgCWs', '2020-06-25 22:11:16', 1),
+	(89, 9, '2020-06-25 23:16:04', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjM2NjQuMjgyLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTIzMzY0fQ.uBPVUISiY-SHNQH4BpNBZQd2abt8vW2RmiLUtj625Yo', '2020-06-25 22:21:04', 1),
+	(90, 9, '2020-06-25 23:18:52', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjM4MzIuODE5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTIzNTMyfQ.pdAqVhDumMH2fkot7A-57HdJUF2wsorQbROJ7ZTbqpI', '2020-06-25 22:23:52', 1),
+	(91, 9, '2020-06-25 23:24:06', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQxNDYuNjc0LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTIzODQ2fQ.62Y2A-bd2NttrMq_d78m1JfqJa61SYGK6hdmsLzdAm8', '2020-06-25 22:29:06', 1),
+	(92, 9, '2020-06-25 23:24:49', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQxODkuNjMyLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTIzODg5fQ.25bEDNezgl_4B-AhJuCgu7cw8fLbwN35X7zRJEZ9cHM', '2020-06-25 22:29:49', 1),
+	(93, 9, '2020-06-25 23:24:55', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQxOTUuNzY3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTIzODk1fQ.tUQ3FyPblsXtvJ1qZNpeSlhCwgwTuaVSEHrolEZ0-RQ', '2020-06-25 22:29:55', 1),
+	(94, 9, '2020-06-25 23:27:31', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQzNTEuNjgxLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTI0MDUxfQ.wEyiDzLuk0oq_tvqiqIBCC0NIC9w0-sIrmBqOyVB0UA', '2020-06-25 22:32:31', 1),
+	(95, 9, '2020-06-25 23:28:05', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQzODUuMTEzLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTI0MDg1fQ.m98HhuSsI7KiBU23-dkUS6YfRQ6SEgiKse3gZ5YRW-8', '2020-06-25 22:33:05', 1),
+	(96, 9, '2020-06-25 23:28:57', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQ0MzcuOTM4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNDEzN30.pgQhtG9OYgBNuGy1gwEU5f4NyR2da_YUHjgNc3rAQOc', '2020-06-25 22:33:57', 1),
+	(97, 9, '2020-06-25 23:32:27', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQ2NDcuODU3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDYuMDsgTmV4dXMgNSBCdWlsZC9NUkE1OE4pIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS84My4wLjQxMDMuMTE2IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTI0MzQ3fQ.dRZPms4coB34Ql33YJsgEBYFySb50dfSUQLHc88mR2A', '2020-06-25 22:37:27', 1),
+	(98, 9, '2020-06-25 23:32:44', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQ2NjQuNjY1LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNDM2NH0.3H2t6HWvZh4QascosIfPlYkAJnEUtpD8qohxuNrc4jw', '2020-06-25 22:37:44', 1),
+	(99, 9, '2020-06-25 23:36:08', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjQ4NjguNzE3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNDU2OH0.geSWtOkqT9zYVs9WtbgS85XhA3ScYjaezk1LhFsbcEs', '2020-06-25 22:41:08', 1),
+	(100, 9, '2020-06-25 23:41:16', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjUxNzYuMzU3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNDg3Nn0.ND7w88dJwMGxGtsTOtxLZvX_SJriyKOiH3wWgqxMYks', '2020-06-25 22:46:16', 1),
+	(101, 9, '2020-06-25 23:43:11', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjUyOTEuMDY2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNDk5MX0.XfQ_v19CQdoSPj0gdN8OHNeUdgDR2V7AJ2nsBHR1hh4', '2020-06-25 22:48:11', 1),
+	(102, 9, '2020-06-25 23:45:09', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjU0MDkuOTA1LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNTEwOX0.kynEPO7fvZd4fx_BFsiekJMSdIScP_qixF7C3P86CVk', '2020-06-25 22:50:09', 1),
+	(103, 9, '2020-06-25 23:48:42', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjU2MjIuNjQ4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNTMyMn0.PeX9jAGhGNZcRfAqCAJdZd1A1OCtA4QT9mqBDEmGATI', '2020-06-25 22:53:42', 1),
+	(104, 9, '2020-06-26 00:18:43', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjc0MjMuNDcyLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNzEyM30.b_LPYTqEO8I0Ud0lx5vbe8348AHfZcHBsCi8Li0vm4Y', '2020-06-25 23:23:43', 1),
+	(105, 9, '2020-06-26 00:23:13', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjc2OTMuMTIzLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyNzM5M30.wXx2FKiQYun5Tk6vDCm1YfrnNckyEp28wlXA3iOhqQw', '2020-06-25 23:28:13', 1),
+	(106, 9, '2020-06-26 00:29:40', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjgwODAuNDgsImlwIjoiOjoxIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODMuMC40MTAzLjExNiBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTI3NzgwfQ.4OYHv7Yk_oMal1H1esjcDZe05XjIhRXFnEFI2tTOwBo', '2020-06-25 23:34:40', 1),
+	(107, 9, '2020-06-26 00:39:41', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjg2ODEuMDQsImlwIjoiOjoxIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODMuMC40MTAzLjExNiBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTI4MzgxfQ.MIfIC9qZi5CS4ORgfG54phluoMBu6Bmm1oBcGFw8eIE', '2020-06-25 23:44:41', 1),
+	(108, 9, '2020-06-26 00:42:43', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjg4NjMuNDM4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyODU2M30.3jNMWo6gCv2e-n7-DMJO23xjvp4wb9RCb2HslrtokwA', '2020-06-25 23:47:43', 1),
+	(109, 9, '2020-06-26 00:48:28', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjkyMDguNjcsImlwIjoiOjoxIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODMuMC40MTAzLjExNiBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTI4OTA4fQ.KQBxxDWgFESKOQ0DdgyfXxce8733tha-yRVWRl3rPNw', '2020-06-25 23:53:28', 1),
+	(110, 9, '2020-06-26 01:00:34', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMjk5MzQuODQsImlwIjoiOjoxIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODMuMC40MTAzLjExNiBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTI5NjM0fQ.-8In42YO3fO0KtD4WEHKn4zvr-W2IBiXWDB2WuN_zqw', '2020-06-26 00:05:34', 1),
+	(111, 9, '2020-06-26 01:05:39', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzAyMzkuMDcyLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEyOTkzOX0.54l2MMCMkKFPnPRSCHklKnBGR44gjKDezoJvu2GZk4A', '2020-06-26 00:10:39', 1),
+	(112, 9, '2020-06-26 01:11:12', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzA1NzIuNTk5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMDI3Mn0.EmbjeHPG76oTbsTM3W0Qh-GmVeTRamaStrMYOf7lzbA', '2020-06-26 00:16:12', 1),
+	(113, 9, '2020-06-26 01:16:17', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzA4NzcuMTc2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMDU3N30.Ms9HlfgSULuHKewOP1p6iy0p6a8tSxCsQgDN693cmR0', '2020-06-26 00:21:17', 1),
+	(114, 9, '2020-06-26 01:21:37', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzExOTcuODMsImlwIjoiOjoxIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODMuMC40MTAzLjExNiBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzMTMwODk3fQ.PQ_5rfh7wDhDdsuuMWXl5Y_1bOs1AlvOZQ4jZYCPjrk', '2020-06-26 00:26:37', 1),
+	(115, 9, '2020-06-26 01:27:19', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzE1MzkuMjkzLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMTIzOX0.zOaXBdLpAi-mBRK1K4NSB4RxVKU4rzZSfdET-kilv74', '2020-06-26 00:32:19', 1),
+	(116, 9, '2020-06-26 01:39:36', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzIyNzYuMzE3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMTk3Nn0.X3ToBg4e-IbnUNRUrarsRX_Wp0blTYsmPw8epLYUFTM', '2020-06-26 00:44:36', 1),
+	(117, 9, '2020-06-26 01:46:23', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzI2ODMuMDM2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMjM4M30.FnhviZfD9hR_u0vcZF6rMGPXSwtDQ3mnFOQGYUKLRJM', '2020-06-26 00:51:23', 1),
+	(118, 9, '2020-06-26 01:55:01', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzMyMDEuMzg4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMjkwMX0.LyIBmnkZPidoBDdjoLg7S8GO9_OtuNU2MDDBk7-9tyw', '2020-06-26 01:00:01', 1),
+	(119, 9, '2020-06-26 02:06:47', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzM5MDcuODA4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMzYwN30.4CgLb-kisrh6hb_KVhFz56pi3buTJu1X9rbm_CVB7yE', '2020-06-26 01:11:47', 1),
+	(120, 9, '2020-06-26 02:14:17', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzQzNTcuMjk5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzNDA1N30.Og8-4hqMxNtlM_5pNQ0GzJZtcm8GUyzR4IobEXEPwGQ', '2020-06-26 01:19:17', 1),
+	(121, 9, '2020-06-26 02:20:33', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzQ3MzMuMzA1LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzNDQzM30.S37x_1Hbhttx8SaG0LlXPukJIl4ufZ4qil4oXtZL_n4', '2020-06-26 01:25:33', 1),
+	(122, 9, '2020-06-26 02:29:24', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzUyNjQuNTA2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzNDk2NH0.AHjflWWwJV_XHklXlPamIxEsHeHcbu611YinqhuG6Dk', '2020-06-26 01:34:24', 1);
 /*!40000 ALTER TABLE `administrator_token` ENABLE KEYS */;
 
--- Dumping structure for table aplikacija.availability
-DROP TABLE IF EXISTS `availability`;
-CREATE TABLE IF NOT EXISTS `availability` (
-  `availability_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `is_available` tinyint(1) unsigned NOT NULL DEFAULT 1,
-  `store_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `furniture_id` int(10) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`availability_id`),
-  KEY `fk_availability_store_id` (`store_id`),
-  KEY `fk_availability_furniture_id` (`furniture_id`),
-  CONSTRAINT `fk_availability_furniture_id` FOREIGN KEY (`furniture_id`) REFERENCES `furniture` (`furniture_id`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_availability_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Dumping data for table aplikacija.availability: ~0 rows (approximately)
-DELETE FROM `availability`;
-/*!40000 ALTER TABLE `availability` DISABLE KEYS */;
-/*!40000 ALTER TABLE `availability` ENABLE KEYS */;
-
 -- Dumping structure for table aplikacija.category
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '',
@@ -168,57 +189,31 @@ CREATE TABLE IF NOT EXISTS `category` (
   UNIQUE KEY `uq_category_name` (`name`),
   UNIQUE KEY `uq_category_image_path` (`image_path`),
   KEY `fk_category_parent__category_id` (`parent__category_id`),
-  CONSTRAINT `fk_category_parent__category_id` FOREIGN KEY (`parent__category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `fk_category_parent__category_id` FOREIGN KEY (`parent__category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.category: ~40 rows (approximately)
+-- Dumping data for table aplikacija.category: ~29 rows (approximately)
 DELETE FROM `category`;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`category_id`, `name`, `image_path`, `parent__category_id`) VALUES
-	(7, 'Living room', 'https://hgtvhome.com/room.jpg', NULL),
-	(8, 'Bedroom', 'images.com/bedroom.jpg', NULL),
-	(9, 'Mattresses', 'images.com/mattresses.png', NULL),
-	(10, 'Kitchen & Dining Room', 'images.com/kitchen.jpg', NULL),
-	(11, 'Baby + Kids', 'images.com/kids.jpg', NULL),
-	(12, 'Outdoor', 'images.com/outdoor.jpg', NULL),
-	(13, 'Home Office', 'images.com/homeoffice.jpg', NULL),
-	(14, 'Home Decor', 'images.com/homedecor.jpg', NULL),
-	(15, 'Lightning', 'images.com/lightning.jpg', NULL),
-	(16, 'Sofas & Couches', 'images.com/sofas', 7),
-	(17, 'Loveseats', 'images.com/loveseats', 7),
-	(18, 'Sectional Sofas', 'images.com/sectional.jpg', 7),
-	(19, 'Sleeper Sofas', 'images.com/sleeper.jpg', 7),
-	(20, 'King Beds', 'images.com/kingbeds.jpg', 8),
-	(23, 'Bedroom Sets', 'images.com/bedroomsets.jpg', 8),
-	(24, 'Bed & Mattress Bundles', 'images.com/bedandmattress.jpg', 8),
-	(25, 'Nightstands', 'images.com/nightstands.jpg', 8),
-	(26, 'Plush Mattress', 'images.com/plushmattres.jpg', 9),
-	(27, 'Memory Foam', 'images.com/memoryfoam', 9),
-	(28, 'Innerspring', 'images.com/innerspring.jpg', 9),
-	(29, 'Dining Tables', 'images.com/diningtables.jpg', 10),
-	(30, 'Dining Chairs', 'images.com/diningchairs.jpg', 10),
-	(31, 'Dining Sets', 'images.com/diningsets.jpg', 10),
-	(32, 'Bar Stools', 'images.com/barstools.jpg', 10),
-	(33, 'Kids Bedroom Sets', 'images.com/kidsbedroomsets.jpg', 11),
-	(34, 'Kids Beds', 'images.com/kidsbeds.jpg', 11),
-	(35, 'Baby Cribs', 'images.com/cribs.jpg', 11),
-	(36, 'Bassinets', 'images.com/bassinets.jpg', 11),
-	(37, 'Outdoor Seating', 'images.com/outdoorseating.jpg', 12),
-	(38, 'Outdoor Dining', 'images.com/outdoordining.jpg', 12),
-	(39, 'Outdoor Bar Furniture', 'images.com/outdoorbarfurniture', 12),
-	(40, 'Office Desks', 'images.com/officedesks', 13),
-	(41, 'Bookcases', 'images.com/bookcases.jpg', 13),
-	(42, 'Office Chairs', 'images.com/officechairs.jpg', 13),
-	(43, 'Home Accents', 'images.com/homeaccents.jpg', 14),
-	(44, 'Wall Decor', 'images.com/walldecor.jpg', 14),
-	(45, 'Throw Pillows', 'images.com/throwpillows.jpg', 14),
-	(46, 'Decorative Storage', 'images.com/decorativestorage.jpg', 14),
-	(47, 'Table Lamps', 'images.com/tablelamps.jpg', 15),
-	(48, 'Chandeliers', 'images.com/chandeliers.jpg', 15);
+	(52, 'Sofas', 'image.com/sofas.png', NULL),
+	(53, 'Dining', 'images.com/dining.jpg', NULL),
+	(54, 'Sleeping Beds', 'images.com/beds.jpg', NULL),
+	(58, 'Fabric Sofa Sets', 'images.com/fabricsofasets.jpg', 52),
+	(59, 'L Shaped Sofa Sets', 'images.com/lshapedsofasets', 52),
+	(60, 'Wooden Sofa Sets', 'images.com/woodensofasets.jpg', 52),
+	(61, 'Leather Sofa Sets', 'images.com/leathersofasets', 52),
+	(62, 'Sofa Cum Beds', 'images.com/sofacumbeds', 52),
+	(63, 'Beds With Storage', 'images.com/bedswithstorage.png', 54),
+	(64, 'Beds Without Storage', 'images.com/bedswithoutstorage.png', 54),
+	(65, 'Double Beds', 'images.com/doublebeds.png', 54),
+	(67, 'Dining Tables', 'images.com/diningtables.png', 53),
+	(68, '4 Seater Drinking Table Sets', 'images.com/drinkingtablesets', 53),
+	(69, '6 Seater Dining table Sets', 'images.com/diningtablesets', 53),
+	(70, 'Folding Dining Table Sets', 'images.com/foldingtablesets.png', 53);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.feature
-DROP TABLE IF EXISTS `feature`;
 CREATE TABLE IF NOT EXISTS `feature` (
   `feature_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -227,38 +222,121 @@ CREATE TABLE IF NOT EXISTS `feature` (
   UNIQUE KEY `uq_feature_name_category_id` (`name`,`category_id`),
   KEY `fk_feature_category_id` (`category_id`),
   CONSTRAINT `fk_feature_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table aplikacija.feature: ~4 rows (approximately)
+-- Dumping data for table aplikacija.feature: ~92 rows (approximately)
 DELETE FROM `feature`;
 /*!40000 ALTER TABLE `feature` DISABLE KEYS */;
 INSERT INTO `feature` (`feature_id`, `name`, `category_id`) VALUES
-	(22, 'Color', 16),
-	(23, 'Construction', 16),
-	(21, 'Dimensions', 16),
-	(20, 'Material', 16);
+	(29, 'Color', 58),
+	(32, 'Color', 59),
+	(35, 'Color', 60),
+	(39, 'Color', 61),
+	(43, 'Color', 62),
+	(48, 'Color', 63),
+	(52, 'Color', 64),
+	(56, 'Color', 65),
+	(65, 'Color', 67),
+	(69, 'Color', 68),
+	(75, 'Color', 69),
+	(78, 'Color', 70),
+	(26, 'Construction', 58),
+	(34, 'Construction', 59),
+	(37, 'Construction', 60),
+	(42, 'Construction', 61),
+	(46, 'Construction', 62),
+	(50, 'Construction', 63),
+	(54, 'Construction', 64),
+	(57, 'Construction', 65),
+	(67, 'Construction', 67),
+	(71, 'Construction', 68),
+	(74, 'Construction', 69),
+	(79, 'Construction', 70),
+	(30, 'Dimensions', 58),
+	(33, 'Dimensions', 59),
+	(38, 'Dimensions', 60),
+	(40, 'Dimensions', 61),
+	(45, 'Dimensions', 62),
+	(49, 'Dimensions', 63),
+	(53, 'Dimensions', 64),
+	(58, 'Dimensions', 65),
+	(66, 'Dimensions', 67),
+	(70, 'Dimensions', 68),
+	(73, 'Dimensions', 69),
+	(77, 'Dimensions', 70),
+	(28, 'Material', 58),
+	(31, 'Material', 59),
+	(36, 'Material', 60),
+	(41, 'Material', 61),
+	(44, 'Material', 62),
+	(47, 'Material', 63),
+	(51, 'Material', 64),
+	(55, 'Material', 65),
+	(64, 'Material', 67),
+	(68, 'Material', 68),
+	(72, 'Material', 69),
+	(76, 'Material', 70);
 /*!40000 ALTER TABLE `feature` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.furniture
-DROP TABLE IF EXISTS `furniture`;
 CREATE TABLE IF NOT EXISTS `furniture` (
   `furniture_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL DEFAULT '0',
   `category_id` int(10) unsigned NOT NULL DEFAULT 0,
   `description` text NOT NULL,
   `status` enum('available','visible','hidden') NOT NULL DEFAULT 'available',
+  `available_one` tinyint(4) NOT NULL DEFAULT 1,
+  `available_two` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`furniture_id`),
   KEY `fk_furniture_category_id` (`category_id`),
   CONSTRAINT `fk_furniture_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.furniture: ~0 rows (approximately)
+-- Dumping data for table aplikacija.furniture: ~51 rows (approximately)
 DELETE FROM `furniture`;
 /*!40000 ALTER TABLE `furniture` DISABLE KEYS */;
+INSERT INTO `furniture` (`furniture_id`, `name`, `category_id`, `description`, `status`, `available_one`, `available_two`) VALUES
+	(121, 'Rubik Sofa', 58, 'Long-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 1, 1),
+	(122, 'Apollo Sofa', 58, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nHigh-performance fabric\n\nThe upholstery comes with a high rub count and is resistant to fading and pilling. Its durable properties will keep your sofa looking new for years to come.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 1, 1),
+	(123, 'Liverpool Sofa', 58, 'Straight lines meet soft foam. The Liverpool is a compact sofa that can make life feel king-sized. As practical as it is pretty, the slim armrests and straight back give it a clean, modern look that’s perfect for a starter home. \nFrame made of Eucalyptus wood\nTall wooden legs make it easy to clean underneath\nFabric upholstery\nPlease refer to the images for dimension details\nIndoor use only', 'available', 1, 1),
+	(124, 'Camden Sofa', 58, 'A gorgeous three-seater, the Camden sofa cum bed works not just as your primary seating option, but also as an elegant statement piece.\nIt transforms easily from sofa to bed, in three simple steps.\nEasy to pull out, easy to put back. Make an instant guest room whenever you need!\nOr,simply enjoy your book or TV show in better comfort.\nIts armrests are steady and reliable - perfect for resting your elbow, book, or even the remote, when needed.', 'available', 1, 1),
+	(125, 'Emila Motorized Recliner', 58, 'Next-level cosy. The Emila recliner sofa takes comfort to a whole new dimension.\nThis recliner is about as plush as it gets, with extra-cushy armrests, headrests, and seats.\nThe cleverly designed backrest reclines without taking up extra space.\nThe generously proportioned two seater is just right for tete-a-tetes, and even better for snoozathons.\nKick back and cool your heels at the push of a button.\nChoose your angle of comfort, just as you like.\n', 'available', 1, 1),
+	(126, 'Lewis Sofa', 58, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood with plywood boxing that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nHigh-performance fabric\n\nThe upholstery comes with a high rub count and is resistant to fading and pilling. Its durable properties will keep your sofa looking new for years to come.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.\n\n', 'available', 1, 1),
+	(127, 'Turin Sectional Sofa', 59, 'A comfy tour! The Turin sectional sofa checks all the comfy boxes.\nA three seater with a chaise on one end, it works as an elegant statement piece.\nStretch out on its comfy chaise. Made for the ultimate relaxation.  \nThe chaise is great to stretch out and prop your feet up at the end of a long day.\nThe armrests are plush and supportive.', 'available', 1, 1),
+	(128, 'Apollo Sectional Tufted Sofa', 59, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nHigh-performance fabric\n\nThe upholstery comes with a high rub count and is resistant to fading and pilling. Its durable properties will keep your sofa looking new for years to come.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 1, 1),
+	(129, 'Chelsea Adjustable Sectional Sofa', 59, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n \n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 1, 1),
+	(130, 'Apollo Sectional Sofa', 59, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nHigh-performance fabric\n\nThe upholstery comes with a high rub count and is resistant to fading and pilling. Its durable properties will keep your sofa looking new for years to come.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam.', 'available', 1, 1),
+	(131, 'Parsons Wooden Sofa - American Walnut Finish', 60, 'This sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 0, 1),
+	(132, 'Amos Wooden Sofa', 60, 'Amazing comfort. The Amos wooden sofa combines the best of two worlds.\nIt sports a gorgeous wooden frame and upholstered cushions for added comfort.\nThe three-seater works not just as your primary seating option, but also as an elegant statement piece.\nComplete your set with the expansive yet cosy two-seater.\nPerfect for you and your partner (or pet).\nIt’s angled wooden legs add a contemporary touch to your home.', 'available', 1, 1),
+	(133, 'Parsons Wooden Sofa - Teak Finish', 60, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging.', 'available', 1, 1),
+	(134, 'Camden Compact Sofa Cum Bed', 62, 'A gorgeous three-seater, the Camden compact sofa cum bed works not just as your primary seating option, but also as an elegant statement piece.\nIt transforms easily from sofa to bed, in three simple steps.\nEasy to pull out, easy to put back. Make an instant guest room whenever you need!\nOr, simply enjoy your book or TV show in better comfort.\nIts armrests are steady and reliable - perfect for resting your elbow, book, or even the remote, when needed.', 'available', 1, 1),
+	(135, 'Farina Half Leather Sectional Sofa', 61, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity', 'available', 1, 1),
+	(136, 'Trissino Sofa (Camel Italian Leather) ', 61, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 1, 1),
+	(137, 'Thiene Sofa (Cappuccino Italian Leather) ', 61, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 1, 1),
+	(138, 'Thiene Sofa (Cappuccino Italian Leather) ', 61, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\nLong-lasting suspension system\n\nThis sofa is supported on a foundation of 3 inch wide elastic bands, thicker and more durable than the industry standard.\n\n\nAnti-sag construction\n\nThis sofa is designed to combat sagging. The multi-density foam in the seat cushions reduces sagging due to prolonged use. A grid of polyfill pockets in the back cushions prevents the cushions from weighing down because of gravity.', 'available', 1, 1),
+	(139, 'Weston Half Leather Sofa', 61, 'Seasoned solid wood frames\n\nThis sofa’s frame is made from seasoned solid wood that undergoes a 3-step treatment for protection against borers and is kiln-dried for moisture control.\n\n\n4 layers of high', 'available', 1, 1),
+	(140, 'Arabia XXL 8 Seater Dining Table', 67, 'For good, clean family fun. This spacious solid wood table is ideal to host large gatherings. Its minimalist design focuses the attention on what matters most - the food.\nMade from sheesham wood\nAvailable in 2 finishes\nTable seats up to 8\nPlease refer to the images for dimension details\nIndoor use only', 'available', 1, 1),
+	(141, 'Arco 8 Seater Dining Table', 67, 'Expansive meets elegant. The very generous Arco dining table is ideal for large families. It comfortably seats 8, with plenty of legroom. The clean cut edges give the table a simple, classic silhouette, making it an easy match for all décor styles.\n', 'available', 1, 1),
+	(142, 'Brighton Square 4 Seater', 67, 'A sturdy solid wood dining table for 4\nThe Brighton\'s simple form creates a striking contrast with the pebble filled centre\nThe glass box can be filled with a wide array of decorative items - pebbles to potpourri is just a minute away\nAn ideal match for the Oribi, Capra, Zella & Dama, it\'s elegant style compliments any decor\nMade of high-grade Sheesham wood\nRefer to the images for details of dimensions\nIndoor use only.', 'available', 1, 1),
+	(143, 'Caribu 4 To 6 Extendable', 68, 'More the merrier. Throwing a party or hosting extended family? Caribu magically expands to accommodate eight guests. With its modern aesthetics and sleek finish, this dining table is a delight to homeowners and visitors alike. Paired with 4 chairs from the Ingrid series.\nDining table made from Chrome\nComfortably seats 4 and can be extended to seat 6\nChairs frame made of chrome\nChairs upholstery made of fabric (in the dark grey variant) and leatherette (in the white variant)\nPlease refer to images for dimension details\nIndoor use only', 'available', 1, 1),
+	(144, 'Diner 6 Seater Dining', 69, 'You really can have it all. A dining table set for those who do not want to compromise on comfort, budget or style. Marrying modern design aesthetics with classic functionality, the Diner comes with a glossy top that is sure to add an extra oomph to your dinner spread. Paired with the Diner chairs, it is easy on the eye and easy to fall in love with!\nSet includes: Diner 6-seater dining table + 6 Diner dining chairs\nMade of rubberwood\nDark walnut finish\nTable seats up to 6\nPlease refer to images for dimension details\nIndoor use only', 'available', 1, 1),
+	(145, 'Wesley 6 Seater', 69, 'Create a striking dining space with the stunning Wesley Dining Table and Dalla Chairs\nThis set includes 6 upholstered Dalla chairs along with the Wesley table\nThe clear tempered glass tabletop allows you to admire the sleek minimalist wooden frame\nThe shelf below the tabletop can be used for storage, or as a display space\nThe table frame is made of high quality Beech wood. Table top is 10mm tempered glass. The lower shelf is made of MDF with a wood veneer\nThe chairs are made of high quality Beech wood with upholstered cushions on the seat and back\nRefer to the images for details of dimensions\nFor indoor use only\n', 'available', 1, 1),
+	(146, 'Arabia Zella 6 Seater', 69, 'A sturdy solid wood dining table and 6 high-back upholstered chairs\nThe Arabia\'s simple understated style highlights the wood grain, and fits into any style of décor\nThe graceful upholstered Zella chairs provide supreme comfort\nMade of high-grade Sheesham wood\nIndoor use only', 'available', 1, 1),
+	(147, 'Vanalen 4 to 6', 70, 'For the hostess with the mostess! Guests bring along a plus one or two? The Vanalen’s got you covered. A gentle tug makes room for two extra spots. A neat cover sits flush against the frame for an even surface. Comes paired with upholstered chairs from the Dalla series.\nTable made from Beech wood in a dark walnut finish\nChair made from Beech wood\nTempered glass tabletop\nFabric upholstery\nUpholstery available in 2 colours\nTable seats up to 6 when extended\nSet includes: Vanalen 4-to-6 extendable dining table + 4/6 Dalla dining chairs\nPlease refer to images for dimension details\nFor indoor use only', 'available', 1, 1),
+	(148, 'Danton 3 to 6', 70, 'The cleverly designed Danton will adapt itself effortlessly to your changing space requirements\nWhen fully expanded, the spacious surface makes it a fully functional table for six\nFor a compact dining experience, put down one flap to make a table for two or three\nTo make space, put both the flaps down and tuck the table away in any part of the room\nThe plush upholstered Zella chairs provide supreme comfort\nPlease refer to the images for details of size of the table and chair\nMade of high grade Sheesham wood\nFor indoor use only', 'available', 1, 1),
+	(149, 'Caribu 4 to 6', 70, 'More the merrier. Throwing a party or hosting extended family? Caribu magically expands to accommodate eight guests. With its modern aesthetics and sleek finish, this dining table is a delight to homeowners and visitors alike. Paired with 4 chairs from the Ingrid series.\nDining table made from Chrome\nComfortably seats 4 and can be extended to seat 6\nChairs frame made of chrome\nChairs upholstery made of fabric (in the dark grey variant) and leatherette (in the white variant)\nPlease refer to images for dimension details\nIndoor use only', 'available', 1, 1),
+	(150, 'Baltoro High Gloss', 63, 'A delight in white. The tranquil Baltoro bed is all neat, clean lines, and no fuss. The pristine whites and the walnut detailing give it an ethereal look. The hydraulic mechanism lifts to reveal roomy storage compartments underneath. Pair this beauty with the Baltoro bedside table, dresser, and chest of drawers. You’ll have a haven in which time stands still.\nMade of MDF\nWalnut and high-gloss finish\nAvailable in two sizes\nHydraulic mechanism for storage\nRecommended mattress size for king: 78 x 72 inches\nRecommended mattress size for Queen: 78 x 60 inches\nRecommended mattress thickness: 8 inches\nPlease refer to the images for dimension details\nFor indoor use only\n', 'available', 1, 1),
+	(151, 'Sandon Storage Bed', 63, 'Hoarders, ahoy! Hate to part with your stuff? With the Sandon bed, you don’t have to! Stash away extras in the storage compartment. Stack up essentials and knick-knacks in the headboard shelves. And then, sleep tight, because everything you love has found a place.\nMade of MDF in a walnut finish\nRecommended mattress size: King - 78” x 72”, Queen - 78” x 60”\nPlease refer to the images for dimension details\nIndoor use only\nNote: Mattress and other accessories not included, unless specified otherwise', 'available', 1, 1),
+	(152, 'Stanhope Upholstered Storage Bed', 63, 'What dreams are made of. Designed for the discerning, the Stanhope bed is fully upholstered giving your bedroom plenty of texture and tone. The subtle piping detail and gentle curve of the headboard add to its charm. The plush, tufted headboard is perfect to lean against when you’re catching up on your reading, or late night emails. The soft cushioning all around guards against accidental toe stubs, and also makes it ideal for homes with young children. Combining form with discreet function, there are four spacious built-in drawers to store extra sheets, cushions and pillowcases.\nRecommended mattress size for king is 78 x 72 inches; Queen is 78 x 60 inches\nRecommended mattress thickness is 6 to 8 inches\nBed frame made of high quality MDF and particle board\nPolyester upholstery. Cushioning of PU foam and polyfill.\nMDF board to support the mattress\nDrawers on channels\nRefer to the images for dimension details\nFor indoor use only\nNote: Available in 2 options - With Mattress and Without Mattress\n', 'available', 1, 1),
+	(153, 'Pico Bed', 64, 'Sleep on this. Here’s a trim bed that’s stylish and functional. The Pico’s neat lines and classic finish are for fans of subtlety. Its upholstered headboard makes sitting up in bed more comfortable. And its understated design details allow you to accessorise freely as you like.\nMade of particle board in a walnut finish\nUpholstered headboard\nRecommended mattress size: Queen - 78" x 60"\nPlease refer to the images for dimension details\nIndoor use only\nNote: Mattress and other accessories not included, unless specified otherwise\n', 'available', 1, 1),
+	(154, 'Holmebrook Upholstered Storage Bed', 64, 'Sleep retreat. Transform your bedroom into a sleep haven with the gorgeous Holmebrook upholstered bed. The seamless fabric upholstery works its magic to soften your space and make it more inviting. Plushly padded, the tall headboard is all the more striking courtesy button tufted detailing and wings. Place it flush against the wall or float it in the middle of the room, this bed is designed for attention.\nRecommended mattress size for king is 78 x 72 inches; queen is 78 x 60 inches\nCan accommodate mattresses between 6 and 10 inches\nBed frame made of high quality MDF and particle board\nRubberwood legs\nFabric upholstery; cushioning of PU foam and polyfill\nPlease refer to the images for dimension details\nFor indoor use only\nNote: Mattress and other accessories not included, unless specified otherwise', 'available', 1, 1),
+	(155, 'Pavis Bed', 64, 'There’s no wrong side to this bed! The trim Pavis bed hits the sweet spot of style and function. The neat lines and classic finish are for fans of subtlety. The understated design details allow you to accessorise freely with bright colours and prints.\nMade of particle board\nRecommended mattress size: King - 78" x 72" | Queen - 78" x 60"\nPlease refer to the images for dimension details\nFor indoor use only\nNote: Mattress and other accessories not included, unless specified otherwise', 'available', 1, 1),
+	(156, 'Tory White Bed', 64, 'There’s no wrong side to this bed! The trim Tory bed hits the sweet spot of style and function. The neat lines and classic finish are for fans of subtlety. The understated design details allow you to accessorise freely with bright colours and prints.\nMade of particle board\nRecommended mattress size: King - 78" x 72" | Queen - 78" x 60"\nPlease refer to the images for dimension details\nFor indoor use only\nNote: Mattress and other accessories not included, unless specified otherwise', 'available', 1, 1),
+	(157, 'Pico Bed Urban', 65, 'Sleep on this. Here’s a trim bed that’s stylish and functional. The Pico’s neat lines and classic finish are for fans of subtlety. Its upholstered headboard makes sitting up in bed more comfortable. And its understated design details allow you to accessorise freely as you like.\nMade of particle board in a walnut finish\nUpholstered headboard\nRecommended mattress size: Queen - 78" x 60"\nPlease refer to the images for dimension details\nIndoor use only\nNote: Mattress and other accessories not included, unless specified otherwise', 'available', 1, 1),
+	(158, 'Baltoro Hydraulic High Gloss', 65, 'A delight in white. The tranquil Baltoro bed is all neat, clean lines, and no fuss. The pristine whites and the walnut detailing give it an ethereal look. The hydraulic mechanism lifts to reveal roomy storage compartments underneath. Pair this beauty with the Baltoro bedside table, dresser, and chest of drawers. You’ll have a haven in which time stands still.\nMade of MDF\nWalnut and high-gloss finish\nAvailable in two sizes\nHydraulic mechanism for storage\nRecommended mattress size for king: 78 x 72 inches\nRecommended mattress size for Queen: 78 x 60 inches\nRecommended mattress thickness: 8 inches\nPlease refer to the images for dimension details\nFor indoor use only', 'available', 1, 1);
 /*!40000 ALTER TABLE `furniture` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.furniture_feature
-DROP TABLE IF EXISTS `furniture_feature`;
 CREATE TABLE IF NOT EXISTS `furniture_feature` (
   `furniture_feature_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `furniture_id` int(10) unsigned NOT NULL DEFAULT 0,
@@ -269,15 +347,167 @@ CREATE TABLE IF NOT EXISTS `furniture_feature` (
   KEY `fk_furniture_feature_feature_id` (`feature_id`),
   CONSTRAINT `fk_furniture_feature_feature_id` FOREIGN KEY (`feature_id`) REFERENCES `feature` (`feature_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_furniture_feature_furniture_id` FOREIGN KEY (`furniture_id`) REFERENCES `furniture` (`furniture_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table aplikacija.furniture_feature: ~0 rows (approximately)
+-- Dumping data for table aplikacija.furniture_feature: ~152 rows (approximately)
 DELETE FROM `furniture_feature`;
 /*!40000 ALTER TABLE `furniture_feature` DISABLE KEYS */;
+INSERT INTO `furniture_feature` (`furniture_feature_id`, `furniture_id`, `feature_id`, `value`) VALUES
+	(50, 121, 26, 'Solid Wood'),
+	(51, 121, 28, 'Rubber Wood'),
+	(52, 121, 29, 'Black'),
+	(53, 121, 30, '719.0 x 1920.0 x 800.0 mm'),
+	(54, 122, 26, 'Soft Wood'),
+	(55, 122, 28, 'Fabric'),
+	(56, 122, 29, 'Blue'),
+	(57, 122, 30, '851.0 x 851.0 x 2131.0 mm'),
+	(62, 123, 26, 'Eucalyptus Wood'),
+	(63, 123, 28, 'Fabric'),
+	(64, 123, 29, 'Blue'),
+	(65, 123, 30, '800.0 x 1765.0 x 770.0 mm'),
+	(66, 124, 26, 'Engineered Wood'),
+	(67, 124, 28, 'Fabric'),
+	(68, 124, 29, 'Brown'),
+	(69, 124, 30, '803.0 x 1753.0 x 1994.0 mm'),
+	(70, 125, 26, 'Ply Wood'),
+	(71, 125, 28, 'Fabric'),
+	(72, 125, 29, 'Black'),
+	(73, 125, 30, '965.0 x 2235.0 x 864.0 mm'),
+	(74, 126, 26, 'Hard Wood'),
+	(75, 126, 28, 'Polyester'),
+	(76, 126, 29, 'Blue'),
+	(77, 126, 30, '780.0 x 2050.0 x 793.0 mm'),
+	(78, 127, 31, 'Fabric'),
+	(79, 127, 32, 'Blue'),
+	(80, 127, 33, '853.0 x 1979.0 x 851.0 mm'),
+	(81, 127, 34, 'Engineered Wood'),
+	(82, 128, 31, 'Fabric'),
+	(83, 128, 32, 'Brown'),
+	(84, 128, 33, '853.0 x 1979.0 x 851.0 mm'),
+	(85, 128, 34, 'Hard Wood'),
+	(86, 129, 31, 'Eucalyptus Wood'),
+	(87, 129, 32, 'Brown'),
+	(88, 129, 33, '920.0 x 1580.0 x 2680.0 mm'),
+	(89, 129, 34, 'Solid Wood'),
+	(90, 130, 31, 'Polyester'),
+	(91, 130, 32, 'Brown'),
+	(92, 130, 33, '831.0 x 1491.0 x 610.0 mm'),
+	(93, 130, 34, 'Variant Specific'),
+	(98, 131, 35, 'Safari Brown'),
+	(99, 131, 36, 'Solid Wood'),
+	(100, 131, 37, 'Sheesham Wood'),
+	(101, 131, 38, '833.0 x 1318.0 x 737.0 mm'),
+	(102, 132, 35, 'Blue'),
+	(103, 132, 36, 'Engineered Wood'),
+	(104, 132, 37, 'Ply Wood'),
+	(105, 132, 38, '950.0 x 539.0 x 671.0 mm'),
+	(106, 133, 35, 'Indigo Blue'),
+	(107, 133, 36, 'Sheesham Wood'),
+	(108, 133, 37, 'Solid Wood'),
+	(109, 133, 38, '833.0 x 1318.0 x 737.0 mm'),
+	(110, 134, 43, 'Green'),
+	(111, 134, 44, 'Ply Wood'),
+	(112, 134, 45, '848.0 x 1519.0 x 871.0 mm'),
+	(113, 134, 46, 'Engineered Wood'),
+	(114, 135, 39, 'Brown'),
+	(115, 135, 40, '810.0 x 790.0 x 1590.0 mm'),
+	(116, 135, 41, 'Leather'),
+	(117, 135, 42, 'Hard Wood'),
+	(118, 136, 39, 'Brown'),
+	(119, 136, 40, '861.0 x 841.0 x 2030.0 mm'),
+	(120, 136, 41, 'Leather'),
+	(121, 136, 42, 'Soft Wood'),
+	(122, 137, 39, 'Brown'),
+	(123, 137, 40, '810.0 x 790.0 x 1590.0 mm'),
+	(124, 137, 41, 'Leather'),
+	(125, 137, 42, 'Hard Wood'),
+	(126, 138, 39, 'Brown'),
+	(127, 138, 40, '810.0 x 790.0 x 1590.0 mm'),
+	(128, 138, 41, 'Leather'),
+	(129, 138, 42, 'Hard Wood'),
+	(130, 139, 39, 'Chocolate'),
+	(131, 139, 40, '765.0 x 1740.0 x 754.0 mm'),
+	(132, 139, 41, 'Half Leather'),
+	(133, 139, 42, 'Eucalyptus Wood'),
+	(134, 140, 64, 'Sheesham Wood'),
+	(135, 140, 65, 'Brown'),
+	(136, 140, 66, '760.0 x 899.0 x 2030.0 mm'),
+	(137, 140, 67, 'Sheesham Wood'),
+	(138, 141, 64, 'Beech Wood'),
+	(139, 141, 65, 'Brown'),
+	(140, 141, 66, '749.0 x 899.0 x 2200.0 mm'),
+	(141, 141, 67, 'Engineered Wood'),
+	(142, 142, 64, 'Toughened Glass'),
+	(143, 142, 65, 'Brown White'),
+	(144, 142, 66, '762.0 x 1067.0 x 1067.0 mm'),
+	(145, 142, 67, 'Solid Wood'),
+	(146, 143, 68, 'Chrome Plated Metal'),
+	(147, 143, 69, 'White'),
+	(148, 143, 70, '752.0 x 1346.0 x 798.0 mm'),
+	(149, 143, 71, 'Glass'),
+	(150, 144, 72, 'Rubber Wood'),
+	(151, 144, 73, '760.0 x 1499.0 x 899.0 mm'),
+	(152, 144, 74, 'Soft Wood'),
+	(153, 144, 75, 'Brown'),
+	(154, 145, 72, 'Glass'),
+	(155, 145, 73, '889.0 x 432.0 x 470.0 mm'),
+	(156, 145, 74, 'Beech Wood'),
+	(157, 145, 75, 'Brown'),
+	(158, 146, 72, 'Sheesham Wood'),
+	(159, 146, 73, '770.0 x 1506.0 x 904.0 mm'),
+	(160, 146, 74, 'Sheesham Wood'),
+	(161, 146, 75, 'Yellow'),
+	(162, 147, 76, 'Fabric'),
+	(163, 147, 77, '889.0 x 432.0 x 470.0 mm'),
+	(164, 147, 78, 'Brown'),
+	(165, 147, 79, 'Beech Wood'),
+	(166, 148, 76, 'Sheesham Wood'),
+	(167, 148, 77, '1003.0 x 483.0 x 457.0 mm'),
+	(168, 148, 78, 'Dark Brown'),
+	(169, 148, 79, 'Solid Wood'),
+	(170, 149, 76, 'Fabric'),
+	(171, 149, 77, '752.0 x 1346.0 x 798.0 mm'),
+	(172, 149, 78, 'White'),
+	(173, 149, 79, 'Chrome Plated Metal'),
+	(174, 150, 47, 'Fabric'),
+	(175, 150, 48, 'White'),
+	(176, 150, 49, '920.0 x 2179.0 x 1781.0 mm'),
+	(177, 150, 50, 'Engineered Wood'),
+	(178, 151, 47, 'Engineered Wood'),
+	(179, 151, 48, 'Brown'),
+	(180, 151, 49, '1006.0 x 2134.0 x 1892.0 mm'),
+	(181, 151, 50, 'Hard Wood'),
+	(182, 152, 47, 'Engineered Wood'),
+	(183, 152, 48, 'Grey'),
+	(184, 152, 49, '991.0 x 2370.0 x 2101.0 mm'),
+	(185, 152, 50, 'Soft Wood'),
+	(186, 153, 51, 'Leatherette'),
+	(187, 153, 52, 'Brown'),
+	(188, 153, 53, '1227.0 x 2184.0 x 1608.0 mm'),
+	(189, 153, 54, 'Engineered Wood'),
+	(190, 154, 51, 'Solid rubber wood'),
+	(191, 154, 52, 'Brown'),
+	(192, 154, 53, '1133.0 x 1588.0 x 2169.0 mm'),
+	(193, 154, 54, 'Engineered Wood'),
+	(194, 155, 51, 'Engineered Wood'),
+	(195, 155, 52, 'White'),
+	(196, 155, 53, '780.0 x 1585.0 x 2052.0 mm'),
+	(197, 155, 54, 'Engineered Wood'),
+	(198, 156, 51, 'Particle Board'),
+	(199, 156, 52, 'White'),
+	(200, 156, 53, '780.0 x 1585.0 x 2052.0 mm'),
+	(201, 156, 54, 'Hard Wood'),
+	(202, 157, 55, 'Leatherette'),
+	(203, 157, 56, 'Brown'),
+	(204, 157, 57, 'Particle Board'),
+	(205, 157, 58, '1227.0 x 2184.0 x 1608.0 mm'),
+	(206, 158, 55, 'Engineered Wood'),
+	(207, 158, 56, 'White'),
+	(208, 158, 57, 'Engineered Wood'),
+	(209, 158, 58, '920.0 x 2179.0 x 1781.0 mm');
 /*!40000 ALTER TABLE `furniture_feature` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.furniture_price
-DROP TABLE IF EXISTS `furniture_price`;
 CREATE TABLE IF NOT EXISTS `furniture_price` (
   `furniture_price_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `furniture_id` int(10) unsigned NOT NULL,
@@ -286,15 +516,55 @@ CREATE TABLE IF NOT EXISTS `furniture_price` (
   PRIMARY KEY (`furniture_price_id`),
   KEY `fk_furniture_price_furniture_id` (`furniture_id`),
   CONSTRAINT `fk_furniture_price_furniture_id` FOREIGN KEY (`furniture_id`) REFERENCES `furniture` (`furniture_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.furniture_price: ~1 rows (approximately)
+-- Dumping data for table aplikacija.furniture_price: ~40 rows (approximately)
 DELETE FROM `furniture_price`;
 /*!40000 ALTER TABLE `furniture_price` DISABLE KEYS */;
+INSERT INTO `furniture_price` (`furniture_price_id`, `furniture_id`, `price`, `created_at`) VALUES
+	(66, 121, 1499.00, '2020-06-26 01:27:05'),
+	(67, 122, 1799.00, '2020-06-26 01:28:51'),
+	(68, 123, 0.01, '2020-06-26 01:30:00'),
+	(69, 123, 999.00, '2020-06-26 01:30:12'),
+	(70, 124, 1200.00, '2020-06-26 01:32:17'),
+	(71, 125, 2400.00, '2020-06-26 01:34:29'),
+	(72, 126, 1399.00, '2020-06-26 01:35:53'),
+	(73, 127, 1499.00, '2020-06-26 01:41:10'),
+	(74, 128, 999.00, '2020-06-26 01:42:57'),
+	(75, 129, 1399.00, '2020-06-26 01:44:07'),
+	(76, 130, 1499.00, '2020-06-26 01:45:48'),
+	(77, 131, 1455.00, '2020-06-26 01:48:55'),
+	(78, 131, 1500.00, '2020-06-26 01:49:37'),
+	(79, 132, 800.00, '2020-06-26 01:50:47'),
+	(80, 133, 1800.00, '2020-06-26 01:52:01'),
+	(81, 134, 699.00, '2020-06-26 01:55:57'),
+	(82, 135, 1799.00, '2020-06-26 01:58:56'),
+	(83, 136, 1586.96, '2020-06-26 02:00:13'),
+	(84, 137, 2000.00, '2020-06-26 02:01:57'),
+	(85, 138, 2000.00, '2020-06-26 02:01:57'),
+	(86, 139, 1233.00, '2020-06-26 02:03:17'),
+	(87, 140, 3499.97, '2020-06-26 02:07:48'),
+	(88, 141, 1399.97, '2020-06-26 02:09:31'),
+	(89, 142, 2100.00, '2020-06-26 02:10:51'),
+	(90, 143, 2700.00, '2020-06-26 02:13:50'),
+	(91, 144, 2799.96, '2020-06-26 02:16:19'),
+	(92, 145, 799.00, '2020-06-26 02:18:22'),
+	(93, 146, 789.00, '2020-06-26 02:20:04'),
+	(94, 147, 1799.97, '2020-06-26 02:23:58'),
+	(95, 148, 723.00, '2020-06-26 02:25:12'),
+	(96, 149, 1000.00, '2020-06-26 02:26:23'),
+	(97, 150, 1899.00, '2020-06-26 02:30:36'),
+	(98, 151, 2299.97, '2020-06-26 02:31:51'),
+	(99, 152, 2700.00, '2020-06-26 02:32:52'),
+	(100, 153, 1599.97, '2020-06-26 02:34:55'),
+	(101, 154, 1999.00, '2020-06-26 02:36:20'),
+	(102, 155, 477.00, '2020-06-26 02:38:25'),
+	(103, 156, 1399.00, '2020-06-26 02:40:24'),
+	(104, 157, 2700.00, '2020-06-26 02:42:39'),
+	(105, 158, 1350.00, '2020-06-26 02:44:29');
 /*!40000 ALTER TABLE `furniture_price` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.photo
-DROP TABLE IF EXISTS `photo`;
 CREATE TABLE IF NOT EXISTS `photo` (
   `photo_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `furniture_id` int(10) unsigned NOT NULL DEFAULT 0,
@@ -303,34 +573,162 @@ CREATE TABLE IF NOT EXISTS `photo` (
   UNIQUE KEY `uq_photo_image_path` (`image_path`),
   KEY `fk_photo_furniture_id` (`furniture_id`),
   CONSTRAINT `fk_photo_furniture_id` FOREIGN KEY (`furniture_id`) REFERENCES `furniture` (`furniture_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.photo: ~0 rows (approximately)
+-- Dumping data for table aplikacija.photo: ~149 rows (approximately)
 DELETE FROM `photo`;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
+INSERT INTO `photo` (`photo_id`, `furniture_id`, `image_path`) VALUES
+	(46, 121, '2020626-6289402890-3seater.png'),
+	(48, 121, '2020626-1358163363-3seater2.jpg'),
+	(49, 121, '2020626-6448791066-3seater3.jpg'),
+	(50, 121, '2020626-8165382424-3seater4.jpg'),
+	(51, 122, '2020626-8926513352-appolo1.jpg'),
+	(52, 122, '2020626-1631324894-appolo2.jpg'),
+	(53, 122, '2020626-4167430935-appolo3.jpg'),
+	(54, 122, '2020626-6443937655-appolo4.jpg'),
+	(57, 123, '2020626-2113617319-liverpool2.jpg'),
+	(58, 123, '2020626-7132013541-liverpool3.jpg'),
+	(59, 123, '2020626-4302331271-liverpool4.jpg'),
+	(60, 123, '2020626-0646039231-liverpool1.png'),
+	(61, 124, '2020626-2720493754-camden2.jpg'),
+	(62, 124, '2020626-6531032268-camden1.png'),
+	(63, 124, '2020626-6156273301-camden3.jpg'),
+	(64, 124, '2020626-3334747514-camden4.jpg'),
+	(65, 125, '2020626-8451952265-emila1.jpg'),
+	(66, 125, '2020626-5747494524-emila2.jpg'),
+	(67, 125, '2020626-7183053439-emila3.jpg'),
+	(68, 125, '2020626-4644371593-emila4.jpg'),
+	(69, 126, '2020626-9239812692-lewis1.jpg'),
+	(70, 126, '2020626-7038673774-lewis2.jpg'),
+	(71, 126, '2020626-5738141395-lewis3.jpg'),
+	(72, 126, '2020626-0420971172-lewis4.jpg'),
+	(73, 127, '2020626-8355864123-turin1.jpg'),
+	(74, 127, '2020626-5641617434-turin2.jpg'),
+	(75, 127, '2020626-6668653548-turin3.jpg'),
+	(76, 127, '2020626-7288439659-turin4.jpg'),
+	(77, 128, '2020626-0818768306-apollosectional1.jpg'),
+	(78, 128, '2020626-4382425972-apollosectional2.jpg'),
+	(79, 128, '2020626-3524143885-apollosectional3.jpg'),
+	(80, 128, '2020626-1277117435-apollosectional4.jpg'),
+	(82, 129, '2020626-7507598858-chelsea2.jpg'),
+	(83, 129, '2020626-7726283872-chelsea1.jpg'),
+	(84, 129, '2020626-4194735585-chelsea3.jpg'),
+	(85, 129, '2020626-6282481816-chelsea4.jpg'),
+	(86, 130, '2020626-4245244552-apollosofa1.jpg'),
+	(87, 130, '2020626-1713267315-apollosofa2.jpg'),
+	(88, 130, '2020626-4556134260-apollosofa3.jpg'),
+	(89, 130, '2020626-6621610862-apollosofa4.jpg'),
+	(90, 131, '2020626-4391735153-parsonswooden1.jpg'),
+	(91, 131, '2020626-8575646264-parsonswooden2.jpg'),
+	(92, 131, '2020626-1888220736-parsonswooden3.jpg'),
+	(93, 131, '2020626-7522741541-parsonswooden4.jpg'),
+	(94, 132, '2020626-8637318916-amos2.jpg'),
+	(95, 132, '2020626-4418344397-amos1.jpg'),
+	(96, 132, '2020626-6488270303-amos3.jpg'),
+	(97, 132, '2020626-3213358867-amos4.jpg'),
+	(98, 133, '2020626-7424675481-parsons1.jpg'),
+	(99, 133, '2020626-4511215114-parsons2.jpg'),
+	(100, 133, '2020626-2857609183-parsons3.jpg'),
+	(101, 133, '2020626-1055563525-parsons4.jpg'),
+	(102, 134, '2020626-7504284767-camdencompact1.jpg'),
+	(103, 134, '2020626-7678891184-camdencompact2.jpg'),
+	(104, 134, '2020626-4495812468-camdencompact3.jpg'),
+	(105, 134, '2020626-6683449376-camdencompact4.png'),
+	(106, 135, '2020626-4195764115-weston1.jpg'),
+	(107, 135, '2020626-4087914417-weston2.png'),
+	(108, 135, '2020626-1282330278-weston3.jpg'),
+	(109, 135, '2020626-4776126586-weston4.jpg'),
+	(110, 136, '2020626-2128783636-trissino1.jpg'),
+	(111, 136, '2020626-3735669027-trissino2.jpg'),
+	(112, 136, '2020626-3857644269-trissino3.jpg'),
+	(113, 136, '2020626-1555234444-trissino4.jpg'),
+	(114, 137, '2020626-8844138521-thiene2.jpg'),
+	(115, 138, '2020626-5673923673-thiene2.jpg'),
+	(116, 138, '2020626-1615053481-thiene1.jpg'),
+	(117, 138, '2020626-8581878434-thiene3.jpg'),
+	(118, 138, '2020626-7743711255-thiene4.jpg'),
+	(119, 139, '2020626-2831745278-weston1.jpg'),
+	(120, 139, '2020626-6594438225-weston2.png'),
+	(121, 139, '2020626-7255954844-weston3.jpg'),
+	(122, 139, '2020626-1981561971-weston4.jpg'),
+	(123, 140, '2020626-2263363346-xxlarabia4.jpg'),
+	(124, 140, '2020626-2031581818-xxlarabia1.jpg'),
+	(125, 140, '2020626-2118061544-xxlarabia2.jpg'),
+	(126, 140, '2020626-9412923891-xxlarabia3.jpg'),
+	(127, 141, '2020626-4040738744-arabia4.jpg'),
+	(128, 141, '2020626-5155941359-arabia1.jpg'),
+	(129, 141, '2020626-6033385245-arabia2.jpg'),
+	(130, 141, '2020626-0338348514-arabia3.jpg'),
+	(131, 142, '2020626-6260870454-brighton4.jpg'),
+	(132, 142, '2020626-9986760528-brighton1.jpg'),
+	(133, 142, '2020626-7572632739-brighton2.jpg'),
+	(134, 142, '2020626-1613241506-brighton3.jpg'),
+	(135, 143, '2020626-7822325855-caribu1.jpg'),
+	(136, 143, '2020626-1491839786-caribu2.jpg'),
+	(137, 143, '2020626-0573273175-caribu3.jpg'),
+	(138, 143, '2020626-9052826641-caribu4.jpg'),
+	(139, 144, '2020626-7743163687-dinersix1.jpg'),
+	(140, 144, '2020626-4045464181-dinersix2.jpg'),
+	(141, 144, '2020626-4234446373-dinersix3.jpg'),
+	(142, 144, '2020626-5762261413-dinersix4.jpg'),
+	(143, 145, '2020626-6005371441-wesley1.jpg'),
+	(144, 145, '2020626-5275781614-wesley2.jpg'),
+	(145, 145, '2020626-7561073456-wesley3.jpg'),
+	(146, 145, '2020626-1457758452-wesley4.jpg'),
+	(147, 146, '2020626-3869255045-arabiasix1.jpg'),
+	(148, 146, '2020626-6562602975-arabiasix2.jpg'),
+	(149, 146, '2020626-1214923889-arabiasix3.jpg'),
+	(150, 146, '2020626-7839157071-arabiasix4.jpg'),
+	(151, 147, '2020626-7151184441-vanalen1.jpg'),
+	(152, 147, '2020626-8777170301-vanalen2.jpg'),
+	(153, 147, '2020626-5856223241-vanalen3.jpg'),
+	(154, 147, '2020626-6128131275-vanalen4.png'),
+	(155, 148, '2020626-6137756544-danton1.jpg'),
+	(156, 148, '2020626-2941263106-danton2.jpg'),
+	(157, 148, '2020626-8261169244-danton3.jpg'),
+	(158, 148, '2020626-8748376988-danton4.jpg'),
+	(159, 149, '2020626-2280654833-caribu1.jpg'),
+	(160, 149, '2020626-1636273104-caribu2.jpg'),
+	(161, 149, '2020626-4189332544-caribu3.jpg'),
+	(162, 149, '2020626-5265198028-caribu4.jpg'),
+	(163, 150, '2020626-1004842082-baltoro3.png'),
+	(164, 150, '2020626-8637170236-baltoro1.png'),
+	(165, 150, '2020626-5432277831-baltorohigh1.png'),
+	(166, 150, '2020626-7542426380-baltoro4.png'),
+	(167, 151, '2020626-3788823182-sandon3.png'),
+	(168, 151, '2020626-7988762508-sandon1.png'),
+	(169, 151, '2020626-1703052486-sandon2.png'),
+	(170, 151, '2020626-1843667374-sandon4.png'),
+	(171, 152, '2020626-1703123314-stanhope2.png'),
+	(172, 152, '2020626-3826229779-stanhope2.png'),
+	(173, 152, '2020626-2714340217-stanhope4.png'),
+	(174, 152, '2020626-7028546355-stanhope3.png'),
+	(175, 153, '2020626-3178382188-pico1.png'),
+	(176, 153, '2020626-1648752564-pico2.png'),
+	(177, 153, '2020626-4924297532-pico3.png'),
+	(178, 153, '2020626-7745271176-pico4.png'),
+	(179, 154, '2020626-9281781784-holm1.png'),
+	(180, 154, '2020626-9336463180-holm2.png'),
+	(181, 154, '2020626-1657211984-holm3.png'),
+	(182, 154, '2020626-6296092314-holm4.png'),
+	(183, 155, '2020626-1883933934-pavis2.jpg'),
+	(184, 155, '2020626-0732462947-pavis1.jpg'),
+	(185, 155, '2020626-5569781614-pavis3.jpg'),
+	(186, 155, '2020626-1537109049-pavis4.jpg'),
+	(187, 156, '2020626-9453234617-tory4.jpg'),
+	(188, 156, '2020626-1471097765-tory1.jpg'),
+	(189, 156, '2020626-1786427345-tory2.jpg'),
+	(190, 156, '2020626-6576120841-tory1.jpg'),
+	(191, 157, '2020626-3543684638-picourban1.png'),
+	(192, 157, '2020626-5823641742-picourban2.png'),
+	(193, 157, '2020626-1311541666-picourban3.png'),
+	(194, 157, '2020626-9402081327-picourban4.png'),
+	(195, 158, '2020626-3811624761-baltorohydra1.png'),
+	(196, 158, '2020626-5768887789-baltorohydra2.png'),
+	(197, 158, '2020626-2640103318-baltorohydra3.png'),
+	(198, 158, '2020626-6743724846-baltorohydra4.png');
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
-
--- Dumping structure for table aplikacija.store
-DROP TABLE IF EXISTS `store`;
-CREATE TABLE IF NOT EXISTS `store` (
-  `store_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `image_path` varchar(128) NOT NULL DEFAULT '0',
-  `address` varchar(128) NOT NULL DEFAULT '0',
-  `geo_lng` decimal(11,8) unsigned NOT NULL DEFAULT 0.00000000,
-  `geo_lat` decimal(11,8) unsigned NOT NULL DEFAULT 0.00000000,
-  `name` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`store_id`),
-  UNIQUE KEY `uq_store_image_path` (`image_path`),
-  UNIQUE KEY `uq_store_address` (`address`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
--- Dumping data for table aplikacija.store: ~2 rows (approximately)
-DELETE FROM `store`;
-/*!40000 ALTER TABLE `store` DISABLE KEYS */;
-INSERT INTO `store` (`store_id`, `image_path`, `address`, `geo_lng`, `geo_lat`, `name`) VALUES
-	(1, 'images.com/image.jpg', 'Bulevar Mihajla Pupina 10', 20.41942200, 44.82151100, 'Furniture Store 1'),
-	(2, 'images.com/store2.jpg', 'Nikole Pašića 17-15, Novi Sad', 19.84622900, 45.25832300, 'Furniture Store 2');
-/*!40000 ALTER TABLE `store` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

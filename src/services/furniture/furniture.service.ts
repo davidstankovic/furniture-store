@@ -8,7 +8,7 @@ import { EditFurnitureDto } from "src/dtos/furniture/edit.furniture.dto";
 import { ApiResponse } from "src/misc/api.response.class";
 import { FurnitureFeature } from "src/entities/furniture-feature.entity";
 import { FurniturePrice } from "src/entities/furniture-price.entity";
-import { Availability } from "src/entities/availability.entity";
+// import { Availability } from "src/entities/availability.entity";
 import { FurnitureSearchDto } from "src/dtos/furniture/furniture.search.dto";
 
 @Injectable()
@@ -22,8 +22,8 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         @InjectRepository(FurnitureFeature)
         private readonly furnitureFeature: Repository<FurnitureFeature>,
 
-        @InjectRepository(Availability)
-        private readonly availability: Repository<Availability>
+        // @InjectRepository(Availability)
+        // private readonly availability: Repository<Availability>
         ) {
         super(furniture);
     }
@@ -87,7 +87,8 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         existingFurniture.categoryId = data.categoryId;
         existingFurniture.description = data.description;
         existingFurniture.status = data.status;
-        
+        existingFurniture.availableOne  = data.availableOne;
+        existingFurniture.availableTwo  = data.availableTwo;
 
         const savedFurniture = await this.furniture.save(existingFurniture)
         if(!savedFurniture){
@@ -122,7 +123,7 @@ export class FurnitureService extends TypeOrmCrudService<Furniture> {
         //     }
         // }
 
-        if (data.features !== null) {
+        if (data.features !== undefined) {
             await this.furnitureFeature.remove(existingFurniture.furnitureFeatures);
 
             for (let feature of data.features) {

@@ -54,7 +54,7 @@ export class Category {
   @ManyToOne(
     () => Category,
     category => category.categories,
-    { onDelete: "NO ACTION", onUpdate: "NO ACTION" }
+    { onDelete: "NO ACTION", onUpdate: "CASCADE" }
   )
   @JoinColumn([
     { name: "parent__category_id", referencedColumnName: "categoryId" }

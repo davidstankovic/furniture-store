@@ -10,12 +10,12 @@ import {
 } from "typeorm";
 import { Category } from "./category.entity";
 import { FurniturePrice } from "./furniture-price.entity";
-import { Availability } from "./availability.entity";
+// import { Availability } from "./availability.entity";
 import { Photo } from "./photo.entity";
 import { FurnitureFeature } from "./furniture-feature.entity";
 import { Feature } from "./feature.entity";
 import { from } from "rxjs";
-import { Store } from "./store.entity";
+// import { Store } from "./store.entity";
 import * as Validator from 'class-validator'
 import { FurnitureStatus } from "src/types/furniture.status.enum";
 
@@ -49,16 +49,36 @@ export class Furniture {
   @Validator.IsEnum(FurnitureStatus)
   status: "available" | "visible" | "hidden";
 
-  @OneToMany(() => Availability, (availability) => availability.furniture)
-  availabilities: Availability[];
-
-  @ManyToMany(type => Store, store => store.furnitures)
-  @JoinTable({
-    name: "availability",
-    joinColumn: {name: "furniture_id", referencedColumnName:"furnitureId"},
-    inverseJoinColumn: {name: "store_id", referencedColumnName:"storeId"}
+  
+  @Column({
+    type: "tinyint",
+    name: "available_one",
+    unsigned: true
   })
-  stores: Store[];
+  @Validator.IsNotEmpty()
+  @Validator.IsIn([0, 1])
+  availableOne: number;
+
+
+  
+  @Column({
+    type: "tinyint",
+    name: "available_two",
+    unsigned: true
+  })
+  @Validator.IsNotEmpty()
+  @Validator.IsIn([0, 1])
+  availableTwo: number;
+  // @OneToMany(() => Availability, (availability) => availability.furniture)
+  // availabilities: Availability[];
+
+  // @ManyToMany(type => Store, store => store.furnitures)
+  // @JoinTable({
+  //   name: "availability",
+  //   joinColumn: {name: "furniture_id", referencedColumnName:"furnitureId"},
+  //   inverseJoinColumn: {name: "store_id", referencedColumnName:"storeId"}
+  // })
+  // stores: Store[];
 
   @ManyToOne(() => Category, (category) => category.furnitures, {
     onDelete: "NO ACTION",
