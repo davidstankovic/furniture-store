@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `administrator_token` (
   PRIMARY KEY (`administrator_token_id`),
   KEY `fk_administrator_token_administrator_id` (`administrator_id`),
   CONSTRAINT `fk_administrator_token_administrator_id` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.administrator_token: ~131 rows (approximately)
+-- Dumping data for table aplikacija.administrator_token: ~141 rows (approximately)
 DELETE FROM `administrator_token`;
 /*!40000 ALTER TABLE `administrator_token` DISABLE KEYS */;
 INSERT INTO `administrator_token` (`administrator_token_id`, `administrator_id`, `created_at`, `token`, `expires_at`, `is_valid`) VALUES
@@ -176,7 +176,17 @@ INSERT INTO `administrator_token` (`administrator_token_id`, `administrator_id`,
 	(119, 9, '2020-06-26 02:06:47', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzM5MDcuODA4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzMzYwN30.4CgLb-kisrh6hb_KVhFz56pi3buTJu1X9rbm_CVB7yE', '2020-06-26 01:11:47', 1),
 	(120, 9, '2020-06-26 02:14:17', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzQzNTcuMjk5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzNDA1N30.Og8-4hqMxNtlM_5pNQ0GzJZtcm8GUyzR4IobEXEPwGQ', '2020-06-26 01:19:17', 1),
 	(121, 9, '2020-06-26 02:20:33', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzQ3MzMuMzA1LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzNDQzM30.S37x_1Hbhttx8SaG0LlXPukJIl4ufZ4qil4oXtZL_n4', '2020-06-26 01:25:33', 1),
-	(122, 9, '2020-06-26 02:29:24', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzUyNjQuNTA2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzNDk2NH0.AHjflWWwJV_XHklXlPamIxEsHeHcbu611YinqhuG6Dk', '2020-06-26 01:34:24', 1);
+	(122, 9, '2020-06-26 02:29:24', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTMxMzUyNjQuNTA2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzEzNDk2NH0.AHjflWWwJV_XHklXlPamIxEsHeHcbu611YinqhuG6Dk', '2020-06-26 01:34:24', 1),
+	(123, 9, '2020-06-29 17:02:10', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NDY4MzAuOTE5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzQ0NjUzMH0.je9t1T0O1fNL4dmSEd4VH5PdPGt2nLKUMuD2eZYcknQ', '2020-06-29 16:07:10', 1),
+	(124, 9, '2020-06-29 18:00:14', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NTAzMTQuODAyLCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzQ1MDAxNH0.rFKUc9OXio5xXHBPhSdPJpuI7e05dNepNUUNZ2T2Iko', '2020-06-29 17:05:14', 1),
+	(125, 9, '2020-06-29 18:00:20', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NTAzMjAuMTE2LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzQ1MDAyMH0.aDuHsJp-EVlqF_YjzvangwrSVPPZl86DgzBC3dHMXDc', '2020-06-29 17:05:20', 1),
+	(126, 9, '2020-06-29 18:00:29', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NTAzMjkuOTM5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzQ1MDAyOX0.UQUC018Nk0OxJ6i8SYBZsvcXXASIBXMATFg9Ty_u7HA', '2020-06-29 17:05:29', 1),
+	(127, 9, '2020-06-29 18:30:14', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NTIxMTQuMjcsImlwIjoiOjoxIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODMuMC40MTAzLjExNiBTYWZhcmkvNTM3LjM2IiwiaWF0IjoxNTkzNDUxODE0fQ.TyAnuPiR-z9XeDbK3OczNF9SAKdZoqjrzlW7OaH_9Cw', '2020-06-29 17:35:14', 1),
+	(128, 9, '2020-06-29 18:30:14', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NTIxMTQuOTg3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzQ1MTgxNH0.wcbwy3u7q8hebot13KNKa-tO-K72Bf6Ax7qP-R_nZc0', '2020-06-29 17:35:14', 1),
+	(129, 9, '2020-06-29 18:30:17', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NTIxMTcuNTA3LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzQ1MTgxN30.-a_DtaqnDi-yJmhBis3mX0Yhz4-lqzZ05Ih6IfThpqA', '2020-06-29 17:35:17', 1),
+	(130, 9, '2020-06-29 18:30:21', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM0NTIxMjEuODY5LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzQ1MTgyMX0.R86BW53WJTHUMNYFhDTe1gwk4aU-Neb_vDPa7l4FbVw', '2020-06-29 17:35:21', 1),
+	(131, 9, '2020-06-30 13:12:40', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM1MTk0NjAuMjA4LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzUxOTE2MH0.MVDZc-cJGMTCSK3y0deu2jrn40hkOGLveTysZ5Mev74', '2020-06-30 12:17:40', 1),
+	(132, 9, '2020-06-30 13:43:16', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjo5LCJpZGVudGl0eSI6ImFkbWluaXN0cmF0b3IiLCJleHAiOjE1OTM1MjEyOTYuNjM1LCJpcCI6Ijo6MSIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzgzLjAuNDEwMy4xMTYgU2FmYXJpLzUzNy4zNiIsImlhdCI6MTU5MzUyMDk5Nn0.wkkdGu-0h7zhuL1clxNq255Hid7988u9AJp3YitlHKc', '2020-06-30 12:48:16', 1);
 /*!40000 ALTER TABLE `administrator_token` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.category
@@ -190,27 +200,27 @@ CREATE TABLE IF NOT EXISTS `category` (
   UNIQUE KEY `uq_category_image_path` (`image_path`),
   KEY `fk_category_parent__category_id` (`parent__category_id`),
   CONSTRAINT `fk_category_parent__category_id` FOREIGN KEY (`parent__category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.category: ~29 rows (approximately)
+-- Dumping data for table aplikacija.category: ~15 rows (approximately)
 DELETE FROM `category`;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`category_id`, `name`, `image_path`, `parent__category_id`) VALUES
-	(52, 'Sofas', 'image.com/sofas.png', NULL),
-	(53, 'Dining', 'images.com/dining.jpg', NULL),
-	(54, 'Sleeping Beds', 'images.com/beds.jpg', NULL),
-	(58, 'Fabric Sofa Sets', 'images.com/fabricsofasets.jpg', 52),
-	(59, 'L Shaped Sofa Sets', 'images.com/lshapedsofasets', 52),
-	(60, 'Wooden Sofa Sets', 'images.com/woodensofasets.jpg', 52),
-	(61, 'Leather Sofa Sets', 'images.com/leathersofasets', 52),
-	(62, 'Sofa Cum Beds', 'images.com/sofacumbeds', 52),
-	(63, 'Beds With Storage', 'images.com/bedswithstorage.png', 54),
-	(64, 'Beds Without Storage', 'images.com/bedswithoutstorage.png', 54),
-	(65, 'Double Beds', 'images.com/doublebeds.png', 54),
-	(67, 'Dining Tables', 'images.com/diningtables.png', 53),
-	(68, '4 Seater Drinking Table Sets', 'images.com/drinkingtablesets', 53),
-	(69, '6 Seater Dining table Sets', 'images.com/diningtablesets', 53),
-	(70, 'Folding Dining Table Sets', 'images.com/foldingtablesets.png', 53);
+	(52, 'Sofas', 'sofascat.jpg', NULL),
+	(53, 'Dining', 'diningcat.jpg', NULL),
+	(54, 'Sleeping Beds', 'sleepingbedscat.jpg', NULL),
+	(58, 'Fabric Sofa Sets', 'fabricsofasetscat.jpg', 52),
+	(59, 'L Shaped Sofa Sets', 'lshapedsofasetscat.jpg', 52),
+	(60, 'Wooden Sofa Sets', 'woodensofasetscat.jpg', 52),
+	(61, 'Leather Sofa Sets', 'leathersofasetscat.jpg', 52),
+	(62, 'Sofa Cum Beds', 'sofacumbedscat.jpg', 52),
+	(63, 'Beds With Storage', 'storagecat.jpg', 54),
+	(64, 'Beds Without Storage', 'withoutstoragecat.jpg', 54),
+	(65, 'Double Beds', 'doublecat.jpg', 54),
+	(67, 'Dining Tables', 'diningtablescat.jpg', 53),
+	(68, '4 Seater Drinking Table Sets', 'fourseatercat.jpg', 53),
+	(69, '6 Seater Dining table Sets', 'sixseatercat.jpg', 53),
+	(70, 'Folding Dining Table Sets', 'foldingcat.jpg', 53);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.feature
@@ -224,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `feature` (
   CONSTRAINT `fk_feature_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table aplikacija.feature: ~92 rows (approximately)
+-- Dumping data for table aplikacija.feature: ~49 rows (approximately)
 DELETE FROM `feature`;
 /*!40000 ALTER TABLE `feature` DISABLE KEYS */;
 INSERT INTO `feature` (`feature_id`, `name`, `category_id`) VALUES
@@ -290,9 +300,9 @@ CREATE TABLE IF NOT EXISTS `furniture` (
   PRIMARY KEY (`furniture_id`),
   KEY `fk_furniture_category_id` (`category_id`),
   CONSTRAINT `fk_furniture_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.furniture: ~51 rows (approximately)
+-- Dumping data for table aplikacija.furniture: ~52 rows (approximately)
 DELETE FROM `furniture`;
 /*!40000 ALTER TABLE `furniture` DISABLE KEYS */;
 INSERT INTO `furniture` (`furniture_id`, `name`, `category_id`, `description`, `status`, `available_one`, `available_two`) VALUES
@@ -320,7 +330,7 @@ INSERT INTO `furniture` (`furniture_id`, `name`, `category_id`, `description`, `
 	(142, 'Brighton Square 4 Seater', 67, 'A sturdy solid wood dining table for 4\nThe Brighton\'s simple form creates a striking contrast with the pebble filled centre\nThe glass box can be filled with a wide array of decorative items - pebbles to potpourri is just a minute away\nAn ideal match for the Oribi, Capra, Zella & Dama, it\'s elegant style compliments any decor\nMade of high-grade Sheesham wood\nRefer to the images for details of dimensions\nIndoor use only.', 'available', 1, 1),
 	(143, 'Caribu 4 To 6 Extendable', 68, 'More the merrier. Throwing a party or hosting extended family? Caribu magically expands to accommodate eight guests. With its modern aesthetics and sleek finish, this dining table is a delight to homeowners and visitors alike. Paired with 4 chairs from the Ingrid series.\nDining table made from Chrome\nComfortably seats 4 and can be extended to seat 6\nChairs frame made of chrome\nChairs upholstery made of fabric (in the dark grey variant) and leatherette (in the white variant)\nPlease refer to images for dimension details\nIndoor use only', 'available', 1, 1),
 	(144, 'Diner 6 Seater Dining', 69, 'You really can have it all. A dining table set for those who do not want to compromise on comfort, budget or style. Marrying modern design aesthetics with classic functionality, the Diner comes with a glossy top that is sure to add an extra oomph to your dinner spread. Paired with the Diner chairs, it is easy on the eye and easy to fall in love with!\nSet includes: Diner 6-seater dining table + 6 Diner dining chairs\nMade of rubberwood\nDark walnut finish\nTable seats up to 6\nPlease refer to images for dimension details\nIndoor use only', 'available', 1, 1),
-	(145, 'Wesley 6 Seater', 69, 'Create a striking dining space with the stunning Wesley Dining Table and Dalla Chairs\nThis set includes 6 upholstered Dalla chairs along with the Wesley table\nThe clear tempered glass tabletop allows you to admire the sleek minimalist wooden frame\nThe shelf below the tabletop can be used for storage, or as a display space\nThe table frame is made of high quality Beech wood. Table top is 10mm tempered glass. The lower shelf is made of MDF with a wood veneer\nThe chairs are made of high quality Beech wood with upholstered cushions on the seat and back\nRefer to the images for details of dimensions\nFor indoor use only\n', 'available', 1, 1),
+	(145, 'Dalla Chairs dining 6', 69, 'Create a striking dining space with the stunning Wesley Dining Table and Dalla Chairs This set includes 6 upholstered Dalla chairs along with the Wesley table The clear tempered glass tabletop allows you to admire the sleek minimalist wooden frame The shelf below the tabletop can be used for storage, or as a display space The table frame is made of high quality Beech wood. Table top is 10mm tempered glass. The lower shelf is made of MDF with a wood veneer The chairs are made of high quality Beech wood with upholstered cushions on the seat and back Refer to the images for details of dimensions For indoor use only', 'available', 0, 1),
 	(146, 'Arabia Zella 6 Seater', 69, 'A sturdy solid wood dining table and 6 high-back upholstered chairs\nThe Arabia\'s simple understated style highlights the wood grain, and fits into any style of décor\nThe graceful upholstered Zella chairs provide supreme comfort\nMade of high-grade Sheesham wood\nIndoor use only', 'available', 1, 1),
 	(147, 'Vanalen 4 to 6', 70, 'For the hostess with the mostess! Guests bring along a plus one or two? The Vanalen’s got you covered. A gentle tug makes room for two extra spots. A neat cover sits flush against the frame for an even surface. Comes paired with upholstered chairs from the Dalla series.\nTable made from Beech wood in a dark walnut finish\nChair made from Beech wood\nTempered glass tabletop\nFabric upholstery\nUpholstery available in 2 colours\nTable seats up to 6 when extended\nSet includes: Vanalen 4-to-6 extendable dining table + 4/6 Dalla dining chairs\nPlease refer to images for dimension details\nFor indoor use only', 'available', 1, 1),
 	(148, 'Danton 3 to 6', 70, 'The cleverly designed Danton will adapt itself effortlessly to your changing space requirements\nWhen fully expanded, the spacious surface makes it a fully functional table for six\nFor a compact dining experience, put down one flap to make a table for two or three\nTo make space, put both the flaps down and tuck the table away in any part of the room\nThe plush upholstered Zella chairs provide supreme comfort\nPlease refer to the images for details of size of the table and chair\nMade of high grade Sheesham wood\nFor indoor use only', 'available', 1, 1),
@@ -347,9 +357,9 @@ CREATE TABLE IF NOT EXISTS `furniture_feature` (
   KEY `fk_furniture_feature_feature_id` (`feature_id`),
   CONSTRAINT `fk_furniture_feature_feature_id` FOREIGN KEY (`feature_id`) REFERENCES `feature` (`feature_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_furniture_feature_furniture_id` FOREIGN KEY (`furniture_id`) REFERENCES `furniture` (`furniture_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=239 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table aplikacija.furniture_feature: ~152 rows (approximately)
+-- Dumping data for table aplikacija.furniture_feature: ~156 rows (approximately)
 DELETE FROM `furniture_feature`;
 /*!40000 ALTER TABLE `furniture_feature` DISABLE KEYS */;
 INSERT INTO `furniture_feature` (`furniture_feature_id`, `furniture_id`, `feature_id`, `value`) VALUES
@@ -449,10 +459,6 @@ INSERT INTO `furniture_feature` (`furniture_feature_id`, `furniture_id`, `featur
 	(151, 144, 73, '760.0 x 1499.0 x 899.0 mm'),
 	(152, 144, 74, 'Soft Wood'),
 	(153, 144, 75, 'Brown'),
-	(154, 145, 72, 'Glass'),
-	(155, 145, 73, '889.0 x 432.0 x 470.0 mm'),
-	(156, 145, 74, 'Beech Wood'),
-	(157, 145, 75, 'Brown'),
 	(158, 146, 72, 'Sheesham Wood'),
 	(159, 146, 73, '770.0 x 1506.0 x 904.0 mm'),
 	(160, 146, 74, 'Sheesham Wood'),
@@ -504,7 +510,11 @@ INSERT INTO `furniture_feature` (`furniture_feature_id`, `furniture_id`, `featur
 	(206, 158, 55, 'Engineered Wood'),
 	(207, 158, 56, 'White'),
 	(208, 158, 57, 'Engineered Wood'),
-	(209, 158, 58, '920.0 x 2179.0 x 1781.0 mm');
+	(209, 158, 58, '920.0 x 2179.0 x 1781.0 mm'),
+	(214, 145, 72, 'Glass'),
+	(215, 145, 73, '889.0 x 432.0 x 470.0 mm'),
+	(216, 145, 74, 'Beech Wood'),
+	(217, 145, 75, 'Brown');
 /*!40000 ALTER TABLE `furniture_feature` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.furniture_price
@@ -516,9 +526,9 @@ CREATE TABLE IF NOT EXISTS `furniture_price` (
   PRIMARY KEY (`furniture_price_id`),
   KEY `fk_furniture_price_furniture_id` (`furniture_id`),
   CONSTRAINT `fk_furniture_price_furniture_id` FOREIGN KEY (`furniture_id`) REFERENCES `furniture` (`furniture_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.furniture_price: ~40 rows (approximately)
+-- Dumping data for table aplikacija.furniture_price: ~48 rows (approximately)
 DELETE FROM `furniture_price`;
 /*!40000 ALTER TABLE `furniture_price` DISABLE KEYS */;
 INSERT INTO `furniture_price` (`furniture_price_id`, `furniture_id`, `price`, `created_at`) VALUES
@@ -561,7 +571,9 @@ INSERT INTO `furniture_price` (`furniture_price_id`, `furniture_id`, `price`, `c
 	(102, 155, 477.00, '2020-06-26 02:38:25'),
 	(103, 156, 1399.00, '2020-06-26 02:40:24'),
 	(104, 157, 2700.00, '2020-06-26 02:42:39'),
-	(105, 158, 1350.00, '2020-06-26 02:44:29');
+	(105, 158, 1350.00, '2020-06-26 02:44:29'),
+	(106, 145, 455.99, '2020-06-29 18:32:57'),
+	(107, 145, 998.99, '2020-06-29 18:34:46');
 /*!40000 ALTER TABLE `furniture_price` ENABLE KEYS */;
 
 -- Dumping structure for table aplikacija.photo
@@ -573,9 +585,9 @@ CREATE TABLE IF NOT EXISTS `photo` (
   UNIQUE KEY `uq_photo_image_path` (`image_path`),
   KEY `fk_photo_furniture_id` (`furniture_id`),
   CONSTRAINT `fk_photo_furniture_id` FOREIGN KEY (`furniture_id`) REFERENCES `furniture` (`furniture_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table aplikacija.photo: ~149 rows (approximately)
+-- Dumping data for table aplikacija.photo: ~150 rows (approximately)
 DELETE FROM `photo`;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
 INSERT INTO `photo` (`photo_id`, `furniture_id`, `image_path`) VALUES
